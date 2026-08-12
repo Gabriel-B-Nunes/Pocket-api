@@ -1,0 +1,30 @@
+services:
+  db:
+    image: mysql:9.7.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=pocket
+      - MYSQL_USER=pocket
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - pocket
+
+  web:
+    build:
+      context: ./
+      dockerfile: ./php/dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./src:/var/www/html/
+    networks:
+      - pocket
+
+networks:
+  pocket:

@@ -1,0 +1,727 @@
+/usr/sbin/mysqld, Version: 9.7.0 (MySQL Community Server - GPL). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+2026-08-09T22:14:16.961310Z	   11 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:14:16.971003Z	   11 Prepare	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:14:16.971265Z	   11 Execute	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:14:16.976234Z	   11 Close stmt	
+2026-08-09T22:14:16.976581Z	   11 Prepare	SELECT count(*) FROM `superGroup`
+2026-08-09T22:14:16.976778Z	   11 Execute	SELECT count(*) FROM `superGroup`
+2026-08-09T22:14:16.978361Z	   11 Close stmt	
+2026-08-09T22:14:16.982614Z	   11 Quit	
+2026-08-09T22:14:55.296596Z	   12 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:14:55.306214Z	   12 Prepare	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:14:55.306552Z	   12 Execute	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:14:55.307061Z	   12 Close stmt	
+2026-08-09T22:14:55.307482Z	   12 Prepare	SELECT count(*) FROM `superGroup`
+2026-08-09T22:14:55.307791Z	   12 Execute	SELECT count(*) FROM `superGroup`
+2026-08-09T22:14:55.309553Z	   12 Close stmt	
+2026-08-09T22:14:55.313818Z	   12 Quit	
+2026-08-09T22:16:24.931184Z	   13 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:16:24.941439Z	   13 Prepare	SELECT * FROM `superGroup` WHERE `superGroupStatus` = ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:16:24.941861Z	   13 Execute	SELECT * FROM `superGroup` WHERE `superGroupStatus` = '0' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:16:24.942444Z	   13 Close stmt	
+2026-08-09T22:16:24.942856Z	   13 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupStatus` = ?
+2026-08-09T22:16:24.943133Z	   13 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupStatus` = '0'
+2026-08-09T22:16:24.943521Z	   13 Close stmt	
+2026-08-09T22:16:24.947243Z	   13 Quit	
+2026-08-09T22:17:22.208713Z	   14 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:17:22.218533Z	   14 Prepare	SELECT * FROM `movement` WHERE `movementFinancialType` = ? ORDER BY `movementId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:17:22.218776Z	   14 Execute	SELECT * FROM `movement` WHERE `movementFinancialType` = '0' ORDER BY `movementId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:17:22.222120Z	   14 Close stmt	
+2026-08-09T22:17:22.222415Z	   14 Prepare	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = ?
+2026-08-09T22:17:22.222639Z	   14 Execute	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = '0'
+2026-08-09T22:17:22.223047Z	   14 Close stmt	
+2026-08-09T22:17:22.227717Z	   14 Quit	
+2026-08-09T22:17:37.988859Z	   15 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:17:37.999221Z	   15 Prepare	SELECT * FROM `movement` WHERE `movementFinancialType` = ? AND `movementCreatedAt` BETWEEN ? AND ? ORDER BY `movementId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:17:37.999504Z	   15 Execute	SELECT * FROM `movement` WHERE `movementFinancialType` = '0' AND `movementCreatedAt` BETWEEN '2026-08-09 18:17:00' AND '2026-08-10 18:17:00' ORDER BY `movementId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:17:38.000052Z	   15 Close stmt	
+2026-08-09T22:17:38.000402Z	   15 Prepare	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = ? AND `movementCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:17:38.000634Z	   15 Execute	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = '0' AND `movementCreatedAt` BETWEEN '2026-08-09 18:17:00' AND '2026-08-10 18:17:00'
+2026-08-09T22:17:38.001269Z	   15 Close stmt	
+2026-08-09T22:17:38.004674Z	   15 Quit	
+2026-08-09T22:18:58.478483Z	   16 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:18:58.488565Z	   16 Prepare	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:18:58.488801Z	   16 Execute	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:18:58.489300Z	   16 Close stmt	
+2026-08-09T22:18:58.489620Z	   16 Prepare	SELECT count(*) FROM `superGroup`
+2026-08-09T22:18:58.489820Z	   16 Execute	SELECT count(*) FROM `superGroup`
+2026-08-09T22:18:58.491406Z	   16 Close stmt	
+2026-08-09T22:18:58.496897Z	   16 Quit	
+2026-08-09T22:19:29.252587Z	   17 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:19:29.262917Z	   17 Prepare	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:19:29.263298Z	   17 Execute	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:58:00' AND '2026-07-05 14:00:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:19:29.263793Z	   17 Close stmt	
+2026-08-09T22:19:29.264185Z	   17 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:19:29.264414Z	   17 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:58:00' AND '2026-07-05 14:00:00'
+2026-08-09T22:19:29.264878Z	   17 Close stmt	
+2026-08-09T22:19:29.268133Z	   17 Quit	
+2026-08-09T22:19:34.382182Z	   18 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:19:34.391433Z	   18 Prepare	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:19:34.391681Z	   18 Execute	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:58:00' AND '2026-07-05 14:01:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:19:34.392126Z	   18 Close stmt	
+2026-08-09T22:19:34.392443Z	   18 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:19:34.392664Z	   18 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:58:00' AND '2026-07-05 14:01:00'
+2026-08-09T22:19:34.393113Z	   18 Close stmt	
+2026-08-09T22:19:34.397318Z	   18 Quit	
+2026-08-09T22:19:38.597457Z	   19 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:19:38.605001Z	   19 Prepare	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:19:38.605241Z	   19 Execute	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:58:00' AND '2026-07-05 14:02:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:19:38.605654Z	   19 Close stmt	
+2026-08-09T22:19:38.605935Z	   19 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:19:38.606120Z	   19 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:58:00' AND '2026-07-05 14:02:00'
+2026-08-09T22:19:38.606518Z	   19 Close stmt	
+2026-08-09T22:19:38.608197Z	   19 Quit	
+2026-08-09T22:19:47.184345Z	   20 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:19:47.194081Z	   20 Prepare	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:19:47.194380Z	   20 Execute	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:57:00' AND '2026-07-05 14:02:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:19:47.194960Z	   20 Close stmt	
+2026-08-09T22:19:47.195372Z	   20 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:19:47.195704Z	   20 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:57:00' AND '2026-07-05 14:02:00'
+2026-08-09T22:19:47.196274Z	   20 Close stmt	
+2026-08-09T22:19:47.200471Z	   20 Quit	
+2026-08-09T22:19:52.983416Z	   21 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:19:52.992536Z	   21 Prepare	SELECT * FROM `superGroup` WHERE `superGroupStatus` = ? AND `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:19:52.992785Z	   21 Execute	SELECT * FROM `superGroup` WHERE `superGroupStatus` = '0' AND `superGroupCreatedAt` BETWEEN '2026-07-05 13:57:00' AND '2026-07-05 14:02:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:19:52.993393Z	   21 Close stmt	
+2026-08-09T22:19:52.993960Z	   21 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupStatus` = ? AND `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:19:52.994228Z	   21 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupStatus` = '0' AND `superGroupCreatedAt` BETWEEN '2026-07-05 13:57:00' AND '2026-07-05 14:02:00'
+2026-08-09T22:19:52.994779Z	   21 Close stmt	
+2026-08-09T22:19:52.999217Z	   21 Quit	
+2026-08-09T22:19:54.867078Z	   22 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:19:54.870893Z	   22 Prepare	SELECT * FROM `superGroup` WHERE `superGroupStatus` = ? AND `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:19:54.871137Z	   22 Execute	SELECT * FROM `superGroup` WHERE `superGroupStatus` = '1' AND `superGroupCreatedAt` BETWEEN '2026-07-05 13:57:00' AND '2026-07-05 14:02:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:19:54.871566Z	   22 Close stmt	
+2026-08-09T22:19:54.871904Z	   22 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupStatus` = ? AND `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:19:54.872095Z	   22 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupStatus` = '1' AND `superGroupCreatedAt` BETWEEN '2026-07-05 13:57:00' AND '2026-07-05 14:02:00'
+2026-08-09T22:19:54.872496Z	   22 Close stmt	
+2026-08-09T22:19:54.872680Z	   22 Quit	
+2026-08-09T22:19:56.330422Z	   23 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:19:56.338240Z	   23 Prepare	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:19:56.338482Z	   23 Execute	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:57:00' AND '2026-07-05 14:02:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:19:56.338909Z	   23 Close stmt	
+2026-08-09T22:19:56.339239Z	   23 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:19:56.339467Z	   23 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:57:00' AND '2026-07-05 14:02:00'
+2026-08-09T22:19:56.339859Z	   23 Close stmt	
+2026-08-09T22:19:56.341623Z	   23 Quit	
+2026-08-09T22:20:04.533656Z	   24 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:20:04.542838Z	   24 Prepare	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:20:04.543082Z	   24 Execute	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:56:00' AND '2026-07-05 14:02:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:20:04.543506Z	   24 Close stmt	
+2026-08-09T22:20:04.543794Z	   24 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:20:04.543993Z	   24 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:56:00' AND '2026-07-05 14:02:00'
+2026-08-09T22:20:04.544662Z	   24 Close stmt	
+2026-08-09T22:20:04.549062Z	   24 Quit	
+2026-08-09T22:20:07.131642Z	   25 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:20:07.138940Z	   25 Prepare	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:20:07.139157Z	   25 Execute	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:56:00' AND '2026-07-05 14:03:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:20:07.139587Z	   25 Close stmt	
+2026-08-09T22:20:07.139879Z	   25 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:20:07.140068Z	   25 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:56:00' AND '2026-07-05 14:03:00'
+2026-08-09T22:20:07.140461Z	   25 Close stmt	
+2026-08-09T22:20:07.142122Z	   25 Quit	
+2026-08-09T22:20:09.337463Z	   26 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:20:09.341327Z	   26 Prepare	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:20:09.341565Z	   26 Execute	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:56:00' AND '2026-07-05 14:03:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 5
+2026-08-09T22:20:09.341990Z	   26 Close stmt	
+2026-08-09T22:20:09.342278Z	   26 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:20:09.342474Z	   26 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:56:00' AND '2026-07-05 14:03:00'
+2026-08-09T22:20:09.342854Z	   26 Close stmt	
+2026-08-09T22:20:09.343233Z	   26 Quit	
+2026-08-09T22:20:10.695320Z	   27 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:20:10.703207Z	   27 Prepare	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:20:10.703464Z	   27 Execute	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:56:00' AND '2026-07-05 14:03:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:20:10.703901Z	   27 Close stmt	
+2026-08-09T22:20:10.704279Z	   27 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:20:10.704489Z	   27 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:56:00' AND '2026-07-05 14:03:00'
+2026-08-09T22:20:10.704878Z	   27 Close stmt	
+2026-08-09T22:20:10.706609Z	   27 Quit	
+2026-08-09T22:20:11.593448Z	   28 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:20:11.598680Z	   28 Prepare	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:20:11.598927Z	   28 Execute	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:56:00' AND '2026-07-05 14:03:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 5
+2026-08-09T22:20:11.599333Z	   28 Close stmt	
+2026-08-09T22:20:11.599612Z	   28 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:20:11.599798Z	   28 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:56:00' AND '2026-07-05 14:03:00'
+2026-08-09T22:20:11.600150Z	   28 Close stmt	
+2026-08-09T22:20:11.600531Z	   28 Quit	
+2026-08-09T22:20:12.458186Z	   29 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:20:12.463002Z	   29 Prepare	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ? ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:20:12.463414Z	   29 Execute	SELECT * FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:56:00' AND '2026-07-05 14:03:00' ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:20:12.464146Z	   29 Close stmt	
+2026-08-09T22:20:12.464581Z	   29 Prepare	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN ? AND ?
+2026-08-09T22:20:12.464807Z	   29 Execute	SELECT count(*) FROM `superGroup` WHERE `superGroupCreatedAt` BETWEEN '2026-07-05 13:56:00' AND '2026-07-05 14:03:00'
+2026-08-09T22:20:12.465387Z	   29 Close stmt	
+2026-08-09T22:20:12.465848Z	   29 Quit	
+2026-08-09T22:29:53.313535Z	   30 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:29:53.323883Z	   30 Prepare	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:29:53.324206Z	   30 Execute	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:29:53.324769Z	   30 Close stmt	
+2026-08-09T22:29:53.325058Z	   30 Prepare	SELECT count(*) FROM `responsible`
+2026-08-09T22:29:53.325255Z	   30 Execute	SELECT count(*) FROM `responsible`
+2026-08-09T22:29:53.325578Z	   30 Close stmt	
+2026-08-09T22:29:53.333265Z	   30 Quit	
+2026-08-09T22:29:55.232516Z	   31 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:29:55.237606Z	   31 Prepare	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:29:55.238029Z	   31 Execute	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:29:55.238551Z	   31 Close stmt	
+2026-08-09T22:29:55.238908Z	   31 Prepare	SELECT count(*) FROM `superGroup`
+2026-08-09T22:29:55.239108Z	   31 Execute	SELECT count(*) FROM `superGroup`
+2026-08-09T22:29:55.241402Z	   31 Close stmt	
+2026-08-09T22:29:55.242138Z	   31 Quit	
+2026-08-09T22:30:03.830161Z	   32 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:30:03.840357Z	   32 Prepare	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:30:03.840660Z	   32 Execute	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:30:03.841117Z	   32 Close stmt	
+2026-08-09T22:30:03.841451Z	   32 Prepare	SELECT count(*) FROM `responsible`
+2026-08-09T22:30:03.841660Z	   32 Execute	SELECT count(*) FROM `responsible`
+2026-08-09T22:30:03.842009Z	   32 Close stmt	
+2026-08-09T22:30:03.845449Z	   32 Quit	
+2026-08-09T22:30:04.887856Z	   33 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:30:04.891944Z	   33 Prepare	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:30:04.892273Z	   33 Execute	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:30:04.892766Z	   33 Close stmt	
+2026-08-09T22:30:04.893100Z	   33 Prepare	SELECT count(*) FROM `superGroup`
+2026-08-09T22:30:04.893299Z	   33 Execute	SELECT count(*) FROM `superGroup`
+2026-08-09T22:30:04.894972Z	   33 Close stmt	
+2026-08-09T22:30:04.895619Z	   33 Quit	
+2026-08-09T22:30:23.564817Z	   34 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:30:23.575225Z	   34 Prepare	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:30:23.575525Z	   34 Execute	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:30:23.576004Z	   34 Close stmt	
+2026-08-09T22:30:23.576286Z	   34 Prepare	SELECT count(*) FROM `responsible`
+2026-08-09T22:30:23.576470Z	   34 Execute	SELECT count(*) FROM `responsible`
+2026-08-09T22:30:23.576789Z	   34 Close stmt	
+2026-08-09T22:30:23.580944Z	   34 Quit	
+2026-08-09T22:30:41.682631Z	   35 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:30:41.722138Z	   35 Prepare	SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId ORDER BY g.groupId ASC LIMIT ? OFFSET ?
+2026-08-09T22:30:41.722566Z	   35 Execute	SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId ORDER BY g.groupId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:30:41.727194Z	   35 Close stmt	
+2026-08-09T22:30:41.727549Z	   35 Prepare	SELECT count(*) FROM `group`
+2026-08-09T22:30:41.727746Z	   35 Execute	SELECT count(*) FROM `group`
+2026-08-09T22:30:41.728511Z	   35 Close stmt	
+2026-08-09T22:30:41.730959Z	   35 Prepare	SELECT * FROM `superGroup` WHERE superGroupStatus = 0
+2026-08-09T22:30:41.731208Z	   35 Execute	SELECT * FROM `superGroup` WHERE superGroupStatus = 0
+2026-08-09T22:30:41.731590Z	   35 Close stmt	
+2026-08-09T22:30:41.735415Z	   35 Quit	
+2026-08-09T22:34:24.608044Z	   36 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:34:24.620663Z	   36 Prepare	SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId ORDER BY g.groupId ASC LIMIT ? OFFSET ?
+2026-08-09T22:34:24.621032Z	   36 Execute	SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId ORDER BY g.groupId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:34:24.621736Z	   36 Close stmt	
+2026-08-09T22:34:24.622168Z	   36 Prepare	SELECT count(*) FROM `group`
+2026-08-09T22:34:24.622367Z	   36 Execute	SELECT count(*) FROM `group`
+2026-08-09T22:34:24.622984Z	   36 Close stmt	
+2026-08-09T22:34:24.626172Z	   36 Prepare	SELECT * FROM `superGroup` WHERE superGroupStatus = 0
+2026-08-09T22:34:24.626402Z	   36 Execute	SELECT * FROM `superGroup` WHERE superGroupStatus = 0
+2026-08-09T22:34:24.626823Z	   36 Close stmt	
+2026-08-09T22:34:24.630864Z	   36 Quit	
+2026-08-09T22:34:29.620174Z	   37 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:34:29.628639Z	   37 Prepare	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:34:29.628935Z	   37 Execute	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:34:29.629443Z	   37 Close stmt	
+2026-08-09T22:34:29.629816Z	   37 Prepare	SELECT count(*) FROM `responsible`
+2026-08-09T22:34:29.630028Z	   37 Execute	SELECT count(*) FROM `responsible`
+2026-08-09T22:34:29.630495Z	   37 Close stmt	
+2026-08-09T22:34:29.635521Z	   37 Quit	
+2026-08-09T22:34:30.967580Z	   38 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:34:30.971876Z	   38 Prepare	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:34:30.972176Z	   38 Execute	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:34:30.972615Z	   38 Close stmt	
+2026-08-09T22:34:30.972901Z	   38 Prepare	SELECT count(*) FROM `superGroup`
+2026-08-09T22:34:30.973147Z	   38 Execute	SELECT count(*) FROM `superGroup`
+2026-08-09T22:34:30.976118Z	   38 Close stmt	
+2026-08-09T22:34:30.976547Z	   38 Quit	
+2026-08-09T22:34:33.028116Z	   39 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:34:33.037985Z	   39 Prepare	SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId ORDER BY g.groupId ASC LIMIT ? OFFSET ?
+2026-08-09T22:34:33.038267Z	   39 Execute	SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId ORDER BY g.groupId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:34:33.038822Z	   39 Close stmt	
+2026-08-09T22:34:33.039157Z	   39 Prepare	SELECT count(*) FROM `group`
+2026-08-09T22:34:33.039349Z	   39 Execute	SELECT count(*) FROM `group`
+2026-08-09T22:34:33.039700Z	   39 Close stmt	
+2026-08-09T22:34:33.041396Z	   39 Prepare	SELECT * FROM `superGroup` WHERE superGroupStatus = 0
+2026-08-09T22:34:33.041720Z	   39 Execute	SELECT * FROM `superGroup` WHERE superGroupStatus = 0
+2026-08-09T22:34:33.042417Z	   39 Close stmt	
+2026-08-09T22:34:33.044162Z	   39 Quit	
+2026-08-09T22:34:34.376195Z	   40 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:34:34.380437Z	   40 Prepare	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:34:34.380762Z	   40 Execute	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:34:34.381220Z	   40 Close stmt	
+2026-08-09T22:34:34.381510Z	   40 Prepare	SELECT count(*) FROM `responsible`
+2026-08-09T22:34:34.381705Z	   40 Execute	SELECT count(*) FROM `responsible`
+2026-08-09T22:34:34.382027Z	   40 Close stmt	
+2026-08-09T22:34:34.382337Z	   40 Quit	
+2026-08-09T22:34:36.234935Z	   41 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:34:36.243518Z	   41 Prepare	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:34:36.243841Z	   41 Execute	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:34:36.244351Z	   41 Close stmt	
+2026-08-09T22:34:36.244708Z	   41 Prepare	SELECT count(*) FROM `superGroup`
+2026-08-09T22:34:36.244903Z	   41 Execute	SELECT count(*) FROM `superGroup`
+2026-08-09T22:34:36.247013Z	   41 Close stmt	
+2026-08-09T22:34:36.248778Z	   41 Quit	
+2026-08-09T22:34:37.863373Z	   42 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:34:37.867339Z	   42 Prepare	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:34:37.867616Z	   42 Execute	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:34:37.868053Z	   42 Close stmt	
+2026-08-09T22:34:37.868339Z	   42 Prepare	SELECT count(*) FROM `responsible`
+2026-08-09T22:34:37.868531Z	   42 Execute	SELECT count(*) FROM `responsible`
+2026-08-09T22:34:37.868895Z	   42 Close stmt	
+2026-08-09T22:34:37.869205Z	   42 Quit	
+2026-08-09T22:34:39.549397Z	   43 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:34:39.560129Z	   43 Prepare	SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId ORDER BY g.groupId ASC LIMIT ? OFFSET ?
+2026-08-09T22:34:39.560423Z	   43 Execute	SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId ORDER BY g.groupId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:34:39.560969Z	   43 Close stmt	
+2026-08-09T22:34:39.561295Z	   43 Prepare	SELECT count(*) FROM `group`
+2026-08-09T22:34:39.561484Z	   43 Execute	SELECT count(*) FROM `group`
+2026-08-09T22:34:39.561858Z	   43 Close stmt	
+2026-08-09T22:34:39.564224Z	   43 Prepare	SELECT * FROM `superGroup` WHERE superGroupStatus = 0
+2026-08-09T22:34:39.564463Z	   43 Execute	SELECT * FROM `superGroup` WHERE superGroupStatus = 0
+2026-08-09T22:34:39.564912Z	   43 Close stmt	
+2026-08-09T22:34:39.566498Z	   43 Quit	
+2026-08-09T22:34:41.819457Z	   44 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:34:41.854118Z	   44 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:34:41.854457Z	   44 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:34:41.859315Z	   44 Close stmt	
+2026-08-09T22:34:41.859879Z	   44 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:34:41.860155Z	   44 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:34:41.861399Z	   44 Close stmt	
+2026-08-09T22:34:41.862837Z	   44 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:34:41.863052Z	   44 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:34:41.863427Z	   44 Close stmt	
+2026-08-09T22:34:41.864211Z	   44 Quit	
+2026-08-09T22:37:51.069830Z	   45 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:37:51.081987Z	   45 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:37:51.082260Z	   45 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:37:51.082779Z	   45 Close stmt	
+2026-08-09T22:37:51.083268Z	   45 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:37:51.083495Z	   45 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:37:51.083874Z	   45 Close stmt	
+2026-08-09T22:37:51.086315Z	   45 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:37:51.086565Z	   45 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:37:51.086955Z	   45 Close stmt	
+2026-08-09T22:37:51.090698Z	   45 Quit	
+2026-08-09T22:38:04.740254Z	   46 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:38:04.752342Z	   46 Prepare	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:38:04.752718Z	   46 Execute	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:38:04.753317Z	   46 Close stmt	
+2026-08-09T22:38:04.753724Z	   46 Prepare	SELECT count(*) FROM `responsible`
+2026-08-09T22:38:04.753937Z	   46 Execute	SELECT count(*) FROM `responsible`
+2026-08-09T22:38:04.754420Z	   46 Close stmt	
+2026-08-09T22:38:04.754962Z	   46 Quit	
+2026-08-09T22:38:05.617441Z	   47 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:38:05.621369Z	   47 Prepare	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:38:05.621661Z	   47 Execute	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:38:05.622109Z	   47 Close stmt	
+2026-08-09T22:38:05.622476Z	   47 Prepare	SELECT count(*) FROM `responsible`
+2026-08-09T22:38:05.622671Z	   47 Execute	SELECT count(*) FROM `responsible`
+2026-08-09T22:38:05.623017Z	   47 Close stmt	
+2026-08-09T22:38:05.623319Z	   47 Quit	
+2026-08-09T22:39:40.283612Z	   48 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:39:40.293191Z	   48 Prepare	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:39:40.293492Z	   48 Execute	SELECT * FROM `responsible` ORDER BY `responsibleId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:39:40.293934Z	   48 Close stmt	
+2026-08-09T22:39:40.294262Z	   48 Prepare	SELECT count(*) FROM `responsible`
+2026-08-09T22:39:40.294448Z	   48 Execute	SELECT count(*) FROM `responsible`
+2026-08-09T22:39:40.294769Z	   48 Close stmt	
+2026-08-09T22:39:40.299986Z	   48 Quit	
+2026-08-09T22:39:42.936218Z	   49 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:39:42.940193Z	   49 Prepare	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:39:42.940463Z	   49 Execute	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:39:42.940914Z	   49 Close stmt	
+2026-08-09T22:39:42.941275Z	   49 Prepare	SELECT count(*) FROM `superGroup`
+2026-08-09T22:39:42.941471Z	   49 Execute	SELECT count(*) FROM `superGroup`
+2026-08-09T22:39:42.943326Z	   49 Close stmt	
+2026-08-09T22:39:42.943631Z	   49 Quit	
+2026-08-09T22:40:10.136960Z	   50 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:40:10.147388Z	   50 Prepare	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:40:10.147771Z	   50 Execute	SELECT * FROM `superGroup` ORDER BY `superGroupId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:40:10.148346Z	   50 Close stmt	
+2026-08-09T22:40:10.148814Z	   50 Prepare	SELECT count(*) FROM `superGroup`
+2026-08-09T22:40:10.149002Z	   50 Execute	SELECT count(*) FROM `superGroup`
+2026-08-09T22:40:10.150827Z	   50 Close stmt	
+2026-08-09T22:40:10.154586Z	   50 Quit	
+2026-08-09T22:40:11.928183Z	   51 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:40:11.935089Z	   51 Prepare	SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId ORDER BY g.groupId ASC LIMIT ? OFFSET ?
+2026-08-09T22:40:11.935385Z	   51 Execute	SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId ORDER BY g.groupId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:40:11.935857Z	   51 Close stmt	
+2026-08-09T22:40:11.936224Z	   51 Prepare	SELECT count(*) FROM `group`
+2026-08-09T22:40:11.936410Z	   51 Execute	SELECT count(*) FROM `group`
+2026-08-09T22:40:11.936760Z	   51 Close stmt	
+2026-08-09T22:40:11.937977Z	   51 Prepare	SELECT * FROM `superGroup` WHERE superGroupStatus = 0
+2026-08-09T22:40:11.938228Z	   51 Execute	SELECT * FROM `superGroup` WHERE superGroupStatus = 0
+2026-08-09T22:40:11.938598Z	   51 Close stmt	
+2026-08-09T22:40:11.938988Z	   51 Quit	
+2026-08-09T22:40:50.477809Z	   52 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:40:50.489889Z	   52 Prepare	SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId ORDER BY g.groupId ASC LIMIT ? OFFSET ?
+2026-08-09T22:40:50.490172Z	   52 Execute	SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId ORDER BY g.groupId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:40:50.490676Z	   52 Close stmt	
+2026-08-09T22:40:50.490967Z	   52 Prepare	SELECT count(*) FROM `group`
+2026-08-09T22:40:50.491153Z	   52 Execute	SELECT count(*) FROM `group`
+2026-08-09T22:40:50.491470Z	   52 Close stmt	
+2026-08-09T22:40:50.493900Z	   52 Prepare	SELECT * FROM `superGroup` WHERE superGroupStatus = 0
+2026-08-09T22:40:50.494093Z	   52 Execute	SELECT * FROM `superGroup` WHERE superGroupStatus = 0
+2026-08-09T22:40:50.494460Z	   52 Close stmt	
+2026-08-09T22:40:50.499510Z	   52 Quit	
+2026-08-09T22:40:52.428604Z	   53 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:40:52.435878Z	   53 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:40:52.436135Z	   53 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:40:52.436617Z	   53 Close stmt	
+2026-08-09T22:40:52.436961Z	   53 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:40:52.437154Z	   53 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:40:52.437506Z	   53 Close stmt	
+2026-08-09T22:40:52.438810Z	   53 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:40:52.439057Z	   53 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:40:52.439458Z	   53 Close stmt	
+2026-08-09T22:40:52.439895Z	   53 Quit	
+2026-08-09T22:41:04.195294Z	   54 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:41:04.205491Z	   54 Prepare	SELECT * FROM `movement` WHERE `movementFinancialType` = ? ORDER BY `movementId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:41:04.205789Z	   54 Execute	SELECT * FROM `movement` WHERE `movementFinancialType` = '0' ORDER BY `movementId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:41:04.206255Z	   54 Close stmt	
+2026-08-09T22:41:04.206584Z	   54 Prepare	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = ?
+2026-08-09T22:41:04.206826Z	   54 Execute	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = '0'
+2026-08-09T22:41:04.207172Z	   54 Close stmt	
+2026-08-09T22:41:04.211033Z	   54 Quit	
+2026-08-09T22:41:39.571456Z	   55 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:41:39.580628Z	   55 Prepare	SELECT * FROM `movement` WHERE `movementFinancialType` = ? ORDER BY `movementId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:41:39.580926Z	   55 Execute	SELECT * FROM `movement` WHERE `movementFinancialType` = '0' ORDER BY `movementId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:41:39.581746Z	   55 Close stmt	
+2026-08-09T22:41:39.582263Z	   55 Prepare	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = ?
+2026-08-09T22:41:39.582544Z	   55 Execute	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = '0'
+2026-08-09T22:41:39.583320Z	   55 Close stmt	
+2026-08-09T22:41:39.587383Z	   55 Quit	
+2026-08-09T22:41:41.994151Z	   56 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:41:41.997793Z	   56 Prepare	SELECT * FROM `movement` WHERE `movementFinancialType` = ? ORDER BY `movementId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:41:41.998158Z	   56 Execute	SELECT * FROM `movement` WHERE `movementFinancialType` = '0' ORDER BY `movementId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:41:41.998758Z	   56 Close stmt	
+2026-08-09T22:41:41.999274Z	   56 Prepare	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = ?
+2026-08-09T22:41:41.999594Z	   56 Execute	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = '0'
+2026-08-09T22:41:42.000193Z	   56 Close stmt	
+2026-08-09T22:41:42.000916Z	   56 Quit	
+2026-08-09T22:41:44.007220Z	   57 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:41:44.015697Z	   57 Prepare	SELECT * FROM `movement` WHERE `movementFinancialType` = ? ORDER BY `movementId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:41:44.016205Z	   57 Execute	SELECT * FROM `movement` WHERE `movementFinancialType` = '1' ORDER BY `movementId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:41:44.016855Z	   57 Close stmt	
+2026-08-09T22:41:44.017281Z	   57 Prepare	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = ?
+2026-08-09T22:41:44.017499Z	   57 Execute	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = '1'
+2026-08-09T22:41:44.017884Z	   57 Close stmt	
+2026-08-09T22:41:44.019840Z	   57 Quit	
+2026-08-09T22:41:52.585390Z	   58 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:41:52.596663Z	   58 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:41:52.596946Z	   58 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:41:52.597628Z	   58 Close stmt	
+2026-08-09T22:41:52.598094Z	   58 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:41:52.598321Z	   58 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:41:52.598777Z	   58 Close stmt	
+2026-08-09T22:41:52.601528Z	   58 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:41:52.601756Z	   58 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:41:52.602211Z	   58 Close stmt	
+2026-08-09T22:41:52.606060Z	   58 Quit	
+2026-08-09T22:42:25.842591Z	   59 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:42:25.855120Z	   59 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:42:25.855401Z	   59 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:42:25.855936Z	   59 Close stmt	
+2026-08-09T22:42:25.856360Z	   59 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:42:25.856587Z	   59 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:42:25.856950Z	   59 Close stmt	
+2026-08-09T22:42:25.859444Z	   59 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:42:25.859696Z	   59 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:42:25.860156Z	   59 Close stmt	
+2026-08-09T22:42:25.864018Z	   59 Quit	
+2026-08-09T22:43:09.646399Z	   60 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:09.657326Z	   60 Prepare	SELECT * FROM `movement` WHERE `movementFinancialType` = ? ORDER BY `movementId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:43:09.657675Z	   60 Execute	SELECT * FROM `movement` WHERE `movementFinancialType` = '0' ORDER BY `movementId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:43:09.658115Z	   60 Close stmt	
+2026-08-09T22:43:09.658499Z	   60 Prepare	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = ?
+2026-08-09T22:43:09.658726Z	   60 Execute	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = '0'
+2026-08-09T22:43:09.659103Z	   60 Close stmt	
+2026-08-09T22:43:09.662955Z	   60 Quit	
+2026-08-09T22:43:11.994035Z	   61 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:11.998411Z	   61 Prepare	SELECT * FROM `movement` WHERE `movementFinancialType` = ? ORDER BY `movementId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:43:11.998773Z	   61 Execute	SELECT * FROM `movement` WHERE `movementFinancialType` = '1' ORDER BY `movementId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:43:11.999278Z	   61 Close stmt	
+2026-08-09T22:43:11.999938Z	   61 Prepare	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = ?
+2026-08-09T22:43:12.000525Z	   61 Execute	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = '1'
+2026-08-09T22:43:12.001207Z	   61 Close stmt	
+2026-08-09T22:43:12.001499Z	   61 Quit	
+2026-08-09T22:43:13.739055Z	   62 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:13.749527Z	   62 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:43:13.749936Z	   62 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:43:13.750836Z	   62 Close stmt	
+2026-08-09T22:43:13.751440Z	   62 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:43:13.751762Z	   62 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:43:13.752158Z	   62 Close stmt	
+2026-08-09T22:43:13.754673Z	   62 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:43:13.754873Z	   62 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:43:13.755349Z	   62 Close stmt	
+2026-08-09T22:43:13.757445Z	   62 Quit	
+2026-08-09T22:43:17.927739Z	   63 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:17.935977Z	   63 Prepare	SELECT * FROM `movement` WHERE `movementFinancialType` = ? ORDER BY `movementId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:43:17.936236Z	   63 Execute	SELECT * FROM `movement` WHERE `movementFinancialType` = '0' ORDER BY `movementId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:43:17.936734Z	   63 Close stmt	
+2026-08-09T22:43:17.937077Z	   63 Prepare	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = ?
+2026-08-09T22:43:17.937267Z	   63 Execute	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = '0'
+2026-08-09T22:43:17.937688Z	   63 Close stmt	
+2026-08-09T22:43:17.939204Z	   63 Quit	
+2026-08-09T22:43:19.325378Z	   64 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:19.331573Z	   64 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:43:19.331874Z	   64 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:43:19.332410Z	   64 Close stmt	
+2026-08-09T22:43:19.332706Z	   64 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:43:19.332899Z	   64 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:43:19.333460Z	   64 Close stmt	
+2026-08-09T22:43:19.336656Z	   64 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:43:19.336902Z	   64 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:43:19.337389Z	   64 Close stmt	
+2026-08-09T22:43:19.337840Z	   64 Quit	
+2026-08-09T22:43:21.244964Z	   65 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:21.246884Z	   65 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:43:21.247090Z	   65 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:43:21.247603Z	   65 Close stmt	
+2026-08-09T22:43:21.250019Z	   65 Quit	
+2026-08-09T22:43:40.430510Z	   66 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:40.432603Z	   66 Prepare	INSERT INTO `item` (itemName, itemMeasurementUnit, itemStatus, groupId, itemFinancialType) VALUES (?, ?, ?, ?, ?)
+2026-08-09T22:43:40.432946Z	   66 Execute	INSERT INTO `item` (itemName, itemMeasurementUnit, itemStatus, groupId, itemFinancialType) VALUES ('Aluguel', '2', '0', '4', '2')
+2026-08-09T22:43:40.442244Z	   66 Close stmt	
+2026-08-09T22:43:40.442544Z	   66 Quit	
+2026-08-09T22:43:40.461894Z	   67 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:40.462785Z	   67 Prepare	SELECT * FROM `item` WHERE `itemId` = ?
+2026-08-09T22:43:40.463057Z	   67 Execute	SELECT * FROM `item` WHERE `itemId` = '7'
+2026-08-09T22:43:40.463576Z	   67 Close stmt	
+2026-08-09T22:43:40.466177Z	   67 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:43:40.466372Z	   67 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:43:40.467061Z	   67 Close stmt	
+2026-08-09T22:43:40.471540Z	   67 Quit	
+2026-08-09T22:43:43.353594Z	   68 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:43.365060Z	   68 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:43:43.365348Z	   68 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:43:43.365887Z	   68 Close stmt	
+2026-08-09T22:43:43.366188Z	   68 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:43:43.366378Z	   68 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:43:43.366816Z	   68 Close stmt	
+2026-08-09T22:43:43.369712Z	   68 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:43:43.369939Z	   68 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:43:43.370377Z	   68 Close stmt	
+2026-08-09T22:43:43.372339Z	   68 Quit	
+2026-08-09T22:43:46.094358Z	   69 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:46.095242Z	   69 Prepare	SELECT * FROM `item` WHERE `itemId` = ?
+2026-08-09T22:43:46.095493Z	   69 Execute	SELECT * FROM `item` WHERE `itemId` = '6'
+2026-08-09T22:43:46.095990Z	   69 Close stmt	
+2026-08-09T22:43:46.098601Z	   69 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:43:46.098814Z	   69 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:43:46.099272Z	   69 Close stmt	
+2026-08-09T22:43:46.101522Z	   69 Quit	
+2026-08-09T22:43:50.024551Z	   70 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:50.032410Z	   70 Prepare	SELECT * FROM `movement` WHERE `movementFinancialType` = ? ORDER BY `movementId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:43:50.032797Z	   70 Execute	SELECT * FROM `movement` WHERE `movementFinancialType` = '1' ORDER BY `movementId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:43:50.033473Z	   70 Close stmt	
+2026-08-09T22:43:50.033968Z	   70 Prepare	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = ?
+2026-08-09T22:43:50.034200Z	   70 Execute	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = '1'
+2026-08-09T22:43:50.034640Z	   70 Close stmt	
+2026-08-09T22:43:50.036396Z	   70 Quit	
+2026-08-09T22:43:52.201107Z	   71 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:52.208558Z	   71 Prepare	SELECT * FROM `movement` WHERE `movementFinancialType` = ? ORDER BY `movementId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:43:52.208875Z	   71 Execute	SELECT * FROM `movement` WHERE `movementFinancialType` = '0' ORDER BY `movementId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:43:52.209345Z	   71 Close stmt	
+2026-08-09T22:43:52.209721Z	   71 Prepare	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = ?
+2026-08-09T22:43:52.209950Z	   71 Execute	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = '0'
+2026-08-09T22:43:52.210402Z	   71 Close stmt	
+2026-08-09T22:43:52.212367Z	   71 Quit	
+2026-08-09T22:43:55.079147Z	   72 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:55.087074Z	   72 Prepare	SELECT * FROM `movement` WHERE `movementFinancialType` = ? ORDER BY `movementId` ASC LIMIT ? OFFSET ?
+2026-08-09T22:43:55.087374Z	   72 Execute	SELECT * FROM `movement` WHERE `movementFinancialType` = '0' ORDER BY `movementId` ASC LIMIT 5 OFFSET 0
+2026-08-09T22:43:55.087868Z	   72 Close stmt	
+2026-08-09T22:43:55.088196Z	   72 Prepare	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = ?
+2026-08-09T22:43:55.088407Z	   72 Execute	SELECT count(*) FROM `movement` WHERE `movementFinancialType` = '0'
+2026-08-09T22:43:55.088828Z	   72 Close stmt	
+2026-08-09T22:43:55.090543Z	   72 Quit	
+2026-08-09T22:43:56.130180Z	   73 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:43:56.131007Z	   73 Prepare	SELECT * FROM `movement` WHERE `movementId` = ?
+2026-08-09T22:43:56.131370Z	   73 Execute	SELECT * FROM `movement` WHERE `movementId` = '8'
+2026-08-09T22:43:56.131797Z	   73 Close stmt	
+2026-08-09T22:43:56.132273Z	   73 Quit	
+2026-08-09T22:46:11.667425Z	   74 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:46:11.688055Z	   74 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:46:11.688405Z	   74 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:46:11.688987Z	   74 Close stmt	
+2026-08-09T22:46:11.689266Z	   74 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:46:11.689474Z	   74 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:46:11.689851Z	   74 Close stmt	
+2026-08-09T22:46:11.692302Z	   74 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:46:11.692500Z	   74 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:46:11.692919Z	   74 Close stmt	
+2026-08-09T22:46:11.696878Z	   74 Quit	
+2026-08-09T22:50:04.642260Z	   75 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:50:04.654386Z	   75 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:50:04.654659Z	   75 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:50:04.655247Z	   75 Close stmt	
+2026-08-09T22:50:04.655654Z	   75 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:50:04.655900Z	   75 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:50:04.656518Z	   75 Close stmt	
+2026-08-09T22:50:04.659672Z	   75 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:50:04.659987Z	   75 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:50:04.660451Z	   75 Close stmt	
+2026-08-09T22:50:04.664918Z	   75 Quit	
+2026-08-09T22:50:44.151429Z	   76 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:50:44.163648Z	   76 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:50:44.164024Z	   76 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:50:44.164611Z	   76 Close stmt	
+2026-08-09T22:50:44.164956Z	   76 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:50:44.165152Z	   76 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:50:44.165476Z	   76 Close stmt	
+2026-08-09T22:50:44.167977Z	   76 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:50:44.168195Z	   76 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:50:44.168592Z	   76 Close stmt	
+2026-08-09T22:50:44.172904Z	   76 Quit	
+2026-08-09T22:51:27.112190Z	   77 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:51:27.124153Z	   77 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:51:27.124546Z	   77 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:51:27.125258Z	   77 Close stmt	
+2026-08-09T22:51:27.125788Z	   77 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:51:27.126142Z	   77 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:51:27.126625Z	   77 Close stmt	
+2026-08-09T22:51:27.129127Z	   77 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:51:27.129410Z	   77 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:51:27.129797Z	   77 Close stmt	
+2026-08-09T22:51:27.134654Z	   77 Quit	
+2026-08-09T22:53:00.957504Z	   78 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:53:00.970310Z	   78 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:53:00.970652Z	   78 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:53:00.971460Z	   78 Close stmt	
+2026-08-09T22:53:00.971866Z	   78 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:53:00.972078Z	   78 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:53:00.972444Z	   78 Close stmt	
+2026-08-09T22:53:00.974841Z	   78 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:53:00.975079Z	   78 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:53:00.975447Z	   78 Close stmt	
+2026-08-09T22:53:00.980437Z	   78 Quit	
+2026-08-09T22:57:42.331490Z	   79 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:57:42.344777Z	   79 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:57:42.345391Z	   79 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:57:42.346124Z	   79 Close stmt	
+2026-08-09T22:57:42.346551Z	   79 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:57:42.346745Z	   79 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:57:42.347117Z	   79 Close stmt	
+2026-08-09T22:57:42.350202Z	   79 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:57:42.350549Z	   79 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:57:42.351064Z	   79 Close stmt	
+2026-08-09T22:57:42.355474Z	   79 Quit	
+2026-08-09T22:58:53.186797Z	   80 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T22:58:53.198671Z	   80 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T22:58:53.199358Z	   80 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T22:58:53.200094Z	   80 Close stmt	
+2026-08-09T22:58:53.200503Z	   80 Prepare	SELECT count(*) FROM `item`
+2026-08-09T22:58:53.200772Z	   80 Execute	SELECT count(*) FROM `item`
+2026-08-09T22:58:53.201122Z	   80 Close stmt	
+2026-08-09T22:58:53.203627Z	   80 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:58:53.203859Z	   80 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T22:58:53.204307Z	   80 Close stmt	
+2026-08-09T22:58:53.208819Z	   80 Quit	
+2026-08-09T23:03:25.486557Z	   81 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T23:03:25.505381Z	   81 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T23:03:25.505906Z	   81 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T23:03:25.506424Z	   81 Close stmt	
+2026-08-09T23:03:25.506764Z	   81 Prepare	SELECT count(*) FROM `item`
+2026-08-09T23:03:25.506964Z	   81 Execute	SELECT count(*) FROM `item`
+2026-08-09T23:03:25.507344Z	   81 Close stmt	
+2026-08-09T23:03:25.510015Z	   81 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:03:25.510303Z	   81 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:03:25.510748Z	   81 Close stmt	
+2026-08-09T23:03:25.514992Z	   81 Quit	
+2026-08-09T23:04:53.406213Z	   82 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T23:04:53.418097Z	   82 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T23:04:53.418685Z	   82 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T23:04:53.419270Z	   82 Close stmt	
+2026-08-09T23:04:53.419629Z	   82 Prepare	SELECT count(*) FROM `item`
+2026-08-09T23:04:53.419840Z	   82 Execute	SELECT count(*) FROM `item`
+2026-08-09T23:04:53.420210Z	   82 Close stmt	
+2026-08-09T23:04:53.423158Z	   82 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:04:53.423455Z	   82 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:04:53.423903Z	   82 Close stmt	
+2026-08-09T23:04:53.428154Z	   82 Quit	
+2026-08-09T23:05:37.888404Z	   83 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T23:05:37.900289Z	   83 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T23:05:37.900829Z	   83 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T23:05:37.901310Z	   83 Close stmt	
+2026-08-09T23:05:37.901683Z	   83 Prepare	SELECT count(*) FROM `item`
+2026-08-09T23:05:37.901903Z	   83 Execute	SELECT count(*) FROM `item`
+2026-08-09T23:05:37.902260Z	   83 Close stmt	
+2026-08-09T23:05:37.904870Z	   83 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:05:37.905134Z	   83 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:05:37.905652Z	   83 Close stmt	
+2026-08-09T23:05:37.910317Z	   83 Quit	
+2026-08-09T23:06:54.682358Z	   84 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T23:06:54.702392Z	   84 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T23:06:54.702965Z	   84 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T23:06:54.703482Z	   84 Close stmt	
+2026-08-09T23:06:54.703842Z	   84 Prepare	SELECT count(*) FROM `item`
+2026-08-09T23:06:54.704046Z	   84 Execute	SELECT count(*) FROM `item`
+2026-08-09T23:06:54.704386Z	   84 Close stmt	
+2026-08-09T23:06:54.707600Z	   84 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:06:54.707907Z	   84 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:06:54.708376Z	   84 Close stmt	
+2026-08-09T23:06:54.712856Z	   84 Quit	
+2026-08-09T23:08:14.362078Z	   85 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T23:08:14.373631Z	   85 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T23:08:14.374149Z	   85 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T23:08:14.374596Z	   85 Close stmt	
+2026-08-09T23:08:14.374955Z	   85 Prepare	SELECT count(*) FROM `item`
+2026-08-09T23:08:14.375136Z	   85 Execute	SELECT count(*) FROM `item`
+2026-08-09T23:08:14.375635Z	   85 Close stmt	
+2026-08-09T23:08:14.378786Z	   85 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:08:14.379074Z	   85 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:08:14.379528Z	   85 Close stmt	
+2026-08-09T23:08:14.383340Z	   85 Quit	
+2026-08-09T23:11:39.063792Z	   86 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T23:11:39.076244Z	   86 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T23:11:39.076874Z	   86 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T23:11:39.077566Z	   86 Close stmt	
+2026-08-09T23:11:39.077991Z	   86 Prepare	SELECT count(*) FROM `item`
+2026-08-09T23:11:39.078186Z	   86 Execute	SELECT count(*) FROM `item`
+2026-08-09T23:11:39.078777Z	   86 Close stmt	
+2026-08-09T23:11:39.081944Z	   86 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:11:39.082218Z	   86 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:11:39.082734Z	   86 Close stmt	
+2026-08-09T23:11:39.087023Z	   86 Quit	
+2026-08-09T23:13:48.793531Z	   87 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T23:13:48.806412Z	   87 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T23:13:48.806976Z	   87 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T23:13:48.807583Z	   87 Close stmt	
+2026-08-09T23:13:48.807937Z	   87 Prepare	SELECT count(*) FROM `item`
+2026-08-09T23:13:48.808147Z	   87 Execute	SELECT count(*) FROM `item`
+2026-08-09T23:13:48.808511Z	   87 Close stmt	
+2026-08-09T23:13:48.811188Z	   87 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:13:48.811476Z	   87 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:13:48.811940Z	   87 Close stmt	
+2026-08-09T23:13:48.816665Z	   87 Quit	
+2026-08-09T23:13:57.335944Z	   88 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T23:13:57.347197Z	   88 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T23:13:57.347781Z	   88 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T23:13:57.348309Z	   88 Close stmt	
+2026-08-09T23:13:57.348734Z	   88 Prepare	SELECT count(*) FROM `item`
+2026-08-09T23:13:57.348985Z	   88 Execute	SELECT count(*) FROM `item`
+2026-08-09T23:13:57.349400Z	   88 Close stmt	
+2026-08-09T23:13:57.352213Z	   88 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:13:57.352447Z	   88 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:13:57.353021Z	   88 Close stmt	
+2026-08-09T23:13:57.357272Z	   88 Quit	
+2026-08-09T23:14:32.946219Z	   89 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T23:14:32.959258Z	   89 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T23:14:32.959815Z	   89 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T23:14:32.960325Z	   89 Close stmt	
+2026-08-09T23:14:32.960718Z	   89 Prepare	SELECT count(*) FROM `item`
+2026-08-09T23:14:32.960925Z	   89 Execute	SELECT count(*) FROM `item`
+2026-08-09T23:14:32.961293Z	   89 Close stmt	
+2026-08-09T23:14:32.963835Z	   89 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:14:32.964086Z	   89 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:14:32.965033Z	   89 Close stmt	
+2026-08-09T23:14:32.969849Z	   89 Quit	
+2026-08-09T23:15:09.777166Z	   90 Connect	pocket@172.18.0.3 on pocket using TCP/IP
+2026-08-09T23:15:09.789868Z	   90 Prepare	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT ? OFFSET ?
+2026-08-09T23:15:09.790518Z	   90 Execute	SELECT * FROM `item` i INNER JOIN `group` g ON g.groupId = i.groupId ORDER BY i.itemId ASC LIMIT 5 OFFSET 0
+2026-08-09T23:15:09.791233Z	   90 Close stmt	
+2026-08-09T23:15:09.791624Z	   90 Prepare	SELECT count(*) FROM `item`
+2026-08-09T23:15:09.791888Z	   90 Execute	SELECT count(*) FROM `item`
+2026-08-09T23:15:09.792254Z	   90 Close stmt	
+2026-08-09T23:15:09.794765Z	   90 Prepare	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:15:09.795045Z	   90 Execute	SELECT * FROM `group` WHERE groupStatus = 0
+2026-08-09T23:15:09.795485Z	   90 Close stmt	
+2026-08-09T23:15:09.800113Z	   90 Quit	
