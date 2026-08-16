@@ -23,7 +23,6 @@ class DAO
         $sql .= self::prepareCondictions($object->getCondictionPairs(), $object);
         $sql .= " ORDER BY `" . implode(", ", array_keys($object->getPrimaryKeyPairs())) . "`";
         $sql .= " ASC LIMIT :limit OFFSET :offset";
-        error_log("AQUI: " . $sql);
         $stmt = $this->pdo->prepare($sql);
 
         $this->bindValues($stmt, $object->getCondictionPairs(), $object);

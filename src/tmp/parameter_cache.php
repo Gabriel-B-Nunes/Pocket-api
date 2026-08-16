@@ -1,4 +1,4 @@
 <?php
 return array (
-  'panelMaxRowNumber' => '5',
+  'panelMaxRowNumber' => '10',
 );
