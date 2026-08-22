@@ -3,4 +3,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gettext \
     libgettextpo-dev \
     && docker-php-ext-install gettext mysqli pdo_mysql \
-    && rm -rf /var/lib/apt/lists/*
+    && a2enmod rewrite \
+    && sed -ri -e 's!AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
+    && rm -rf /var/lib/apt/lists/* 

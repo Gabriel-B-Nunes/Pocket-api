@@ -1,8 +1,0 @@
-Options -Indexes
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-
-    RewriteRule ^api/(.*)$ Backend/index.php/$1 [QSA,L]
-    RewriteRule ^api$ Backend/index.php/ [QSA,L]
-</IfModule>
