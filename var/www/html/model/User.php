@@ -9,19 +9,21 @@ class User extends AbstractModel {
     private ?string $userEmail;
     private ?string $userCellphoneNumber;
     private ?string $userPassword;
+    private ?int $userStatus;
     private ?string $userCreatedAt;
 
     protected static array $INSERT_VALUES = ["userName", "userEmail", "userCellphoneNumber", "userPassword"];
     protected static string $TABLE_NAME = "user";
     protected static string $PRIMARY_KEY = "userId";
 
-    private function __construct(?int $userId, ?string $userName, ?string $userEmail, ?string $userCellphoneNumber, ?string $userPassword)
+    private function __construct(?int $userId, ?string $userName, ?string $userEmail, ?string $userCellphoneNumber, ?string $userPassword, ?int $userStatus)
     {
         $this->userId = $userId;
         $this->userName = $userName;
         $this->userEmail = $userEmail;
         $this->userCellphoneNumber = $userCellphoneNumber;
         $this->userPassword = $userPassword;
+        $this->userStatus = $userStatus;
     }
 
     public static function getConstructor(array $variables): ModelInterface
@@ -57,6 +59,11 @@ class User extends AbstractModel {
     public function getPassword(): string
     {
         return $this->userPassword;
+    }
+
+    public function getStatus(): int
+    {
+        return $this->userStatus;
     }
 
     public function getCreatedAt(): string
