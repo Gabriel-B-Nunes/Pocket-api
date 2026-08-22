@@ -4,7 +4,7 @@ namespace App\model;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
-abstract class AbstractModel implements ModelInterface
+abstract class AbstractModel
 {
     protected static array $ILIKE_COLUMNS = [];
     protected static array $DATE_COLUMNS = [];
