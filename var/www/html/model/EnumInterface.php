@@ -7,5 +7,5 @@ interface EnumInterface
 {
     public static function tryFrom(string|int $value);
     public static function cases();
-    public static function casesView();
+    public static function notAllCases();
 }

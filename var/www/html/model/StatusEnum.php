@@ -25,7 +25,7 @@ class StatusEnum implements EnumInterface
         return Status::cases();
     }
 
-    public static function casesView()
+    public static function notAllCases()
     {
         return array_filter(Status::cases(), function ($case) {
             return $case->value !== -1;
