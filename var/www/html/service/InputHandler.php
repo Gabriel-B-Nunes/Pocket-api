@@ -4,7 +4,6 @@ namespace App\service;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
-use App\exception\InvalidIdException;
 use App\exception\InvalidAlphanumericException;
 use App\exception\InvalidEmailException;
 use App\exception\InvalidCellphoneNumberException;
@@ -12,9 +11,10 @@ use App\exception\InvalidEnumException;
 use App\exception\InvalidIntegerException;
 use App\exception\InvalidDatetimeException;
 use App\exception\InvalidBooleanException;
+use App\exception\InvalidStringLengthException;
 use App\model\EnumInterface;
 
-class UserInputHandler
+class InputHandler
 {
     public static function alphanumericValidator(?string $alphanumericString, bool $nullable = false): ?string
     {
@@ -70,14 +70,14 @@ class UserInputHandler
         throw new InvalidCellphoneNumberException((string) $sanitized);
     }
 
-    public static function enumValidator(?int $status, array $validStatus, EnumInterface $enum, bool $nullable = false): ?int
+    public static function enumValidator(?int $status, EnumInterface $enum, bool $nullable = false): ?int
     {
         if ($nullable == true and $status === null) {
             return null;
         }
 
         $sanitized = filter_var($status, FILTER_SANITIZE_NUMBER_INT);
-        $statusFound = in_array($sanitized, $validStatus);
+        $statusFound = in_array($sanitized, $enum->notAllCases());
 
         if (isset($statusFound) && $enum::tryFrom($sanitized)) {
             return $sanitized;
@@ -131,5 +131,24 @@ class UserInputHandler
         }
 
         throw new InvalidBooleanException((string) $boolean);
+    }
+
+    public static function stringLengthValidator(?string $string, array $options = [], bool $nullable = false): ?string
+    {
+        if ($nullable && $string === null) {
+            return null;
+        }
+
+        $length = mb_strlen((string)$string, "UTF-8");
+
+        if (isset($options["min"]) && $length < $options["min"]) {
+            throw new InvalidStringLengthException($string);
+        }
+
+        if (isset($options["max"]) && $length > $options["max"]) {
+            throw new InvalidStringLengthException($string);
+        }
+
+        return $string;
     }
 }
