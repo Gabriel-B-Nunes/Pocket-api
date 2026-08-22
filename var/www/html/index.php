@@ -1,2 +1,3 @@
 <?php
-print_r("index aqui!");
+print_r($_SERVER["REQUEST_METHOD"]);
+print_r($_SERVER["REQUEST_URI"]);
