@@ -1,7 +1,12 @@
 <?php
 
+namespace App\model;
+
 use App\model\AbstractModel;
-use App\model\ModelInterface;
+use App\service\InputHandler;
+use UserCreateDTO;
+
+require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class User extends AbstractModel {
     private ?int $userId;
@@ -26,14 +31,28 @@ class User extends AbstractModel {
         $this->userStatus = $userStatus;
     }
 
-    public static function getConstructor(array $variables): ModelInterface
+    public static function getConstructor(UserCreateDTO $userCreateDTO): self
     {
-        throw new \Exception('Not implemented');
+        return new self (
+        InputHandler::integerValidator(!empty($userCreateDTO->userId) ? $userCreateDTO : null, true),
+        InputHandler::alphanumericValidator(!empty($userCreateDTO->userName) ? $userCreateDTO->userName : null, true),
+        InputHandler::alphanumericValidator(!empty($userCreateDTO->userEmail) ? $userCreateDTO->userEmail : null, true),
+        InputHandler::alphanumericValidator(!empty($userCreateDTO->userCellphoneNumber) ? $userCreateDTO->userCellphoneNumber : null, true),
+        !empty($userCreateDTO->userPassword) ? $userCreateDTO : null,
+        InputHandler::enumValidator(isset($userCreateDTO->userStatus) ? $userCreateDTO->userStatus : null, new StatusEnum, true)
+        );
     }
 
-    public static function postConstructor(array $variables): ModelInterface
+    public static function postConstructor(UserCreateDTO $userCreateDTO): self
     {
-        throw new \Exception('Not implemented');
+        return new self (
+        InputHandler::integerValidator(!empty($userCreateDTO->userId) ? $userCreateDTO : null, true),
+        InputHandler::alphanumericValidator(!empty($userCreateDTO->userName) ? $userCreateDTO->userName : null),
+        InputHandler::alphanumericValidator(!empty($userCreateDTO->userEmail) ? $userCreateDTO->userEmail : null),
+        InputHandler::alphanumericValidator(!empty($userCreateDTO->userCellphoneNumber) ? $userCreateDTO->userCellphoneNumber : null),
+        InputHandler::stringLengthValidator(!empty($userCreateDTO->userPassword) ? $userCreateDTO : null, ["min" => 12, "max" => 64]),
+        InputHandler::enumValidator(isset($userCreateDTO->userStatus) ? $userCreateDTO->userStatus : null, new StatusEnum)
+        );
     }
 
     public function getId(): int
