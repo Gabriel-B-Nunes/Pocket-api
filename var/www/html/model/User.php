@@ -4,7 +4,7 @@ namespace App\model;
 
 use App\model\AbstractModel;
 use App\service\InputHandler;
-use UserCreateDTO;
+use App\dto\UserCreateDTO;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
@@ -38,7 +38,7 @@ class User extends AbstractModel {
         InputHandler::alphanumericValidator(!empty($userCreateDTO->userName) ? $userCreateDTO->userName : null, true),
         InputHandler::alphanumericValidator(!empty($userCreateDTO->userEmail) ? $userCreateDTO->userEmail : null, true),
         InputHandler::alphanumericValidator(!empty($userCreateDTO->userCellphoneNumber) ? $userCreateDTO->userCellphoneNumber : null, true),
-        !empty($userCreateDTO->userPassword) ? $userCreateDTO : null,
+        InputHandler::stringLengthValidator(!empty($userCreateDTO->userPassword) ? $userCreateDTO : null, ["min" => 12, "max" => 64], true),
         InputHandler::enumValidator(isset($userCreateDTO->userStatus) ? $userCreateDTO->userStatus : null, new StatusEnum, true)
         );
     }
