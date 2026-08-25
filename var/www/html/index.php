@@ -1,3 +1,9 @@
 <?php
-print_r($_SERVER["REQUEST_METHOD"]);
-print_r($_SERVER["REQUEST_URI"]);
+require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
+
+use App\model\Request;
+use App\service\Dispatcher;
+
+$dispatcher = new Dispatcher();
+$request = new Request();
+$dispatcher->dispatch($request);
