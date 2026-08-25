@@ -27,7 +27,7 @@ class PDOService
                 \PDO::ATTR_EMULATE_PREPARES => false,
             ];
             try {
-                self::$instance = new \PDO("mysql:host=db;dbname=pocket;charset=utf8mb4", "pocket", $_ENV["MYSQL_PASSWORD"], $options);
+                self::$instance = new \PDO("mysql:host=database;dbname=pocket;charset=utf8mb4", "pocket", getenv("MYSQL_PASSWORD"), $options);
             } catch (\PDOException $e) {
                 throw new \PDOException($e->getMessage(), (int)$e->getCode());
             }
