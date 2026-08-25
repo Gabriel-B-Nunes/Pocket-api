@@ -26,8 +26,18 @@ class Request {
         return $this->uri;
     }
 
-    public function getPostData(): array
+    public function getData(): ?array
     {
         return $this->data;
+    }
+
+    public function getModules(): array
+    {
+        $explodedUri = explode("/", $this->uri);
+        $modules = array_filter($explodedUri, function($value) {
+            return !empty($value);
+        });
+
+        return $modules;
     }
 }
