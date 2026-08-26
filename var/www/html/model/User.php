@@ -17,7 +17,7 @@ class User extends AbstractModel {
     private ?int $userStatus;
     private ?string $userCreatedAt;
 
-    protected static array $INSERT_VALUES = ["userName", "userEmail", "userCellphoneNumber", "userPassword"];
+    protected static array $INSERT_VALUES = ["userName", "userEmail", "userCellphoneNumber", "userPassword", "userStatus"];
     protected static string $TABLE_NAME = "user";
     protected static string $PRIMARY_KEY = "userId";
 
