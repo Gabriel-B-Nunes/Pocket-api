@@ -1,4 +1,6 @@
 <?php
+namespace App\service\security;
+
 Class HashService {
     public static function hashPasswordWithPepper(string $password): string {
         $pepperedPassword = $password . getenv("HASH_PEPPER");

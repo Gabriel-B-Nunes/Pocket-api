@@ -5,6 +5,7 @@ namespace App\model;
 use App\model\AbstractModel;
 use App\service\InputHandler;
 use App\dto\UserCreateDTO;
+use App\service\security\HashService;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
@@ -38,7 +39,7 @@ class User extends AbstractModel {
         InputHandler::alphanumericValidator(!empty($userCreateDTO->userName) ? $userCreateDTO->userName : null, true),
         InputHandler::alphanumericValidator(!empty($userCreateDTO->userEmail) ? $userCreateDTO->userEmail : null, true),
         InputHandler::cellphoneNumberValidator(!empty($userCreateDTO->userCellphoneNumber) ? $userCreateDTO->userCellphoneNumber : null, true),
-        InputHandler::stringLengthValidator(!empty($userCreateDTO->userPassword) ? $userCreateDTO : null, ["min" => 12, "max" => 64], true),
+        HashService::hashPasswordWithPepper(InputHandler::stringLengthValidator(!empty($userCreateDTO->userPassword) ? $userCreateDTO : null, ["min" => 12, "max" => 64], true)),
         InputHandler::enumValidator(isset($userCreateDTO->userStatus) ? $userCreateDTO->userStatus : null, new StatusEnum, true)
         );
     }
@@ -50,7 +51,7 @@ class User extends AbstractModel {
         InputHandler::alphanumericValidator(!empty($userCreateDTO->userName) ? $userCreateDTO->userName : null),
         InputHandler::alphanumericValidator(!empty($userCreateDTO->userEmail) ? $userCreateDTO->userEmail : null),
         InputHandler::cellphoneNumberValidator(!empty($userCreateDTO->userCellphoneNumber) ? $userCreateDTO->userCellphoneNumber : null),
-        InputHandler::stringLengthValidator(!empty($userCreateDTO->userPassword) ? $userCreateDTO->userPassword : null, ["min" => 12, "max" => 64]),
+        HashService::hashPasswordWithPepper(InputHandler::stringLengthValidator(!empty($userCreateDTO->userPassword) ? $userCreateDTO->userPassword : null, ["min" => 12, "max" => 64])),
         InputHandler::enumValidator(isset($userCreateDTO->userStatus) ? $userCreateDTO->userStatus : null, new StatusEnum)
         );
     }
