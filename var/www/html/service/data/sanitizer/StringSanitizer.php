@@ -17,11 +17,7 @@ class StringSanitizer implements SanitizerInterface {
 
     public function sanitize(mixed $string): mixed
     {
-        if (!is_string($string)) {
-            return null;
-        }
-
-        $tmpString = $string;
+        $tmpString = (string) $string;
 
         if ($this->removeAccents) {
             $tmpString = Normalizer::normalize($tmpString, Normalizer::FORM_D);
