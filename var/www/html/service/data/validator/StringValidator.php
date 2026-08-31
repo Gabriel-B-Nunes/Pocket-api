@@ -14,6 +14,7 @@ class StringValidator implements ValidatorInterface {
         private bool $nullable = false,
         private bool $acceptEmptyString = false,
         private bool $acceptNumbers = true,
+        private bool $onlyAcceptNumbers = false,
         private bool $acceptSpecialChars = true,
         private bool $validEmail = false,
         private bool $validDateTime = false,
@@ -45,8 +46,13 @@ class StringValidator implements ValidatorInterface {
             $validString = false;
         }
 
-        if (!$this->acceptNumbers && preg_match("/[0-9]+/", $value)) {
+        if (!$this->acceptNumbers && preg_match("/[0-9]/", $value)) {
             $this->errorMessages[] = "Field {$name} cannot contain numbers.";
+            $validString = false;
+        }
+
+        if ($this->onlyAcceptNumbers && preg_match("/[^0-9]/", $value)) {
+            $this->errorMessages[] = "Field {$name} can only contain numbers.";
             $validString = false;
         }
 
