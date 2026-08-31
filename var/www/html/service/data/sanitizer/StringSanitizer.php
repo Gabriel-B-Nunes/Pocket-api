@@ -3,7 +3,9 @@
 namespace App\service\data\sanitizer;
 
 use Normalizer;
+use Attribute;
 
+#[Attribute(Attribute::TARGET_PROPERTY)] 
 class StringSanitizer implements SanitizerInterface {
 
     public function __construct(

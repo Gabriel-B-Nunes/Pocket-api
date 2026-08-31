@@ -3,9 +3,11 @@
 namespace App\service\data\validator;
 
 use DateTime;
+use Attribute;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
+#[Attribute(Attribute::TARGET_PROPERTY)] 
 class StringValidator implements ValidatorInterface {
     public function __construct(
         private array $errorMessages = [],
@@ -53,7 +55,7 @@ class StringValidator implements ValidatorInterface {
             $validString = false;
         }
 
-        if (!$this->acceptSpecialChars && preg_match("/[^a-zA-Z0-9]/", $value)) {
+        if (!$this->acceptSpecialChars && preg_match("/[^a-zA-Z0-9\s]/", $value)) {
             $this->errorMessages[] = "Field {$name} cannot contain special characters.";
             $validString = false;
         }
