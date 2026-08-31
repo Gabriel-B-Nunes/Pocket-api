@@ -9,11 +9,12 @@ use Attribute;
 class IntegerValidator implements ValidatorInterface
 {
     public function __construct(
+        private array $errorMessages = [],
         private ?int $min = null,
         private ?int $max = null,
-        private array $errorMessages = [],
         private bool $nullable = false,
-        private bool $acceptZero = true
+        private bool $acceptZero = true,
+        private array $inArray = []
     )
     {}
 
@@ -38,6 +39,12 @@ class IntegerValidator implements ValidatorInterface
 
         if ($value == 0 && !$this->acceptZero) {
             $this->errorMessages[] = "Field {$name} cannot be zero.";
+            $validInteger = false;
+        }
+
+        if ($this->inArray && in_array($value, $this->inArray)) {
+            $implodedArray = implode(",", $this->inArray);
+            $this->errorMessages[] = "Field {$name} must be in array [{$implodedArray}].";
             $validInteger = false;
         }
 
