@@ -11,7 +11,10 @@ class StringSanitizer implements SanitizerInterface {
         private bool $trim = true,
         private bool $removeAccents = false,
         private bool $lowerCase = false,
-        private bool $upperCase = false
+        private bool $upperCase = false,
+        private bool $removeAlphanumerics = false,
+        private bool $removeBlank = false,
+        private bool $removeSpecialCharacters = false
     )
     {}
 
@@ -22,6 +25,18 @@ class StringSanitizer implements SanitizerInterface {
         if ($this->removeAccents) {
             $tmpString = Normalizer::normalize($tmpString, Normalizer::FORM_D);
             $tmpString = preg_replace("/\p{M}/u", "", $tmpString);
+        }
+
+        if ($this->removeAlphanumerics) {
+            $tmpString = preg_replace("/[a-zA-Z]/", "", $tmpString);
+        }
+
+        if ($this->removeBlank) {
+            $tmpString = preg_replace("/\s/", "", $tmpString);
+        }
+
+        if ($this->removeSpecialCharacters) {
+            $tmpString = preg_replace("/[^\p{L}\p{N}\p{Po}\p{Z}]/u", "", $tmpString);
         }
 
         $tmpString = Normalizer::normalize($tmpString, $this->normalizationForm);
