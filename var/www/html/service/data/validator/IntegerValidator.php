@@ -3,7 +3,9 @@
 namespace App\service\data\validator;
 
 use App\service\data\validator\ValidatorInterface;
+use Attribute;
 
+#[Attribute(Attribute::TARGET_PROPERTY)] 
 class IntegerValidator implements ValidatorInterface
 {
     public function __construct(
