@@ -11,11 +11,13 @@ class StringValidator implements ValidatorInterface {
         private array $errorMessages = [],
         private ?int $minLength = null,
         private ?int $maxLength = null,
-        private bool $nullable = false,
+        private bool $acceptNull = false,
         private bool $acceptEmptyString = false,
         private bool $acceptNumbers = true,
-        private bool $onlyAcceptNumbers = false,
         private bool $acceptSpecialChars = true,
+        private bool $onlyAcceptNumbers = false,
+        private bool $mustContainNumbers = false,
+        private bool $mustContainSpecialCharacters = false,
         private bool $validEmail = false,
         private bool $validDateTime = false,
         private string $dateTimeFormat = "Y-m-d H:i:s"
@@ -36,7 +38,7 @@ class StringValidator implements ValidatorInterface {
             $validString = false;
         }
 
-        if (!$this->nullable && $value === null) {
+        if (!$this->acceptNull && $value === null) {
             $this->errorMessages[] = "Field {$name} cannot be null.";
             $validString = false;
         }
@@ -51,13 +53,23 @@ class StringValidator implements ValidatorInterface {
             $validString = false;
         }
 
+        if (!$this->acceptSpecialChars && preg_match("/[^a-zA-Z0-9]/", $value)) {
+            $this->errorMessages[] = "Field {$name} cannot contain special characters.";
+            $validString = false;
+        }
+
         if ($this->onlyAcceptNumbers && preg_match("/[^0-9]/", $value)) {
             $this->errorMessages[] = "Field {$name} can only contain numbers.";
             $validString = false;
         }
 
-        if (!$this->acceptSpecialChars && preg_match("/[^a-zA-Z0-9]/", $value)) {
-            $this->errorMessages[] = "Field {$name} cannot contain special characters.";
+        if ($this->mustContainNumbers && !preg_match("/[0-9]/", $value)) {
+            $this->errorMessages[] = "Field {$name} must contain numbers.";
+            $validString = false;
+        }
+
+        if ($this->mustContainSpecialCharacters && !preg_match("/[\p{M}\p{P}\p{S}]/u", $value)) {
+            $this->errorMessages[] = "Field {$name} must contain special characters.";
             $validString = false;
         }
 
