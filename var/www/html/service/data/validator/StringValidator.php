@@ -31,7 +31,7 @@ class StringValidator implements ValidatorInterface {
         }
 
         if ($this->maxLength && mb_strlen($value) > $this->maxLength) {
-            $this->errorMessages[] = "Field {$name} cannot be longer than {$this->minLength}.";
+            $this->errorMessages[] = "Field {$name} cannot be longer than {$this->maxLength}.";
             $validString = false;
         }
 
