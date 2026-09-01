@@ -39,7 +39,7 @@ class InputHandler {
 
                 if (method_exists($attributeReflection, "validate")) {
                     if (!$attributeReflection->validate($value, $fieldName)) {
-                        $this->errorMessages[] = $attributeReflection->getErrorMessages();
+                        $this->errorMessages[$fieldName] = $attributeReflection->getErrorMessages();
                     }
                 }
             }
