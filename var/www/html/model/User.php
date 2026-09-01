@@ -32,27 +32,15 @@ class User extends AbstractModel {
         $this->userStatus = $userStatus;
     }
 
-    public static function getConstructor(UserCreateDTO $userCreateDTO): self
-    {
-        return new self (
-        InputHandler::integerValidator(!empty($userCreateDTO->userId) ? $userCreateDTO : null, true),
-        InputHandler::alphanumericValidator(!empty($userCreateDTO->userName) ? $userCreateDTO->userName : null, true),
-        InputHandler::alphanumericValidator(!empty($userCreateDTO->userEmail) ? $userCreateDTO->userEmail : null, true),
-        InputHandler::cellphoneNumberValidator(!empty($userCreateDTO->userCellphoneNumber) ? $userCreateDTO->userCellphoneNumber : null, true),
-        HashService::hashPasswordWithPepper(InputHandler::stringLengthValidator(!empty($userCreateDTO->userPassword) ? $userCreateDTO : null, ["min" => 12, "max" => 64], true)),
-        InputHandler::enumValidator(isset($userCreateDTO->userStatus) ? $userCreateDTO->userStatus : null, new StatusEnum, true)
-        );
-    }
-
     public static function postConstructor(UserCreateDTO $userCreateDTO): self
     {
         return new self (
-        InputHandler::integerValidator(!empty($userCreateDTO->userId) ? $userCreateDTO : null, true),
-        InputHandler::alphanumericValidator(!empty($userCreateDTO->userName) ? $userCreateDTO->userName : null),
-        InputHandler::alphanumericValidator(!empty($userCreateDTO->userEmail) ? $userCreateDTO->userEmail : null),
-        InputHandler::cellphoneNumberValidator(!empty($userCreateDTO->userCellphoneNumber) ? $userCreateDTO->userCellphoneNumber : null),
-        HashService::hashPasswordWithPepper(InputHandler::stringLengthValidator(!empty($userCreateDTO->userPassword) ? $userCreateDTO->userPassword : null, ["min" => 12, "max" => 64])),
-        InputHandler::enumValidator(isset($userCreateDTO->userStatus) ? $userCreateDTO->userStatus : null, new StatusEnum)
+            null,
+            $userCreateDTO->userName,
+            $userCreateDTO->userEmail,
+            $userCreateDTO->userCellphoneNumber,
+            $userCreateDTO->userPassword,
+            $userCreateDTO->userStatus
         );
     }
 
