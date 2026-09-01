@@ -7,7 +7,7 @@ use Attribute;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
-#[Attribute(Attribute::TARGET_PROPERTY)] 
+#[Attribute(Attribute::TARGET_PARAMETER)]
 class StringValidator implements ValidatorInterface {
     public function __construct(
         private array $errorMessages = [],
