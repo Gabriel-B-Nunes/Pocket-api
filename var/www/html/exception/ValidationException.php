@@ -8,7 +8,7 @@ use Exception;
 
 class ValidationException extends Exception {
 
-    public function __construct(string $message = "", int $code = 0, private array $errors = [])
+    public function __construct(string $message = "Validation failed for the provided payload.", int $code = 422, private array $errors = [])
     {
         parent::__construct($message, $code);
     }
