@@ -7,44 +7,55 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 use App\api\ControllerInterface;
 use App\dao\DAO;
 use App\dto\UserCreateDTO;
+use App\exception\NotFoundException;
+use App\exception\ValidationException;
 use App\model\Request;
 use App\model\User;
+use App\service\data\InputHandler;
+use Exception;
 
 class UserController implements ControllerInterface
 {
-    private DAO $dao;
+    public function __construct (
+        private DAO $dao = new DAO(),
+        private InputHandler $inputHandler = new InputHandler()
+    )
+    {}
 
-    public function __construct()
-    {
-        $this->dao = new DAO();
-    }
+    public function handleRequest(Request $request): string {
 
-    public function handleRequest(Request $request): string
-    {
         $method = $request->getMethod();
         $uri = $request->getUri();
-        $this->dao = new DAO();
 
         switch (true) {
             case ($method == "POST" && $uri == "/api/user/create"):
+
                 $data = $request->getData();
-                var_dump($data["userName"]);
+                $userCreateDTO = $this->inputHandler->handle(UserCreateDTO::class, $data);
+                
+                if ($userCreateDTO) {
+                    try {    
+                        $user = User::postConstructor($userCreateDTO);
+                        $userOptional = $this->dao->create($user);
 
-                $userCreateDTO = new UserCreateDTO(
-                    $data["userName"],
-                    $data["userEmail"],
-                    $data["userCellphoneNumber"],
-                    $data["userPassword"],
-                    $data["userStatus"]
-                );
+                        $response = [
+                            "Success" => true,
+                            "Message" => "User successfully created",
+                            "userId" => $userOptional
+                        ];
 
-                $user = User::postConstructor($userCreateDTO);
+                        http_response_code(200);
+                        return json_encode($response);
+                    } catch (Exception $e) {
+                        throw new Exception("Internal Server Error", 500);
+                    }
+                } else {
+                    throw new ValidationException(errors: $this->inputHandler->getErrorMessages());
+                }
 
-                $userOptional = $this->dao->create($user);
-                return $userOptional;
-            
+                break;
             default:
-                return json_encode(["error" => "unknown error"]);
+                throw new NotFoundException();
         }
     }
 }
