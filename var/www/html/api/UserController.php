@@ -53,7 +53,6 @@ class UserController implements ControllerInterface
                     throw new ValidationException(errors: $this->inputHandler->getErrorMessages());
                 }
 
-                break;
             default:
                 throw new NotFoundException();
         }
