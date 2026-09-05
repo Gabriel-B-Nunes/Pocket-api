@@ -2,7 +2,8 @@
 
 namespace App\service;
 
-use App\api\UserController;
+use App\api\user\CreateUserController;
+use App\api\user\LoginUserController;
 use App\exception\NotFoundException;
 use App\model\Request;
 
@@ -10,14 +11,15 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class Dispatcher {
     private array $routes = [
-        "user" => UserController::class
+        "/api/user/create" => CreateUserController::class,
+        "/api/user/login" => LoginUserController::class,
     ];
 
     public function dispatch(Request $request): string {
-        $baseModule = $request->getModules()[2] ?? null;
-
-        if (array_key_exists($baseModule, $this->routes)) {
-            $controllerClass = $this->routes[$baseModule];
+        $uri = $request->getUri();
+        error_log($uri);
+        if (array_key_exists($uri, $this->routes)) {
+            $controllerClass = $this->routes[$uri];
             $controller = new $controllerClass();
 
             return $controller->handleRequest($request);
