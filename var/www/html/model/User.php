@@ -39,7 +39,7 @@ class User extends AbstractModel {
             $userCreateDTO->userName,
             $userCreateDTO->userEmail,
             $userCreateDTO->userCellphoneNumber,
-            $userCreateDTO->userPassword,
+            HashService::hashPasswordWithPepper($userCreateDTO->userPassword),
             $userCreateDTO->userStatus
         );
     }
