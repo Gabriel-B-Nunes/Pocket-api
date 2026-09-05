@@ -5,6 +5,7 @@ namespace App\model;
 use App\model\AbstractModel;
 use App\service\InputHandler;
 use App\dto\UserCreateDTO;
+use App\dto\UserLoginDTO;
 use App\service\security\HashService;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
@@ -30,6 +31,18 @@ class User extends AbstractModel {
         $this->userCellphoneNumber = $userCellphoneNumber;
         $this->userPassword = $userPassword;
         $this->userStatus = $userStatus;
+    }
+    
+    public static function loginConstructor(UserLoginDTO $UserLoginDTO): self
+    {
+        return new self (
+            null,
+            null,
+            $UserLoginDTO->userEmail,
+            HashService::hashPasswordWithPepper($UserLoginDTO->userPassword),
+            null,
+            null
+        );
     }
 
     public static function postConstructor(UserCreateDTO $userCreateDTO): self
