@@ -13,14 +13,15 @@ class Dispatcher {
     ];
 
     public function dispatch(Request $request) {
-        $baseModule = $request->getModules()[2];
+        $baseModule = $request->getModules()[2] ?? null;
 
         if (array_key_exists($baseModule, $this->routes)) {
-            print_r("route found");
             $controllerClass = $this->routes[$baseModule];
             $controller = new $controllerClass();
 
             $controller->handleRequest($request);
+        } else {
+            throw new \Exception("The requested URL was not found on this server", 404);
         }
     }
 }
