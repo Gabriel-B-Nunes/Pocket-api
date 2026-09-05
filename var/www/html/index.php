@@ -5,27 +5,32 @@ use App\exception\ValidationException;
 use App\model\Request;
 use App\service\Dispatcher;
 
-$dispatcher = new Dispatcher();
 $request = new Request();
+$requestModule = $request->getModules()[1] ?? null;
 
-try {
-    $dispatcher->dispatch($request);
-} catch (ValidationException $e) {
-    $errors["Errors"] = $e->getErrors();
-    
-    $response = [
-        "Success" => false,
-        "Code" => $e->getCode(),
-        "Message" => $e->getMessage()
-    ];
+switch ($requestModule) {
+    case "api":
+        $dispatcher = new Dispatcher();
+        try {
+            $dispatcher->dispatch($request);
+        } catch (ValidationException $e) {
+            $errors["Errors"] = $e->getErrors();
 
-    return array_merge($response, $errors);
-} catch (Exception $e) {
-    $response = [
-        "Success" => false,
-        "Code" => 500,
-        "Message" => "Internal server error"
-    ];
+            $response = [
+                "Success" => false,
+                "Code" => $e->getCode(),
+                "Message" => $e->getMessage()
+            ];
 
-    return $response;
+            return array_merge($response, $errors);
+        } catch (Exception $e) {
+            $response = [
+                "Success" => false,
+                "Code" => 500,
+                "Message" => "Internal server error"
+            ];
+
+            return $response;
+        }
+        break;
 }
