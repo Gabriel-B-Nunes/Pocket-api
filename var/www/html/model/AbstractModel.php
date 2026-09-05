@@ -7,6 +7,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 abstract class AbstractModel
 {
     protected static array $ILIKE_COLUMNS = [];
+    protected static array $IGNORE_COLUMNS = [];
     protected static array $DATE_COLUMNS = [];
     protected static array $COLUMNS_WITH_AN_ALL_OPTION = [];
     protected static array $INSERT_VALUES = [];
@@ -72,6 +73,11 @@ abstract class AbstractModel
     public function getColumnsWithAnAllOption(): array
     {
         return static::$COLUMNS_WITH_AN_ALL_OPTION;
+    }
+
+    public function getIgnoreColumns(): array
+    {
+        return static::$IGNORE_COLUMNS;
     }
 
     public function getDateColumns(): array

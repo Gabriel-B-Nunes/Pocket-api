@@ -150,7 +150,9 @@ class DAO
             foreach ($condictionsArray as $filter => $value) {
                 if ($exactMatch === false && in_array($filter, $object->getIlikeColumns())) {
                     $condictions[] = "{$prefix}`{$filter}` LIKE :{$filter}";
-                } else if (in_array($filter, $object->getColumnsWithAnAllOption()) && $value === -1 || in_array($filter, $object->getDateColumns())) {
+                } else if (in_array($filter, $object->getColumnsWithAnAllOption()) && $value === -1 
+                || in_array($filter, $object->getDateColumns())
+                || in_array($filter, $object->getIgnoreColumns())) {
                     continue;
                 } else if (array_key_exists($filter, $object->getDateColumns())) {
                     $condictions[] = "{$prefix}`{$filter}` BETWEEN :{$filter} AND :{$object->getDateColumns()[$filter]}";
@@ -201,13 +203,15 @@ class DAO
         return null;
     }
 
-    protected function bindValues(\PDOStatement $stmt, array $bindValues, ?AbstractModel $object, bool $exactMatch = false, ?string $tableAlias = null)
+    protected function bindValues(\PDOStatement $stmt, array $bindValues, ?AbstractModel $object, bool $insert = false, bool $exactMatch = false, ?string $tableAlias = null)
     {
         if (!empty($bindValues)) {
             foreach ($bindValues as $filter => $value) {
                 if ($exactMatch === false && in_array($filter, $object->getIlikeColumns())) {
                     $stmt->bindValue(":{$filter}", "%{$value}%");
                 } else if (in_array($filter, $object->getColumnsWithAnAllOption()) && $value === -1) {
+                    continue;
+                } else if (!$insert && in_array($filter, $object->getIgnoreColumns())) {
                     continue;
                 } else {
                     $stmt->bindValue(":{$filter}", $value);

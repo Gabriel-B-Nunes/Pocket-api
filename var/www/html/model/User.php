@@ -20,6 +20,7 @@ class User extends AbstractModel {
     private ?string $userCreatedAt;
 
     protected static array $INSERT_VALUES = ["userName", "userEmail", "userCellphoneNumber", "userPassword", "userStatus"];
+    protected static array $IGNORE_COLUMNS = ["userPassword"];
     protected static string $TABLE_NAME = "user";
     protected static string $PRIMARY_KEY = "userId";
 
@@ -39,8 +40,8 @@ class User extends AbstractModel {
             null,
             null,
             $UserLoginDTO->userEmail,
-            HashService::hashPasswordWithPepper($UserLoginDTO->userPassword),
             null,
+            $UserLoginDTO->userPassword,
             null
         );
     }
