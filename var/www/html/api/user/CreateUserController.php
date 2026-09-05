@@ -7,6 +7,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 use App\api\ControllerInterface;
 use App\dao\DAO;
 use App\dto\UserCreateDTO;
+use App\exception\BadRequestException;
 use App\exception\ValidationException;
 use App\model\Request;
 use App\model\User;

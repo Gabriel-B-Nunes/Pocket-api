@@ -1,40 +1,57 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
+use App\exception\BadRequestException;
 use App\exception\ValidationException;
 use App\model\Request;
 use App\service\Dispatcher;
 
+header('Content-Type: application/json');
+
 $request = new Request();
-$requestModule = $request->getModules()[1] ?? null;
 
-switch ($requestModule) {
-    case "api":
-        header('Content-Type: application/json');
-        $dispatcher = new Dispatcher();
-        
-        try {
-            echo $dispatcher->dispatch($request);
-        } catch (ValidationException $e) {
-            $errors["Errors"] = $e->getErrors();
+if (json_last_error() !== JSON_ERROR_NONE) {
+    $e = new BadRequestException();
+    error_log("acessou o if");
+    $response = [
+        "Success" => false,
+        "Code" => $e->getCode(),
+        "Message" => $e->getMessage(),
+        "Error" => json_last_error_msg()
+    ];
 
-            $response = [
-                "Success" => false,
-                "Code" => $e->getCode(),
-                "Message" => $e->getMessage()
-            ];
+    http_response_code($e->getCode());
+    echo json_encode($response);
+} else {
+    $requestModule = $request->getModules()[1] ?? null;
 
-            http_response_code($e->getCode());
-            echo json_encode(array_merge($response, $errors));
-        } catch (Exception $e) {
-            $response = [
-                "Success" => false,
-                "Code" => $e->getCode(),
-                "Message" => $e->getMessage()
-            ];
+    switch ($requestModule) {
+        case "api":
+            $dispatcher = new Dispatcher();
 
-            http_response_code($e->getCode());
-            echo json_encode($response);
-        }
-        break;
+            try {
+                echo $dispatcher->dispatch($request);
+            } catch (ValidationException $e) {
+                $errors["Errors"] = $e->getErrors();
+
+                $response = [
+                    "Success" => false,
+                    "Code" => $e->getCode(),
+                    "Message" => $e->getMessage()
+                ];
+
+                http_response_code($e->getCode());
+                echo json_encode(array_merge($response, $errors));
+            } catch (Exception $e) {
+                $response = [
+                    "Success" => false,
+                    "Code" => $e->getCode(),
+                    "Message" => $e->getMessage()
+                ];
+
+                http_response_code($e->getCode());
+                echo json_encode($response);
+            }
+            break;
+    }
 }

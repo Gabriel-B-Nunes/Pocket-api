@@ -7,6 +7,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 use App\api\ControllerInterface;
 use App\dao\DAO;
 use App\dto\UserLoginDTO;
+use App\exception\BadRequestException;
 use App\exception\UnauthorizedException;
 use App\exception\ValidationException;
 use App\model\Request;
@@ -24,6 +25,11 @@ class LoginUserController implements ControllerInterface
     public function handleRequest(Request $request): string
     {
         $data = $request->getData();
+
+        if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
+            throw new BadRequestException(error: json_last_error_msg());
+        }
+
         $userLoginDTO = $this->inputHandler->handle(UserLoginDTO::class, $data);
 
         if ($userLoginDTO) {
