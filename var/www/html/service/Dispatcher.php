@@ -3,6 +3,7 @@
 namespace App\service;
 
 use App\api\UserController;
+use App\exception\NotFoundException;
 use App\model\Request;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
@@ -21,7 +22,7 @@ class Dispatcher {
 
             return $controller->handleRequest($request);
         } else {
-            throw new \Exception("The requested URL was not found on this server", 404);
+            throw new NotFoundException();
         }
     }
 }
