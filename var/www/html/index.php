@@ -10,9 +10,11 @@ $requestModule = $request->getModules()[1] ?? null;
 
 switch ($requestModule) {
     case "api":
+        header('Content-Type: application/json');
         $dispatcher = new Dispatcher();
+        
         try {
-            $dispatcher->dispatch($request);
+            echo $dispatcher->dispatch($request);
         } catch (ValidationException $e) {
             $errors["Errors"] = $e->getErrors();
 
@@ -22,15 +24,17 @@ switch ($requestModule) {
                 "Message" => $e->getMessage()
             ];
 
-            return array_merge($response, $errors);
+            http_response_code($e->getCode());
+            echo json_encode(array_merge($response, $errors));
         } catch (Exception $e) {
             $response = [
                 "Success" => false,
-                "Code" => 500,
-                "Message" => "Internal server error"
+                "Code" => $e->getCode(),
+                "Message" => $e->getMessage()
             ];
 
-            return $response;
+            http_response_code($e->getCode());
+            echo json_encode($response);
         }
         break;
 }

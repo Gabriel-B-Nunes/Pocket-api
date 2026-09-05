@@ -12,14 +12,14 @@ class Dispatcher {
         "user" => UserController::class
     ];
 
-    public function dispatch(Request $request) {
+    public function dispatch(Request $request): string {
         $baseModule = $request->getModules()[2] ?? null;
 
         if (array_key_exists($baseModule, $this->routes)) {
             $controllerClass = $this->routes[$baseModule];
             $controller = new $controllerClass();
 
-            $controller->handleRequest($request);
+            return $controller->handleRequest($request);
         } else {
             throw new \Exception("The requested URL was not found on this server", 404);
         }
