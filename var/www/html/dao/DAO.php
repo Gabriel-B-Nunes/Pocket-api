@@ -2,8 +2,11 @@
 
 namespace App\dao;
 
+use App\exception\InternalServerErrorException;
+use App\exception\UniqueConstraintViolationException;
 use App\model\AbstractModel;
 use App\service\PDOService;
+use PDOException;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
@@ -59,7 +62,16 @@ class DAO
         $stmt = $this->pdo->prepare($sql);
         $this->bindValues($stmt, $object->getInsertValuesPairs(), $object, true);
         
+        try {
         $insertBool = $stmt->execute();
+        } catch (PDOException $e) {
+            
+            if ($e->getCode() == "23000") {
+                throw new UniqueConstraintViolationException();
+            }
+
+            throw new InternalServerErrorException();
+        }
 
         if ($insertBool) {
             $id = $this->pdo->lastInsertId();

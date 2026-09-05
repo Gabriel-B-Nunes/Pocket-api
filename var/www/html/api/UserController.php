@@ -16,13 +16,13 @@ use Exception;
 
 class UserController implements ControllerInterface
 {
-    public function __construct (
+    public function __construct(
         private DAO $dao = new DAO(),
         private InputHandler $inputHandler = new InputHandler()
-    )
-    {}
+    ) {}
 
-    public function handleRequest(Request $request): string {
+    public function handleRequest(Request $request): string
+    {
 
         $method = $request->getMethod();
         $uri = $request->getUri();
@@ -32,23 +32,19 @@ class UserController implements ControllerInterface
 
                 $data = $request->getData();
                 $userCreateDTO = $this->inputHandler->handle(UserCreateDTO::class, $data);
-                
+
                 if ($userCreateDTO) {
-                    try {    
-                        $user = User::postConstructor($userCreateDTO);
-                        $userOptional = $this->dao->create($user);
+                    $user = User::postConstructor($userCreateDTO);
+                    $userOptional = $this->dao->create($user);
 
-                        $response = [
-                            "Success" => true,
-                            "Message" => "User successfully created",
-                            "userId" => $userOptional
-                        ];
+                    $response = [
+                        "Success" => true,
+                        "Message" => "User successfully created",
+                        "userId" => $userOptional
+                    ];
 
-                        http_response_code(200);
-                        return json_encode($response);
-                    } catch (Exception $e) {
-                        throw new Exception("Internal Server Error", 500);
-                    }
+                    http_response_code(200);
+                    return json_encode($response);
                 } else {
                     throw new ValidationException(errors: $this->inputHandler->getErrorMessages());
                 }
