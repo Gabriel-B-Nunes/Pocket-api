@@ -1,5 +1,6 @@
 CREATE TABLE `user` (
     userId INT AUTO_INCREMENT PRIMARY KEY,
+    userUUID BINARY(16) NOT NULL,
     userName VARCHAR(100) NOT NULL,
     userEmail VARCHAR(100) NOT NULL UNIQUE,
     userCellphoneNumber VARCHAR(15) NOT NULL UNIQUE,
