@@ -17,7 +17,7 @@ class Dispatcher {
 
     public function dispatch(Request $request): string {
         $uri = $request->getUri();
-        error_log($uri);
+
         if (array_key_exists($uri, $this->routes)) {
             $controllerClass = $this->routes[$uri];
             $controller = new $controllerClass();
