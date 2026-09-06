@@ -2,6 +2,7 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 use App\exception\BadRequestException;
+use App\exception\NotFoundException;
 use App\exception\ValidationException;
 use App\model\Request;
 use App\service\Dispatcher;
@@ -10,9 +11,9 @@ header('Content-Type: application/json');
 
 $request = new Request();
 
-if (json_last_error() !== JSON_ERROR_NONE) {
+if ($request->getMethod() === "POST" && json_last_error() !== JSON_ERROR_NONE) {
     $e = new BadRequestException();
-    error_log("acessou o if");
+
     $response = [
         "Success" => false,
         "Code" => $e->getCode(),
@@ -53,5 +54,16 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                 echo json_encode($response);
             }
             break;
+        
+        default:
+            $e = new NotFoundException();
+            $response = [
+                    "Success" => false,
+                    "Code" => $e->getCode(),
+                    "Message" => $e->getMessage()
+                ];
+
+                http_response_code($e->getCode());
+                echo json_encode($response);
     }
 }

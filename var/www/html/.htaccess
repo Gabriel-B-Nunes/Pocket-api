@@ -1,3 +1,5 @@
+DirectorySlash Off
+
 RewriteEngine On
 
-RewriteRule ^api/(.*)$ index.php/$1 [QSA,L]
+RewriteRule ^(.*)$ index.php [QSA,L]
