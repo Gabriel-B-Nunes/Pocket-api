@@ -5,9 +5,8 @@ namespace App\api\user;
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 use App\api\ControllerInterface;
-use App\dao\DAO;
+use App\dao\UserDAO;
 use App\dto\UserCreateDTO;
-use App\exception\BadRequestException;
 use App\exception\ValidationException;
 use App\model\Request;
 use App\model\User;
@@ -16,7 +15,7 @@ use App\service\data\InputHandler;
 class CreateUserController implements ControllerInterface
 {
     public function __construct(
-        private DAO $dao = new DAO(),
+        private UserDAO $dao = new UserDAO(),
         private InputHandler $inputHandler = new InputHandler()
     ) {}
 

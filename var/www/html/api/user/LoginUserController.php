@@ -6,6 +6,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 use App\api\ControllerInterface;
 use App\dao\DAO;
+use App\dao\UserDAO;
 use App\dto\UserLoginDTO;
 use App\exception\BadRequestException;
 use App\exception\UnauthorizedException;
@@ -18,23 +19,18 @@ use App\service\security\HashService;
 class LoginUserController implements ControllerInterface
 {
     public function __construct(
-        private DAO $dao = new DAO(),
+        private UserDAO $dao = new UserDAO(),
         private InputHandler $inputHandler = new InputHandler()
     ) {}
 
     public function handleRequest(Request $request): string
     {
         $data = $request->getData();
-
-        if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
-            throw new BadRequestException(error: json_last_error_msg());
-        }
-
         $userLoginDTO = $this->inputHandler->handle(UserLoginDTO::class, $data);
 
         if ($userLoginDTO) {
             $user = User::loginConstructor($userLoginDTO);
-            $userOptional = $this->dao->readByLimitOffset(1, 0, $user)[0] ?? null;
+            $userOptional = $this->dao->readByEmail($user)[0] ?? null;
 
             if ($userOptional) {
                 $hashComparation = HashService::verifyPassword($user->getPassword(), $userOptional["userPassword"]);
