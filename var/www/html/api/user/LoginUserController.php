@@ -15,6 +15,7 @@ use App\model\Request;
 use App\model\User;
 use App\service\data\InputHandler;
 use App\service\security\HashService;
+use App\service\security\JWTService;
 
 class LoginUserController implements ControllerInterface
 {
@@ -33,13 +34,15 @@ class LoginUserController implements ControllerInterface
             $userOptional = $this->dao->readByEmail($user)[0] ?? null;
 
             if ($userOptional) {
-                $hashComparation = HashService::verifyPassword($user->getPassword(), $userOptional["userPassword"]);
+                $hashComparation = HashService::verifyPassword($user->getPassword(), $userOptional["password"]);
 
                 if ($hashComparation) {
+                    $jwtToken = JWTService::create($userOptional["UUID"]);
+
                     $response = [
                         "Success" => true,
                         "Message" => "Login successful.",
-                        "Token" => "coming soon"
+                        "Token" => $jwtToken
                     ];
 
                     http_response_code(200);

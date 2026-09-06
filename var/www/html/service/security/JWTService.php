@@ -6,20 +6,20 @@ use DateTime;
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 Class JWTService {
-    public static function create(int $id): string {
+    public static function create(string $uuid): string {
         $header = base64_encode(json_encode([
             "alg" => "HS256",
             "typ" => "JWT"
         ]));
 
         $payload = base64_encode(json_encode([
-            "sub" => $id,
+            "sub" => $uuid,
             "exp" => new DateTime()->modify("+1 hour")->getTimestamp()
         ]));
 
         $secret = getenv("JWT_SECRET");
 
-        $signature = hash_hmac("sha256", "$header.$payload", $secret, true);
+        $signature = base64_encode(hash_hmac("sha256", "$header.$payload", $secret, true));
 
         $jwtToken = $header . "." . $payload . "." . $signature;
 

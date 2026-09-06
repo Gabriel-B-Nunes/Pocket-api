@@ -44,7 +44,7 @@ class UserDAO
     }
 
     public function readByEmail(User $user): array {
-        $sql = "SELECT * FROM user WHERE email = :email";
+        $sql = "SELECT id, BIN_TO_UUID(UUID) as UUID, name, email, cellphoneNumber, password, status FROM user WHERE email = :email";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue("email", $user->getEmail());
 
