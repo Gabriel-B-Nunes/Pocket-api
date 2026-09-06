@@ -11,29 +11,24 @@ use App\service\security\UUIDService;
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class User extends AbstractModel {
-    private ?int $userId;
-    private ?string $userUUID;
-    private ?string $userName;
-    private ?string $userEmail;
-    private ?string $userCellphoneNumber;
-    private ?string $userPassword;
-    private ?int $userStatus;
-    private ?string $userCreatedAt;
+    private ?int $id;
+    private ?string $UUID;
+    private ?string $name;
+    private ?string $email;
+    private ?string $cellphoneNumber;
+    private ?string $password;
+    private ?int $status;
+    private ?string $createdAt;
 
-    protected static array $INSERT_VALUES = ["userName", "userEmail", "userCellphoneNumber", "userPassword", "userStatus"];
-    protected static array $IGNORE_COLUMNS = ["userPassword"];
-    protected static string $TABLE_NAME = "user";
-    protected static string $PRIMARY_KEY = "userId";
-
-    private function __construct(?int $userId, ?string $userUUID, ?string $userName, ?string $userEmail, ?string $userCellphoneNumber, ?string $userPassword, ?int $userStatus)
+    private function __construct(?int $id, ?string $UUID, ?string $name, ?string $email, ?string $cellphoneNumber, ?string $password, ?int $status)
     {
-        $this->userId = $userId;
-        $this->userUUID = $userUUID;
-        $this->userName = $userName;
-        $this->userEmail = $userEmail;
-        $this->userCellphoneNumber = $userCellphoneNumber;
-        $this->userPassword = $userPassword;
-        $this->userStatus = $userStatus;
+        $this->id = $id;
+        $this->UUID = $UUID;
+        $this->name = $name;
+        $this->email = $email;
+        $this->cellphoneNumber = $cellphoneNumber;
+        $this->password = $password;
+        $this->status = $status;
     }
     
     public static function loginConstructor(UserLoginDTO $UserLoginDTO): self
@@ -64,41 +59,41 @@ class User extends AbstractModel {
 
     public function getId(): int
     {
-        return $this->userId;
+        return $this->id;
     }
 
     public function getUUID(): string
     {
-        return $this->userUUID;
+        return $this->UUID;
     }
 
     public function getName(): string
     {
-        return htmlspecialchars($this->userName);
+        return $this->name;
     }
 
     public function getEmail(): string
     {
-        return htmlspecialchars($this->userEmail);
+        return $this->email;
     }
 
     public function getCellphoneNumber(): string
     {
-        return htmlspecialchars($this->userCellphoneNumber);
+        return $this->cellphoneNumber;
     }
 
     public function getPassword(): string
     {
-        return $this->userPassword;
+        return $this->password;
     }
 
     public function getStatus(): int
     {
-        return $this->userStatus;
+        return $this->status;
     }
 
     public function getCreatedAt(): string
     {
-        return htmlspecialchars($this->userCreatedAt);
+        return $this->createdAt;
     }
 }
