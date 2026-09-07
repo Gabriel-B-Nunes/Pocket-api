@@ -35,16 +35,16 @@ class LoginUserController implements ControllerInterface
 
             if ($userOptional) {
                 $hashComparation = HashService::verifyPassword($user->getPassword(), $userOptional["password"]);
+                $uuid = $userOptional["UUID"];
 
                 if ($hashComparation) {
-                    $acessToken = JWTService::createAccessToken($userOptional["UUID"]);
-                    $refreshToken = JWTService::createRefreshToken($userOptional["UUID"]);
+                    $tokens = JWTService::createToken($uuid);
 
                     $response = [
                         "Success" => true,
                         "Message" => "Login successful.",
-                        "AcessToken" => $acessToken,
-                        "RefreshToken" => $refreshToken
+                        "UUID" => $uuid,
+                        "Tokens" => $tokens
                     ];
 
                     http_response_code(200);
