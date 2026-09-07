@@ -2,4 +2,4 @@ DirectorySlash Off
 
 RewriteEngine On
 
-RewriteRule ^(.*)$ index.php [QSA,L]
+RewriteRule ^api/(.*)$ index.php [QSA,L]
