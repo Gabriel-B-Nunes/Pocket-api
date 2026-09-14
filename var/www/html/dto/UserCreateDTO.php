@@ -17,11 +17,11 @@ class UserCreateDTO {
         #[StringValidator(
             acceptNumbers: false, 
             acceptSpecialChars: false)]
-        public readonly string $userName,
+        public readonly string $name,
 
         #[StringSanitizer()]
         #[StringValidator(validEmail: true)]
-        public readonly string $userEmail,
+        public readonly string $email,
 
         #[StringSanitizer(
             removeBlank: true, 
@@ -31,7 +31,7 @@ class UserCreateDTO {
             minLength: 9,
             maxLength: 15,
             onlyAcceptNumbers: true)]
-        public readonly string $userCellphoneNumber,
+        public readonly string $cellphoneNumber,
 
         #[StringSanitizer()]
         #[StringValidator(
@@ -40,13 +40,13 @@ class UserCreateDTO {
             mustContainNumbers: true,
             mustContainSpecialCharacters: true
         )]
-        public readonly string $userPassword,
+        public readonly string $password,
 
         #[IntegerSanitizer()]
         #[IntegerValidator(
             inArray: [0,1]
         )]
-        public readonly int $userStatus
+        public readonly int $status
     )
     {}
 }

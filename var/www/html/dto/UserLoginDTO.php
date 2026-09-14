@@ -13,7 +13,7 @@ class UserLoginDTO {
     public function __construct(
         #[StringSanitizer()]
         #[StringValidator(validEmail: true)]
-        public readonly string $userEmail,
+        public readonly string $email,
 
         #[StringSanitizer()]
         #[StringValidator(
@@ -22,7 +22,7 @@ class UserLoginDTO {
             mustContainNumbers: true,
             mustContainSpecialCharacters: true
         )]
-        public readonly string $userPassword,
+        public readonly string $password,
     )
     {}
 }
