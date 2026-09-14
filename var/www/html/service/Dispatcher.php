@@ -4,6 +4,8 @@ namespace App\service;
 
 use App\api\user\CreateUserController;
 use App\api\user\LoginUserController;
+use App\api\user\RefreshUserController;
+use App\dto\UserRefreshDTO;
 use App\exception\NotFoundException;
 use App\model\Request;
 
@@ -13,6 +15,7 @@ class Dispatcher {
     private array $routes = [
         "/api/user/create" => CreateUserController::class,
         "/api/user/login" => LoginUserController::class,
+        "/api/user/refresh" => RefreshUserController::class
     ];
 
     public function dispatch(Request $request): string {

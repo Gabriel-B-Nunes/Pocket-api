@@ -86,6 +86,25 @@ Class JWTService {
     }
 
     public static function refresh(string $jwtToken): array {
+        $explodedJwtToken = explode(".", $jwtToken);
+        $header = $explodedJwtToken[0] ?? "";
+        $payload = $explodedJwtToken[1] ?? "";
+        $secret = getenv("JWT_SECRET");
+        $signature = base64_encode(hash_hmac("sha256", "$header.$payload", $secret, true));
+        $expectedToken = $header . "." . $payload . "." . $signature;
+        $tokenValidation = hash_equals($expectedToken, $jwtToken);
+
+        if ($tokenValidation) {
+            $uuid = json_decode(base64_decode($payload), true)["sub"];
+            $redis = RedisService::getInstance();
+            $sessionData = json_decode($redis->get("user:session:".$uuid), true);
+            if ($sessionData["refreshToken"] && $sessionData["refreshToken"] === $jwtToken) {
+                return self::createToken($uuid);
+            }
+
+            throw new UnauthorizedException("Token expired.");
+        }
         
+        throw new UnauthorizedException("Invalid token.");
     }
 }
