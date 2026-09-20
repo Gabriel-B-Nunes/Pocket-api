@@ -1,17 +1,16 @@
 <?php
 
-namespace App\service;
+namespace App\service\handler;
 
 use App\api\user\CreateUserController;
 use App\api\user\LoginUserController;
 use App\api\user\RefreshUserController;
-use App\dto\UserRefreshDTO;
 use App\exception\NotFoundException;
 use App\model\Request;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
-class Dispatcher {
+class Dispatcher extends AbstractHandler {
     private array $routes = [
         "/api/user/create" => CreateUserController::class,
         "/api/user/login" => LoginUserController::class,

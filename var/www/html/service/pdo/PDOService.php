@@ -1,6 +1,6 @@
 <?php
 
-namespace App\service;
+namespace App\service\pdo;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
