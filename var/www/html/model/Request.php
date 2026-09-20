@@ -5,35 +5,44 @@ namespace App\model;
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class Request {
-    private string $method;
-    private string $uri;
-    private ?array $data;
-
-    public function __construct()
-    {
-        $this->method = $_SERVER["REQUEST_METHOD"] ?? 'GET';
-        $this->uri = $_SERVER["REQUEST_URI"] ?? '/';
-        $this->data = json_decode(file_get_contents("php://input"), true);
-    }
+    
+    public function __construct(
+        private string $method,
+        private string $url,
+        private array $headers,
+        private ?array $body = [],
+        private ?array $queryString = []
+    )
+    {}
 
     public function getMethod(): string
     {
         return $this->method;
     }
 
-    public function getUri(): string
+    public function getUrl(): string
     {
-        return $this->uri;
+        return $this->url;
     }
 
-    public function getData(): ?array
+    public function getHeader(): array
     {
-        return $this->data;
+        return $this->headers;
+    }
+
+    public function getBody(): ?array
+    {
+        return $this->body;
+    }
+
+    public function getQueryString(): ?array
+    {
+        return $this->queryString;
     }
 
     public function getModules(): array
     {
-        $explodedUri = explode("/", $this->uri);
+        $explodedUri = explode("/", $this->url);
         $modules = array_filter($explodedUri, function($value) {
             return !empty($value);
         });
