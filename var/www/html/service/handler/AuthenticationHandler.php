@@ -2,35 +2,28 @@
 
 namespace App\service\handler;
 
-<<<<<<< HEAD
 use App\model\Request;
 use App\service\handler\AbstractHandler;
-use App\service\handler\AbstractHandler as HandlerAbstractHandler;
-use Override;
-=======
-use App\service\AbstractHandler;
->>>>>>> refactor-request
+use App\service\security\JWTService;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
-class AuthenticationHandler extends AbstractHandler {
-<<<<<<< HEAD
+class AuthenticationHandler extends AbstractHandler
+{
     public function __construct(
-        private Request $request,
-        private HandlerAbstractHandler $nextHandler
-    )
-    {}
-
-    public function setNext(AbstractHandler $handler): void
-    {
-        $this->nextHandler = $handler;
-    }
+        private AbstractHandler $nextHandler
+    ) {}
 
     public function handle(Request $request)
     {
-        throw new \Exception('Not implemented');
-    }
-=======
+        $authorizationHeader = $request->getHeader()["Authorization"] ?? "";
+        $userRoute = preg_match("/\/api\/user/", $request->getUrl());
 
->>>>>>> refactor-request
+        if (!$userRoute) {
+            JWTService::validate($authorizationHeader);
+            $this->nextHandler->handle($request);
+        }
+
+        $this->nextHandler->handle($request);
+    }
 }
