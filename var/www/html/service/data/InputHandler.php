@@ -4,6 +4,7 @@ namespace App\service\data;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
+use App\service\cache\Container;
 use ReflectionClass;
 
 class InputHandler {
@@ -25,6 +26,8 @@ class InputHandler {
             $value = $rawData[$fieldName] ?? null;
 
             $attributes = $parameter->getAttributes();
+
+            $translator = Container::get("translator");
             
             foreach ($attributes as $attribute) {
                 $attributeReflection = $attribute->newInstance();
