@@ -2,7 +2,7 @@
 namespace App\service\security;
 
 use App\exception\UnauthorizedException;
-use App\service\RedisService;
+use App\service\cache\RedisService;
 use DateTime;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
@@ -98,7 +98,7 @@ Class JWTService {
             $uuid = json_decode(base64_decode($payload), true)["sub"];
             $redis = RedisService::getInstance();
             $sessionData = json_decode($redis->get("user:session:".$uuid), true);
-            if ($sessionData["refreshToken"] && $sessionData["refreshToken"] === $jwtToken) {
+            if (isset($sessionData["refreshToken"]) && $sessionData["refreshToken"] === $jwtToken) {
                 return self::createToken($uuid);
             }
 

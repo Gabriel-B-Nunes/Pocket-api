@@ -5,7 +5,7 @@ namespace App\dao;
 use App\exception\InternalServerErrorException;
 use App\exception\UniqueConstraintViolationException;
 use App\model\User;
-use App\service\PDOService;
+use App\service\pdo\PDOService;
 use PDO;
 use PDOException;
 
