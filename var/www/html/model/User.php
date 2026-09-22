@@ -37,9 +37,9 @@ class User extends AbstractModel {
             null,
             null,
             null,
-            $UserLoginDTO->userEmail,
+            $UserLoginDTO->email,
             null,
-            $UserLoginDTO->userPassword,
+            $UserLoginDTO->password,
             null
         );
     }
@@ -49,11 +49,11 @@ class User extends AbstractModel {
         return new self (
             null,
             UUIDService::generate(),
-            $userCreateDTO->userName,
-            $userCreateDTO->userEmail,
-            $userCreateDTO->userCellphoneNumber,
-            HashService::hashPasswordWithPepper($userCreateDTO->userPassword),
-            $userCreateDTO->userStatus
+            $userCreateDTO->name,
+            $userCreateDTO->email,
+            $userCreateDTO->cellphoneNumber,
+            HashService::hashPasswordWithPepper($userCreateDTO->password),
+            $userCreateDTO->status
         );
     }
 
