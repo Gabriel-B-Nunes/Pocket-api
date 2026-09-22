@@ -2,6 +2,7 @@
 
 namespace App\service\data\validator;
 
+use App\service\cache\Container;
 use DateTime;
 use Attribute;
 
@@ -29,59 +30,60 @@ class StringValidator implements ValidatorInterface {
     public function validate(mixed $value, string $name): bool
     {
         $validString = true;
+        $translator = Container::get("translator");
 
         if ($this->minLength && mb_strlen($value) < $this->minLength) {
-            $this->errorMessages[] = "Field {$name} cannot be shorter than {$this->minLength}.";
+            $this->errorMessages[] = sprintf($translator->translate("Field %s cannot be shorter than %d."), $name, $this->minLength);
             $validString = false;
         }
 
         if ($this->maxLength && mb_strlen($value) > $this->maxLength) {
-            $this->errorMessages[] = "Field {$name} cannot be longer than {$this->maxLength}.";
+            $this->errorMessages[] = sprintf($translator->translate("Field %s cannot be longer than %d."), $name, $this->maxLength);
             $validString = false;
         }
 
         if (!$this->acceptNull && $value === null) {
-            $this->errorMessages[] = "Field {$name} cannot be null.";
+            $this->errorMessages[] = sprintf($translator->translate("Field %s cannot be null."), $name);
             $validString = false;
         }
 
         if (!$this->acceptEmptyString && $value === "") {
-            $this->errorMessages[] = "Field {$name} cannot be empty.";
+            $this->errorMessages[] = sprintf($translator->translate("Field %s cannot be empty."), $name);
             $validString = false;
         }
 
         if (!$this->acceptNumbers && preg_match("/[0-9]/", $value)) {
-            $this->errorMessages[] = "Field {$name} cannot contain numbers.";
+            $this->errorMessages[] = sprintf($translator->translate("Field %s cannot contain numbers."), $name);
             $validString = false;
         }
 
         if (!$this->acceptSpecialChars && preg_match("/[^a-zA-Z0-9\s]/", $value)) {
-            $this->errorMessages[] = "Field {$name} cannot contain special characters.";
+            $this->errorMessages[] = sprintf($translator->translate("Field %s cannot contain special characters."), $name);
             $validString = false;
         }
 
         if ($this->onlyAcceptNumbers && preg_match("/[^0-9]/", $value)) {
-            $this->errorMessages[] = "Field {$name} can only contain numbers.";
+            $this->errorMessages[] = sprintf($translator->translate("Field %s can only contain numbers."), $name);
             $validString = false;
         }
 
         if ($this->mustContainNumbers && !preg_match("/[0-9]/", $value)) {
-            $this->errorMessages[] = "Field {$name} must contain numbers.";
+            $this->errorMessages[] = sprintf($translator->translate("Field %s must contain numbers."), $name);
             $validString = false;
         }
 
         if ($this->mustContainSpecialCharacters && !preg_match("/[\p{M}\p{P}\p{S}]/u", $value)) {
-            $this->errorMessages[] = "Field {$name} must contain special characters.";
+            $this->errorMessages[] = sprintf($translator->translate("Field %s must contain special characters."), $name);
             $validString = false;
         }
 
         if ($this->validEmail && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            $this->errorMessages[] = "Field {$name} must be a valid email.";
+            $this->errorMessages[] = sprintf($translator->translate("Field %s must be a valid email."), $name);
             $validString = false;
         }
 
         if ($this->validDateTime && !$this->validateDateTimeFormat($value, $this->dateTimeFormat)) {
-            $this->errorMessages[] = "Field {$name} must be in the format {$this->dateTimeFormat}.";
+            $this->errorMessages[] = sprintf($translator->translate("Field %s must be in the format %s."), $name, $this->dateTimeFormat);
             $validString = false;
         }
 

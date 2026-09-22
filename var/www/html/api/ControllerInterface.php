@@ -7,5 +7,5 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 use App\model\Request;
 
 interface ControllerInterface {
-    public function handleRequest(Request $request): string;
+    public function handleRequest(Request $request): void;
 }

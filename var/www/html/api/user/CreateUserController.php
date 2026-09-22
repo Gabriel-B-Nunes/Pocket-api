@@ -10,6 +10,7 @@ use App\dto\UserCreateDTO;
 use App\exception\ValidationException;
 use App\model\Request;
 use App\model\User;
+use App\service\cache\Container;
 use App\service\data\InputHandler;
 
 class CreateUserController implements ControllerInterface
@@ -19,23 +20,24 @@ class CreateUserController implements ControllerInterface
         private InputHandler $inputHandler = new InputHandler()
     ) {}
 
-    public function handleRequest(Request $request): string
+    public function handleRequest(Request $request): void
     {
-        $data = $request->getData();
+        $data = $request->getBody();
         $userCreateDTO = $this->inputHandler->handle(UserCreateDTO::class, $data);
 
         if ($userCreateDTO) {
             $user = User::postConstructor($userCreateDTO);
             $userOptional = $this->dao->create($user);
+            $translator = Container::get("translator");
 
             $response = [
-                "Success" => true,
-                "Message" => "User successfully created.",
+                $translator->translate("Success") => true,
+                $translator->translate("Message") => $translator->translate("User successfully created."),
                 "userId" => $userOptional
             ];
 
             http_response_code(200);
-            return json_encode($response);
+            echo json_encode($response);
         } else {
             throw new ValidationException(errors: $this->inputHandler->getErrorMessages());
         }

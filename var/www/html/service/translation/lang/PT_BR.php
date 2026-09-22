@@ -1,4 +1,31 @@
 <?php
 return [
-    "test" => "teste"
+    "The field %s must contain special characters." => "O campo %s deve conter caracteres especiais.",
+    "Field %s must contain special characters." => "O campo %s deve conter caracteres especiais.",
+    "Field %s cannot contain special characters." => "O campo %s não pode conter caracteres especiais.",
+    "Field %s must contain numbers." => "O campo %s deve conter números.",
+    "Field %s cannot contain numbers." => "O campo %s não pode conter números.",
+    "Field %s can only contain numbers." => "O campo %s pode conter apenas números.",
+    "Field %s cannot be shorter than %d." => "O campo %s não pode ter menos de %d caracteres.",
+    "Field %s cannot be longer than %d." => "O campo %s não pode ter mais de %d caracteres.",
+    "Field %s cannot be null." => "O campo %s não pode ser nulo.",
+    "Field %s cannot be empty." => "O campo %s não pode estar vazio.",
+    "Field %s must be a valid email." => "O campo %s deve ser um e-mail válido.",
+    "Field %s must be in the format %s." => "O campo %s deve estar no formato %s.",
+    "Field %s cannot be smaller than %d." => "O campo %s não pode ser menor que %d.",
+    "Field %s cannot be greater than %d." => "O campo %s não pode ser maior que %d.",
+    "Field %s cannot be zero." => "O campo %s não pode ser zero.",
+    "Field %s must be in array [%s]." => "O campo %s deve estar no array [%s].",
+    "Success" => "Sucesso",
+    "Message" => "Mensagem",
+    "Errors" => "Erros",
+    "Validation failed for the provided payload." => "A validação falhou para o payload fornecido.",
+    "The request payload is malformed or missing required parameters." => "O payload da requisição está malformado ou ausente de parâmetros obrigatórios.",
+    "The server encountered an error and could not complete your request." => "O servidor encontrou um erro e não pôde concluir sua solicitação.",
+    "The requested URL was not found on this server." => "A URL solicitada não foi encontrada neste servidor.",
+    "Invalid email or password." => "E-mail ou senha inválidos.",
+    "Duplicate key value violates unique constraint." => "O valor de chave duplicada viola a restrição de unicidade.",
+    "Login successful." => "Login realizado com sucesso.",
+    "Token expired." => "Token expirado.",
+    "Refresh successful." => "Atualização concluída com sucesso."
 ];

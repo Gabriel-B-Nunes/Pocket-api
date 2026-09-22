@@ -11,6 +11,7 @@ use App\exception\UnauthorizedException;
 use App\exception\ValidationException;
 use App\model\Request;
 use App\model\User;
+use App\service\cache\Container;
 use App\service\data\InputHandler;
 use App\service\security\HashService;
 use App\service\security\JWTService;
@@ -22,10 +23,10 @@ class LoginUserController implements ControllerInterface
         private InputHandler $inputHandler = new InputHandler()
     ) {}
 
-    public function handleRequest(Request $request): string
+    public function handleRequest(Request $request): void
     {
-        $data = $request->getData();
-        $userLoginDTO = $this->inputHandler->handle(UserLoginDTO::class, $data);
+        $body = $request->getBody();
+        $userLoginDTO = $this->inputHandler->handle(UserLoginDTO::class, $body);
 
         if ($userLoginDTO) {
             $user = User::loginConstructor($userLoginDTO);
@@ -37,19 +38,21 @@ class LoginUserController implements ControllerInterface
 
                 if ($hashComparation) {
                     $tokens = JWTService::createToken($uuid);
+                    $translator = Container::get("translator");
 
                     $response = [
-                        "Success" => true,
-                        "Message" => "Login successful.",
+                        $translator->translate("Success") => true,
+                        $translator->translate("Message") => $translator->translate("Login successful."),
                         "UUID" => $uuid,
                         "Tokens" => $tokens
                     ];
 
                     http_response_code(200);
-                    return json_encode($response);
+                    echo json_encode($response);
                 }
+            } else {
+                throw new UnauthorizedException();
             }
-            throw new UnauthorizedException();
         } else {
             throw new ValidationException(errors: $this->inputHandler->getErrorMessages());
         }

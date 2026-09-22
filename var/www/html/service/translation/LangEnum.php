@@ -8,10 +8,15 @@ enum LangEnum {
     case PT_BR;
     case EN_US;
 
-    public static function match (string $string) {
-        return match($string) {
-            "pt-BR", "pt" => self::PT_BR,
-            "en-US", "en" => self::EN_US
+    public static function match(string $string): self {
+        $normalized = strtolower(trim($string));
+        $normalized = preg_replace('/\s*;.*$/', '', $normalized);
+        $normalized = explode(',', $normalized)[0];
+
+        return match ($normalized) {
+            "pt", "pt-br" => self::PT_BR,
+            "en", "en-us" => self::EN_US,
+            default => self::EN_US,
         };
     }
 }
