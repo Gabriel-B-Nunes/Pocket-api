@@ -2,8 +2,8 @@
 
 namespace App\service\data\sanitizer;
 
-use Normalizer;
 use Attribute;
+use Normalizer;
 
 #[Attribute(Attribute::TARGET_PARAMETER)] 
 class StringSanitizer implements SanitizerInterface {
@@ -22,6 +22,10 @@ class StringSanitizer implements SanitizerInterface {
 
     public function sanitize(mixed $string): mixed
     {
+        if (!is_string($string)) {
+            return "";
+        }
+        
         $tmpString = (string) $string;
 
         if ($this->removeAccents) {
@@ -38,7 +42,7 @@ class StringSanitizer implements SanitizerInterface {
         }
 
         if ($this->removeSpecialCharacters) {
-            $tmpString = preg_replace("/[^\p{L}\p{N}\p{Po}\p{Z}]/u", "", $tmpString);
+            $tmpString = preg_replace("/[^\s\w\d]/u", "", $tmpString);
         }
 
         $tmpString = Normalizer::normalize($tmpString, $this->normalizationForm);
