@@ -20,10 +20,17 @@ class UserDAO
         $this->pdo = PDOService::getInstance();
     }
 
-    public function create(User $user): int {
-        $sql = "INSERT INTO user (UUID, name, email, cellphoneNumber, password, status) VALUES (UUID_TO_BIN(:UUID), :name, :email, :cellphoneNumber, :password, :status)";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue("UUID", $user->getUUID());
+    public function create(User $user): string
+    {
+        $sql = "INSERT INTO user (uuid, name, email, cellphoneNumber, password, status) VALUES (UUID_TO_BIN(:uuid), :name, :email, :cellphoneNumber, :password, :status)";
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $stmt->bindValue("uuid", $user->getUuid());
         $stmt->bindValue("name", $user->getName());
         $stmt->bindValue("email", $user->getEmail());
         $stmt->bindValue("cellphoneNumber", $user->getCellphoneNumber());
@@ -40,22 +47,21 @@ class UserDAO
             throw new InternalServerErrorException();
         }
 
-        return $this->pdo->lastInsertId();
+        return $user->getUuid();
     }
 
-    public function readByEmail(User $user): array {
-        $sql = "SELECT id, BIN_TO_UUID(UUID) as UUID, name, email, cellphoneNumber, password, status FROM user WHERE email = :email";
+    public function readByEmail(User $user): mixed
+    {
+        $sql = "SELECT id, BIN_TO_UUID(UUID) as uuid, name, email, cellphoneNumber, password, status FROM user WHERE email = :email";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue("email", $user->getEmail());
 
         try {
             $stmt->execute();
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             throw new InternalServerErrorException();
         }
 
-        $row = $stmt->fetchAll(PDO::FETCH_ASSOC) ?? [];
-
-        return $row;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
