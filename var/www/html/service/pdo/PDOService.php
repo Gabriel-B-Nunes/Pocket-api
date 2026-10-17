@@ -2,6 +2,10 @@
 
 namespace App\service\pdo;
 
+use App\exception\InternalServerErrorException;
+use PDOException;
+use PDO;
+
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class PDOService
@@ -22,17 +26,17 @@ class PDOService
     {
         if (empty(self::$instance)) {
             $options = [
-                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-                \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
-                \PDO::ATTR_EMULATE_PREPARES => false,
+                PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false
             ];
             try {
                 self::$instance = new \PDO("mysql:host=database;dbname=pocket;charset=utf8mb4", "pocket", getenv("MYSQL_PASSWORD"), $options);
-            } catch (\PDOException $e) {
-                throw new \PDOException($e->getMessage(), (int)$e->getCode());
+            } catch (PDOException $e) {
+                throw new InternalServerErrorException();
             }
         }
-        
+
         return self::$instance;
     }
 }
