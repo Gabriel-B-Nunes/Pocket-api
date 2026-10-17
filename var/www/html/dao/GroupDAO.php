@@ -2,35 +2,254 @@
 
 namespace App\dao;
 
-use App\model\AbstractModel;
-use App\service\PDOService;
+use App\dto\group\GroupDeleteDTO;
+use App\dto\group\GroupReadDTO;
+use App\dto\group\GroupUpdateDTO;
+use App\dto\group\GroupUuidDTO;
+use App\exception\ForeignKeyConstraintViolationException;
+use App\exception\InternalServerErrorException;
+use App\exception\UniqueConstraintViolationException;
+use App\model\Group;
+use App\service\pdo\PDOService;
+use PDO;
+use PDOException;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
-class GroupDAO extends DAO
+class GroupDAO
 {
-    private \PDO $pdo;
+    private PDO $pdo;
+    const LIMIT = 50;
+    const ILIKE_COLUMNS = [
+        "name" => " AND name = :name",
+        "status" => " AND status = :status"
+    ];
+    const DATE_COLUMNS = [
+        "createdAt" => " AND createdAt = :createdAt",
+        "createdAt_begin" => " AND createdAt >= :createdAt",
+        "createdAt_end" => " AND createdAt <= :createdAt",
+        "updatedAt" => " AND updatedAt = :updatedAt",
+        "updatedAt_begin" => " AND updatedAt >= :updatedAt",
+        "updatedAt_end" => " AND updatedAt <= :updatedAt"
+    ];
 
     public function __construct()
     {
         $this->pdo = PDOService::getInstance();
     }
 
-    public function readByLimitOffset(int $limit, int $offset, AbstractModel $object): ?array
+    public function create(Group $group): mixed
     {
-        $sql = "SELECT * FROM `group` g INNER JOIN `superGroup` g2 ON g2.superGroupId = g.superGroupId";
-        $sql .= parent::prepareCondictions($object->getCondictionPairs(), $object, false, "g");
-        $sql .= " ORDER BY g.groupId ASC LIMIT :limit OFFSET :offset";
+        $sql = "INSERT INTO `group` (uuid, userUuid, name, status) VALUES (UUID_TO_BIN(:uuid), UUID_TO_BIN(:userUuid), :name, :status)";
 
-        $stmt = $this->pdo->prepare($sql);
+        try {
+            $stmt = $this->pdo->prepare($sql);
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException($e->getMessage());
+        }
 
-        $this->bindValues($stmt, $object->getCondictionPairs(), $object, false, "g");
+        $stmt->bindValue("uuid", $group->getUuid());
+        $stmt->bindValue("userUuid", $group->getUserUuid());
+        $stmt->bindValue("name", $group->getName());
+        $stmt->bindValue("status", $group->getStatus());
 
-        $stmt->bindValue(":limit", $limit, \PDO::PARAM_INT);
-        $stmt->bindValue(":offset", $offset, \PDO::PARAM_INT);
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            if ($e->getCode() == "23000") {
+                throw new UniqueConstraintViolationException();
+            }
 
-        $stmt->execute();
+            throw new InternalServerErrorException();
+        }
 
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return self::readByUuid(new GroupUuidDTO($group->getUuid(), $group->getUserUuid()));
+    }
+
+    public function readByUuid(GroupUuidDTO $groupUuidDTO): mixed
+    {
+        $sql = "SELECT id, BIN_TO_UUID(uuid) as uuid, BIN_TO_UUID(userUuid) as userUuid, name, status, DATE_FORMAT(createdAt, '%Y-%m-%dT%H:%i:%sZ') as createdAt, DATE_FORMAT(updatedAt, '%Y-%m-%dT%H:%i:%sZ') as updatedAt FROM `group` WHERE uuid = UUID_TO_BIN(:uuid) AND userUuid = UUID_TO_BIN(:userUuid)";
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $stmt->bindValue("uuid", $groupUuidDTO->uuid);
+        $stmt->bindValue("userUuid", $groupUuidDTO->userUuid);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            if ($e->getCode() == "23000") {
+                throw new UniqueConstraintViolationException();
+            }
+
+            throw new InternalServerErrorException();
+        }
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function update(GroupUpdateDTO $groupUpdateDTO): mixed
+    {
+        $sql = "UPDATE `group` SET name = :name, status = :status, updatedAt = now() WHERE uuid = UUID_TO_BIN(:uuid) AND userUuid = UUID_TO_BIN(:userUuid)";
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $stmt->bindValue("name", $groupUpdateDTO->name);
+        $stmt->bindValue("status", $groupUpdateDTO->status);
+        $stmt->bindValue("uuid", $groupUpdateDTO->uuid);
+        $stmt->bindValue("userUuid", $groupUpdateDTO->userUuid);
+
+        try {
+            $updateAttempt = $stmt->execute();
+        } catch (PDOException $e) {
+            if ($e->getCode() == "23000") {
+                throw new UniqueConstraintViolationException();
+            }
+
+            throw new InternalServerErrorException();
+        }
+
+        $groupUuidDTO = new GroupUuidDTO($groupUpdateDTO->uuid, $groupUpdateDTO->userUuid);
+
+        if ($updateAttempt) {
+            return self::readByUuid($groupUuidDTO);
+        }
+
+        throw new ForeignKeyConstraintViolationException();
+    }
+
+    public function delete(GroupDeleteDTO $groupDeleteDTO): mixed
+    {
+        $sql = "DELETE FROM `group` WHERE uuid = UUID_TO_BIN(:uuid) AND userUuid = UUID_TO_BIN(:userUuid)";
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $stmt->bindValue("uuid", $groupDeleteDTO->uuid);
+        $stmt->bindValue("userUuid", $groupDeleteDTO->userUuid);
+
+        $groupUuidDTO = new GroupUuidDTO($groupDeleteDTO->uuid, $groupDeleteDTO->userUuid);
+        $groupOptional = self::readByUuid($groupUuidDTO);
+
+        try {
+            $deleteAttempt = $stmt->execute();
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException(message: $e->getMessage());
+        }
+
+        if ($deleteAttempt) {
+            return $groupOptional;
+        }
+
+        throw new ForeignKeyConstraintViolationException();
+    }
+
+    public function readByQueryString(GroupReadDTO $groupReadDTO): mixed
+    {
+        $sql = "SELECT id, BIN_TO_UUID(uuid) as uuid, BIN_TO_UUID(userUuid) as userUuid, name, status, DATE_FORMAT(createdAt, '%Y-%m-%dT%H:%i:%sZ') as createdAt, DATE_FORMAT(updatedAt, '%Y-%m-%dT%H:%i:%sZ') as updatedAt FROM `group` WHERE userUuid = UUID_TO_BIN(:userUuid)";
+
+        foreach ($groupReadDTO->queryString as $name => $value) {
+            if (isset(self::ILIKE_COLUMNS[$name])) {
+                $sql .= self::ILIKE_COLUMNS[$name];
+            } else if (isset(self::DATE_COLUMNS[$name])) {
+                $sql .= self::DATE_COLUMNS[$name];
+            }
+        }
+
+        $sql .= " LIMIT :limit OFFSET :offset";
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $stmt->bindValue("userUuid", $groupReadDTO->userUuid);
+        $stmt->bindValue("limit", self::LIMIT);
+        $stmt->bindValue("offset", (($groupReadDTO->queryString["page"] ?? 1) - 1) * self::LIMIT);
+
+        foreach ($groupReadDTO->queryString as $name => $value) {
+            if (
+                isset(self::ILIKE_COLUMNS[$name])
+                || isset(self::DATE_COLUMNS[$name])
+            )
+                $stmt->bindValue(explode("_", $name)[0], $value);
+        }
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            if ($e->getCode() == "23000") {
+                throw new UniqueConstraintViolationException();
+            }
+
+            throw new InternalServerErrorException();
+        }
+
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $meta = self::meta($groupReadDTO);
+
+        return ["data" => $data, "meta" => $meta];
+    }
+
+    private function meta(GroupReadDTO $groupReadDTO): mixed
+    {
+        $sql = "SELECT count(*) as pages FROM `group` WHERE userUuid = UUID_TO_BIN(:userUuid)";
+
+        foreach ($groupReadDTO->queryString as $name => $value) {
+            if (isset(self::ILIKE_COLUMNS[$name])) {
+                $sql .= self::ILIKE_COLUMNS[$name];
+            } else if (isset(self::DATE_COLUMNS[$name])) {
+                $sql .= self::DATE_COLUMNS[$name];
+            }
+        }
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $stmt->bindValue("userUuid", $groupReadDTO->userUuid);
+
+        foreach ($groupReadDTO->queryString as $name => $value) {
+            if (
+                isset(self::ILIKE_COLUMNS[$name])
+                || isset(self::DATE_COLUMNS[$name])
+            )
+                $stmt->bindValue(explode("_", $name)[0], $value);
+        }
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            if ($e->getCode() == "23000") {
+                throw new UniqueConstraintViolationException();
+            }
+
+            throw new InternalServerErrorException();
+        }
+
+        $pages = $stmt->fetchColumn();
+
+        $meta = [
+            "page" => (int) ($groupReadDTO->queryString["page"] ?? 1),
+            "limit" => self::LIMIT,
+            "totalItems" => $pages ?? 0,
+            "totalPages" => $pages ? ceil($pages / self::LIMIT) : 0
+        ];
+
+        return $meta;
     }
 }
