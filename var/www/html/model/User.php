@@ -2,28 +2,28 @@
 
 namespace App\model;
 
-use App\model\AbstractModel;
-use App\dto\UserCreateDTO;
-use App\dto\UserLoginDTO;
+use App\dto\user\UserCreateDTO;
+use App\dto\user\UserLoginDTO;
 use App\service\security\HashService;
 use App\service\security\UUIDService;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
-class User extends AbstractModel {
+class User {
     private ?int $id;
-    private ?string $UUID;
+    private ?string $uuid;
     private ?string $name;
     private ?string $email;
     private ?string $cellphoneNumber;
     private ?string $password;
-    private ?int $status;
+    private ?string $status;
     private ?string $createdAt;
+    private ?string $updatedAt;
 
-    private function __construct(?int $id, ?string $UUID, ?string $name, ?string $email, ?string $cellphoneNumber, ?string $password, ?int $status)
+    private function __construct(?int $id, ?string $uuid, ?string $name, ?string $email, ?string $cellphoneNumber, ?string $password, ?string $status)
     {
         $this->id = $id;
-        $this->UUID = $UUID;
+        $this->uuid = $uuid;
         $this->name = $name;
         $this->email = $email;
         $this->cellphoneNumber = $cellphoneNumber;
@@ -62,9 +62,9 @@ class User extends AbstractModel {
         return $this->id;
     }
 
-    public function getUUID(): string
+    public function getUuid(): string
     {
-        return $this->UUID;
+        return $this->uuid;
     }
 
     public function getName(): string
@@ -87,7 +87,7 @@ class User extends AbstractModel {
         return $this->password;
     }
 
-    public function getStatus(): int
+    public function getStatus(): string
     {
         return $this->status;
     }
@@ -95,5 +95,10 @@ class User extends AbstractModel {
     public function getCreatedAt(): string
     {
         return $this->createdAt;
+    }
+
+    public function getUpdatedAt(): string
+    {
+        return $this->updatedAt;
     }
 }
