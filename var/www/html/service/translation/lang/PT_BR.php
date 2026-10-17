@@ -16,9 +16,9 @@ return [
     "Field %s cannot be greater than %d." => "O campo %s não pode ser maior que %d.",
     "Field %s cannot be zero." => "O campo %s não pode ser zero.",
     "Field %s must be in array [%s]." => "O campo %s deve estar no array [%s].",
-    "Success" => "Sucesso",
-    "Message" => "Mensagem",
-    "Errors" => "Erros",
+    "success" => "sucesso",
+    "message" => "mensagem",
+    "errors" => "erros",
     "Validation failed for the provided payload." => "A validação falhou para o payload fornecido.",
     "The request payload is malformed or missing required parameters." => "O payload da requisição está malformado ou ausente de parâmetros obrigatórios.",
     "The server encountered an error and could not complete your request." => "O servidor encontrou um erro e não pôde concluir sua solicitação.",
@@ -27,5 +27,8 @@ return [
     "Duplicate key value violates unique constraint." => "O valor de chave duplicada viola a restrição de unicidade.",
     "Login successful." => "Login realizado com sucesso.",
     "Token expired." => "Token expirado.",
-    "Refresh successful." => "Atualização concluída com sucesso."
+    "Refresh successful." => "Atualização concluída com sucesso.",
+    "Record found." => "Registro encontrado.",
+    "group" => "grupo",
+    "The request could not be completed due to a conflict with the current state of the resource." => "A solicitação não pôde ser concluída devido a um conflito com o estado atual do recurso."
 ];
