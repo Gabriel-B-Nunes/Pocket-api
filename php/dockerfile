@@ -1,10 +1,19 @@
 FROM php:8.5-apache
+
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends gettext libgettextpo-dev libicu-dev \
-    && pecl install redis \
-    && docker-php-ext-enable redis \
-    && docker-php-ext-configure intl \
-    && docker-php-ext-install gettext mysqli pdo_mysql intl \
-    && a2enmod rewrite \
+    && apt-get install -y --no-install-recommends libgettextpo-dev libicu-dev
+
+RUN pecl install redis \
+    && docker-php-ext-enable redis
+
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+    
+RUN docker-php-ext-configure intl \
+    && docker-php-ext-install mysqli pdo_mysql intl
+
+RUN a2enmod rewrite \
     && sed -ri -e 's!AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
     && rm -rf /var/lib/apt/lists/*
+
+COPY ./php/php.ini /usr/local/etc/php/
