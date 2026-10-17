@@ -10,8 +10,9 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 #[Attribute(Attribute::TARGET_PARAMETER)]
 class StringValidator implements ValidatorInterface {
+    private array $errorMessages = [];
+
     public function __construct(
-        private array $errorMessages = [],
         private ?int $minLength = null,
         private ?int $maxLength = null,
         private bool $acceptNull = false,
@@ -57,7 +58,7 @@ class StringValidator implements ValidatorInterface {
             $validString = false;
         }
 
-        if (!$this->acceptSpecialChars && preg_match("/[^a-zA-Z0-9\s]/", $value)) {
+        if (!$this->acceptSpecialChars && preg_match("/[^\s\w\d]/u", $value)) {
             $this->errorMessages[] = sprintf($translator->translate("Field %s cannot contain special characters."), $name);
             $validString = false;
         }
@@ -72,7 +73,7 @@ class StringValidator implements ValidatorInterface {
             $validString = false;
         }
 
-        if ($this->mustContainSpecialCharacters && !preg_match("/[\p{M}\p{P}\p{S}]/u", $value)) {
+        if ($this->mustContainSpecialCharacters && !preg_match("/[\p{L}\p{N}\p{Po}\p{Z}]/u", $value)) {
             $this->errorMessages[] = sprintf($translator->translate("Field %s must contain special characters."), $name);
             $validString = false;
         }

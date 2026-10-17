@@ -9,8 +9,9 @@ use Attribute;
 #[Attribute(Attribute::TARGET_PARAMETER)] 
 class IntegerValidator implements ValidatorInterface
 {
+    private array $errorMessages = [];
+
     public function __construct(
-        private array $errorMessages = [],
         private ?int $min = null,
         private ?int $max = null,
         private bool $nullable = false,
