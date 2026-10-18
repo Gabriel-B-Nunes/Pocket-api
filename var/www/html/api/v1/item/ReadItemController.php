@@ -26,8 +26,6 @@ class ReadItemController implements ControllerInterface {
 
     public function handleRequest(Request $request): Response
     {
-        preg_match("/([\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12})/", $request->getUrl(), $matchs);
-
         $data = [
             "userUuid" => JWTService::getUserUuid($request->getHeader("Authorization")),
             "queryString" => $request->getQueryString()
