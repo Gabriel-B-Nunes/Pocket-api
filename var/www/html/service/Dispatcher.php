@@ -13,6 +13,7 @@ use App\api\v1\item\ReadItemController;
 use App\api\v1\item\ReadUuidItemController;
 use App\api\v1\item\UpdateItemController;
 use App\api\v1\item\UuidItemController;
+use App\api\v1\movementItem\CreateMovementItemController;
 use App\api\v1\user\CreateUserController;
 use App\api\v1\user\LoginUserController;
 use App\api\v1\user\RefreshUserController;
@@ -34,7 +35,9 @@ class Dispatcher
             //groups
             "/^\/api\/v1\/groups$/" => CreateGroupController::class,
             //items
-            "/^\/api\/v1\/items$/" => CreateItemController::class
+            "/^\/api\/v1\/items$/" => CreateItemController::class,
+            //movementItems
+            "/^\/api\/v1\/movementItems$/" => CreateMovementItemController::class
         ],
         "GET" => [
             //groups
