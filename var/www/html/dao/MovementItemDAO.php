@@ -17,19 +17,19 @@ class MovementItemDAO {
     private PDO $pdo;
     const LIMIT = 50;
     const ILIKE_COLUMNS = [
-        "itemUuid" => " AND itemUuid = UUID_TO_BIN(:itemUuid)",
-        "unitValue" => " AND unitValue = :unitValue",
-        "quantity" => " AND quatity = :quantity",
-        "unity" => " AND unity = :unity",
-        "currency" => " AND currency = :currency"
+        "itemUuid" => ["condition" => " AND itemUuid = UUID_TO_BIN(:itemUuid)", "paramType" => PDO::PARAM_STR],
+        "unitValue" => ["condition" => " AND unitValue = :unitValue", "paramType" => PDO::PARAM_INT],
+        "quantity" => ["condition" => " AND quantity = :quantity", "paramType" => PDO::PARAM_INT],
+        "unity" => ["condition" => " AND unity = :unity", "paramType" => PDO::PARAM_STR],
+        "currency" => ["condition" => " AND currency = :currency", "paramType" => PDO::PARAM_STR]
     ];
     const DATE_COLUMNS = [
-        "createdAt" => " AND createdAt = :createdAt",
-        "createdAt_begin" => " AND createdAt <= :createdAt",
-        "createdAt_end" => " AND createdAt >= :createdAt",
-        "updatedAt" => " AND updatedAt = :updatedAt",
-        "updatedAt_begin" => " AND updatedAt <= :updatedAt",
-        "updatedAt_end" => " AND updatedAt >= :updatedAt"
+        "createdAt" => ["condition" => " AND createdAt = :createdAt", "paramType" => PDO::PARAM_STR],
+        "createdAt_begin" => ["condition" => " AND createdAt <= :createdAt", "paramType" => PDO::PARAM_STR],
+        "createdAt_end" => ["condition" => " AND createdAt >= :createdAt", "paramType" => PDO::PARAM_STR],
+        "updatedAt" => ["condition" => " AND updatedAt = :updatedAt", "paramType" => PDO::PARAM_STR],
+        "updatedAt_begin" => ["condition" => " AND updatedAt <= :updatedAt", "paramType" => PDO::PARAM_STR],
+        "updatedAt_end" => ["condition" => " AND updatedAt >= :updatedAt", "paramType" => PDO::PARAM_STR]
     ];
 
     public function __construct()
@@ -93,10 +93,9 @@ class MovementItemDAO {
         $sql = "SELECT id, BIN_TO_UUID(uuid) as uuid, BIN_TO_UUID(userUuid) as userUuid, BIN_TO_UUID(itemUuid) as itemUuid, unitValue, quantity, unity, currency, DATE_FORMAT(createdAt, '%Y-%m-%dT%H:%i:%sZ') as createdAt, DATE_FORMAT(updatedAt, '%Y-%m-%dT%H:%i:%sZ') as updatedAt FROM movementItem WHERE userUuid = UUID_TO_BIN(:userUuid)";
 
         foreach ($movementItemReadDTO->queryString as $name => $value) {
-            if (isset(self::ILIKE_COLUMNS[$name])) {
-                $sql .= self::ILIKE_COLUMNS[$name];
-            } else if (isset(self::DATE_COLUMNS[$name])) {
-                $sql .= self::DATE_COLUMNS[$name];
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $sql .= $column["condition"];
             }
         }
 
@@ -113,11 +112,10 @@ class MovementItemDAO {
         $stmt->bindValue("offset", (($movementItemReadDTO->queryString["page"] ?? 1) - 1) * self::LIMIT);
 
         foreach ($movementItemReadDTO->queryString as $name => $value) {
-            if (
-                isset(self::ILIKE_COLUMNS[$name])
-                || isset(self::DATE_COLUMNS[$name])
-            )
-                $stmt->bindValue(explode("_", $name)[0], $value);
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $stmt->bindValue(explode("_", $name)[0], $value, $column["paramType"]);
+            }
         }
 
         try {
@@ -137,13 +135,12 @@ class MovementItemDAO {
     }
 
     private function meta(MovementItemReadDTO $movementItemReadDTO): mixed {
-        $sql = "SELECT count(*) as pages FROM `group` WHERE userUuid = UUID_TO_BIN(:userUuid)";
+        $sql = "SELECT count(*) as pages FROM movementItem WHERE userUuid = UUID_TO_BIN(:userUuid)";
 
         foreach ($movementItemReadDTO->queryString as $name => $value) {
-            if (isset(self::ILIKE_COLUMNS[$name])) {
-                $sql .= self::ILIKE_COLUMNS[$name];
-            } else if (isset(self::DATE_COLUMNS[$name])) {
-                $sql .= self::DATE_COLUMNS[$name];
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $sql .= $column["condition"];
             }
         }
 
@@ -156,11 +153,10 @@ class MovementItemDAO {
         $stmt->bindValue("userUuid", $movementItemReadDTO->userUuid);
 
         foreach ($movementItemReadDTO->queryString as $name => $value) {
-            if (
-                isset(self::ILIKE_COLUMNS[$name])
-                || isset(self::DATE_COLUMNS[$name])
-            )
-                $stmt->bindValue(explode("_", $name)[0], $value);
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $stmt->bindValue(explode("_", $name)[0], $value, $column["paramType"]);
+            }
         }
 
         try {

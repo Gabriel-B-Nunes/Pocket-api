@@ -21,16 +21,16 @@ class GroupDAO
     private PDO $pdo;
     const LIMIT = 50;
     const ILIKE_COLUMNS = [
-        "name" => " AND name = :name",
-        "status" => " AND status = :status"
+        "name" => ["condition" => " AND name = :name", "paramType" => PDO::PARAM_STR],
+        "status" => ["condition" => " AND status = :status", "paramType" => PDO::PARAM_STR]
     ];
     const DATE_COLUMNS = [
-        "createdAt" => " AND createdAt = :createdAt",
-        "createdAt_begin" => " AND createdAt >= :createdAt",
-        "createdAt_end" => " AND createdAt <= :createdAt",
-        "updatedAt" => " AND updatedAt = :updatedAt",
-        "updatedAt_begin" => " AND updatedAt >= :updatedAt",
-        "updatedAt_end" => " AND updatedAt <= :updatedAt"
+        "createdAt" => ["condition" => " AND createdAt = :createdAt", "paramType" => PDO::PARAM_STR],
+        "createdAt_begin" => ["condition" => " AND createdAt >= :createdAt", "paramType" => PDO::PARAM_STR],
+        "createdAt_end" => ["condition" => " AND createdAt <= :createdAt", "paramType" => PDO::PARAM_STR],
+        "updatedAt" => ["condition" => " AND updatedAt = :updatedAt", "paramType" => PDO::PARAM_STR],
+        "updatedAt_begin" => ["condition" => " AND updatedAt >= :updatedAt", "paramType" => PDO::PARAM_STR],
+        "updatedAt_end" => ["condition" => " AND updatedAt <= :updatedAt", "paramType" => PDO::PARAM_STR]
     ];
 
     public function __construct()
@@ -160,10 +160,9 @@ class GroupDAO
         $sql = "SELECT id, BIN_TO_UUID(uuid) as uuid, BIN_TO_UUID(userUuid) as userUuid, name, status, DATE_FORMAT(createdAt, '%Y-%m-%dT%H:%i:%sZ') as createdAt, DATE_FORMAT(updatedAt, '%Y-%m-%dT%H:%i:%sZ') as updatedAt FROM `group` WHERE userUuid = UUID_TO_BIN(:userUuid)";
 
         foreach ($groupReadDTO->queryString as $name => $value) {
-            if (isset(self::ILIKE_COLUMNS[$name])) {
-                $sql .= self::ILIKE_COLUMNS[$name];
-            } else if (isset(self::DATE_COLUMNS[$name])) {
-                $sql .= self::DATE_COLUMNS[$name];
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $sql .= $column["condition"];
             }
         }
 
@@ -180,11 +179,10 @@ class GroupDAO
         $stmt->bindValue("offset", (($groupReadDTO->queryString["page"] ?? 1) - 1) * self::LIMIT);
 
         foreach ($groupReadDTO->queryString as $name => $value) {
-            if (
-                isset(self::ILIKE_COLUMNS[$name])
-                || isset(self::DATE_COLUMNS[$name])
-            )
-                $stmt->bindValue(explode("_", $name)[0], $value);
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $stmt->bindValue(explode("_", $name)[0], $value, $column["paramType"]);
+            }
         }
 
         try {
@@ -208,10 +206,9 @@ class GroupDAO
         $sql = "SELECT count(*) as pages FROM `group` WHERE userUuid = UUID_TO_BIN(:userUuid)";
 
         foreach ($groupReadDTO->queryString as $name => $value) {
-            if (isset(self::ILIKE_COLUMNS[$name])) {
-                $sql .= self::ILIKE_COLUMNS[$name];
-            } else if (isset(self::DATE_COLUMNS[$name])) {
-                $sql .= self::DATE_COLUMNS[$name];
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $sql .= $column["condition"];
             }
         }
 
@@ -224,11 +221,10 @@ class GroupDAO
         $stmt->bindValue("userUuid", $groupReadDTO->userUuid);
 
         foreach ($groupReadDTO->queryString as $name => $value) {
-            if (
-                isset(self::ILIKE_COLUMNS[$name])
-                || isset(self::DATE_COLUMNS[$name])
-            )
-                $stmt->bindValue(explode("_", $name)[0], $value);
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $stmt->bindValue(explode("_", $name)[0], $value, $column["paramType"]);
+            }
         }
 
         try {

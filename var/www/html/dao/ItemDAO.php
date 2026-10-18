@@ -21,16 +21,16 @@ class ItemDAO
     private PDO $pdo;
     const LIMIT = 50;
     const ILIKE_COLUMNS = [
-        "name" => " AND name = :name",
-        "status" => " AND status = :status"
+        "name" => ["condition" => " AND name = :name", "paramType" => PDO::PARAM_STR],
+        "status" => ["condition" => " AND status = :status", "paramType" => PDO::PARAM_STR]
     ];
     const DATE_COLUMNS = [
-        "createdAt" => " AND createdAt = :createdAt",
-        "createdAt_begin" => " AND createdAt >= :createdAt",
-        "createdAt_end" => " AND createdAt <= :createdAt",
-        "updatedAt" => " AND updatedAt = :updatedAt",
-        "updatedAt_begin" => " AND updatedAt >= :updatedAt",
-        "updatedAt_end" => " AND updatedAt <= :updatedAt"
+        "createdAt" => ["condition" => " AND createdAt = :createdAt", "paramType" => PDO::PARAM_STR],
+        "createdAt_begin" => ["condition" => " AND createdAt >= :createdAt", "paramType" => PDO::PARAM_STR],
+        "createdAt_end" => ["condition" => " AND createdAt <= :createdAt", "paramType" => PDO::PARAM_STR],
+        "updatedAt" => ["condition" => " AND updatedAt = :updatedAt", "paramType" => PDO::PARAM_STR],
+        "updatedAt_begin" => ["condition" => " AND updatedAt >= :updatedAt", "paramType" => PDO::PARAM_STR],
+        "updatedAt_end" => ["condition" => " AND updatedAt <= :updatedAt", "paramType" => PDO::PARAM_STR]
     ];
 
     public function __construct()
@@ -99,10 +99,9 @@ class ItemDAO
         $sql = "SELECT id, BIN_TO_UUID(uuid) as uuid, BIN_TO_UUID(userUuid) as userUuid, BIN_TO_UUID(groupUuid) as groupUuid, name, status FROM item WHERE userUuid = UUID_TO_BIN(:userUuid)";
 
         foreach ($itemReadDTO->queryString as $key => $value) {
-            if (isset(self::ILIKE_COLUMNS[$key])) {
-                $sql .= self::ILIKE_COLUMNS[$key];
-            } else if (isset(self::DATE_COLUMNS[$key])) {
-                $sql .= self::DATE_COLUMNS[$key];
+            $column = self::ILIKE_COLUMNS[$key] ?? self::DATE_COLUMNS[$key] ?? null;
+            if ($column !== null) {
+                $sql .= $column["condition"];
             }
         }
 
@@ -119,11 +118,10 @@ class ItemDAO
         $stmt->bindValue("offset", (($groupReadDTO->queryString["page"] ?? 1) - 1) * self::LIMIT);
 
         foreach ($itemReadDTO->queryString as $name => $value) {
-            if (
-                isset(self::ILIKE_COLUMNS[$name])
-                || isset(self::DATE_COLUMNS[$name])
-            )
-                $stmt->bindValue(explode("_", $name)[0], $value);
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $stmt->bindValue(explode("_", $name)[0], $value, $column["paramType"]);
+            }
         }
 
         try {
@@ -143,10 +141,9 @@ class ItemDAO
         $sql = "SELECT count(*) as pages FROM item WHERE userUuid = UUID_TO_BIN(:userUuid)";
 
         foreach ($itemReadDTO->queryString as $key => $value) {
-            if (isset(self::ILIKE_COLUMNS[$key])) {
-                $sql .= self::ILIKE_COLUMNS[$key];
-            } else if (isset(self::DATE_COLUMNS[$key])) {
-                $sql .= self::DATE_COLUMNS[$key];
+            $column = self::ILIKE_COLUMNS[$key] ?? self::DATE_COLUMNS[$key] ?? null;
+            if ($column !== null) {
+                $sql .= $column["condition"];
             }
         }
 
@@ -163,11 +160,10 @@ class ItemDAO
         $stmt->bindValue("offset", (($groupReadDTO->queryString["page"] ?? 1) - 1) * self::LIMIT);
 
         foreach ($itemReadDTO->queryString as $name => $value) {
-            if (
-                isset(self::ILIKE_COLUMNS[$name])
-                || isset(self::DATE_COLUMNS[$name])
-            )
-                $stmt->bindValue(explode("_", $name)[0], $value);
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $stmt->bindValue(explode("_", $name)[0], $value, $column["paramType"]);
+            }
         }
 
         try {
