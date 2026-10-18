@@ -31,7 +31,7 @@ class EnumValidator implements ValidatorInterface
         $translator = Container::get("translator");
 
         try {
-            $enum->getCase($value);
+            $enum->getCase($value ?? "");
         } catch (ReflectionException $e) {
             $implodedCases = implode(",", array_map(function ($value) {
                 return $value->name;
