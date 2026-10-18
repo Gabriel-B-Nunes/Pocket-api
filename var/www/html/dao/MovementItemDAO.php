@@ -4,10 +4,12 @@ namespace App\dao;
 
 use App\dto\movementItem\MovementItemReadDTO;
 use App\dto\movementItem\MovementItemUuidDTO;
+use App\exception\ForeignKeyConstraintViolationException;
 use App\exception\InternalServerErrorException;
 use App\exception\UniqueConstraintViolationException;
 use App\model\MovementItem;
 use App\service\pdo\PDOService;
+use MovementItemUpdateDTO;
 use PDO;
 use PDOException;
 
@@ -179,5 +181,32 @@ class MovementItemDAO {
         ];
 
         return $meta;
+    }
+
+    public function update(MovementItemUpdateDTO $movementItemUpdateDTO): mixed {
+        $sql = "UPDATE movementItem SET itemUuid = UUID_TO_BIN(:itemUuid), unitValue = :unitValue, quantity = :quantity, unity = :unity, currency = :currency, updatedAt = NOW() WHERE userUuid = UUID_TO_BIN(:userUuid) AND uuid = UUID_TO_BIN(:uuid)";
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $stmt->bindValue("userUuid", $movementItemUpdateDTO->userUuid);
+        $stmt->bindValue("itemUuid", $movementItemUpdateDTO->itemUuid);
+        $stmt->bindValue("unitValue", $movementItemUpdateDTO->unitValue);
+        $stmt->bindValue("quantity", $movementItemUpdateDTO->quantity);
+        $stmt->bindValue("unity", $movementItemUpdateDTO->unity);
+        $stmt->bindValue("currency", $movementItemUpdateDTO->currency);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new ForeignKeyConstraintViolationException();
+        }
+
+        $movementItemUuidDTO = new MovementItemUuidDTO($movementItemUpdateDTO->uuid, $movementItemUpdateDTO->userUuid);
+
+        return self::readByUuid($movementItemUuidDTO);
     }
 }
