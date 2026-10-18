@@ -15,6 +15,7 @@ use App\api\v1\item\UpdateItemController;
 use App\api\v1\movementItem\CreateMovementItemController;
 use App\api\v1\movementItem\ReadMovementItemCotroller;
 use App\api\v1\movementItem\ReadUuidMovementItemController;
+use App\api\v1\movementItem\UpdateMovementItemController;
 use App\api\v1\user\CreateUserController;
 use App\api\v1\user\LoginUserController;
 use App\api\v1\user\RefreshUserController;
@@ -55,7 +56,9 @@ class Dispatcher
             //groups
             "/^\/api\/v1\/groups\/uuid\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => UpdateGroupCotroller::class,
             //items
-            "/^\/api\/v1\/items\/uuid\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => UpdateItemController::class
+            "/^\/api\/v1\/items\/uuid\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => UpdateItemController::class,
+            //movementItems
+            "/^\/api\/v1\/movementItems\/uuid\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => UpdateMovementItemController::class
         ],
         "DELETE" => [
             //groups
