@@ -37,7 +37,7 @@ class CreateMovementItemController implements ControllerInterface {
             
             $response = [
                 $translator->translate("timestamp") => new DateTimeImmutable()->format("Y-m-d\TH:i:sp"),
-                $translator->translate("item") => $movementItemOptional
+                $translator->translate("movementItem") => $movementItemOptional
             ];
             
             return new Response($response, Cache::PRIVATE_NO_CACHE);

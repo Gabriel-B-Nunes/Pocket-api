@@ -35,7 +35,7 @@ class CreateItemController implements ControllerInterface
 
             $response = [
                 $translator->translate("timestamp") => new DateTimeImmutable()->format("Y-m-d\TH:i:sp"),
-                "uuid" => $itemOptional
+                "item" => $itemOptional
             ];
 
             return new Response($response, Cache::PRIVATE_NO_CACHE);
