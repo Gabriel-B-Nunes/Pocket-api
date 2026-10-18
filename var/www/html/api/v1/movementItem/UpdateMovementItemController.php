@@ -4,17 +4,16 @@ namespace App\api\v1\movementItem;
 
 use App\api\ControllerInterface;
 use App\dao\MovementItemDAO;
+use App\dto\movementItem\MovementItemUpdateDTO;
 use App\exception\NotFoundException;
 use App\exception\ValidationException;
 use App\model\Cache;
-use App\model\MovementItem;
 use App\model\Request;
 use App\model\Response;
 use App\service\cache\Container;
 use App\service\data\InputHandler;
 use App\service\security\JWTService;
 use DateTimeImmutable;
-use MovementItemUpdateDTO;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 

@@ -2,6 +2,8 @@
 
 declare(strict_types = 1);
 
+namespace App\dto\movementItem;
+
 use App\model\Currency;
 use App\model\Unity;
 use App\service\data\sanitizer\IntegerSanitizer;

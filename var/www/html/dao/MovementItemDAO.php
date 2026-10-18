@@ -3,13 +3,13 @@
 namespace App\dao;
 
 use App\dto\movementItem\MovementItemReadDTO;
+use App\dto\movementItem\MovementItemUpdateDTO;
 use App\dto\movementItem\MovementItemUuidDTO;
 use App\exception\ForeignKeyConstraintViolationException;
 use App\exception\InternalServerErrorException;
 use App\exception\UniqueConstraintViolationException;
 use App\model\MovementItem;
 use App\service\pdo\PDOService;
-use MovementItemUpdateDTO;
 use PDO;
 use PDOException;
 
@@ -192,6 +192,7 @@ class MovementItemDAO {
             throw new InternalServerErrorException();
         }
 
+        $stmt->bindValue("uuid", $movementItemUpdateDTO->uuid);
         $stmt->bindValue("userUuid", $movementItemUpdateDTO->userUuid);
         $stmt->bindValue("itemUuid", $movementItemUpdateDTO->itemUuid);
         $stmt->bindValue("unitValue", $movementItemUpdateDTO->unitValue);
