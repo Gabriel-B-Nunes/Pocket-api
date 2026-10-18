@@ -2,6 +2,7 @@
 
 namespace App\dao;
 
+use App\dto\movementItem\MovementItemDeleteDTO;
 use App\dto\movementItem\MovementItemReadDTO;
 use App\dto\movementItem\MovementItemUpdateDTO;
 use App\dto\movementItem\MovementItemUuidDTO;
@@ -209,5 +210,29 @@ class MovementItemDAO {
         $movementItemUuidDTO = new MovementItemUuidDTO($movementItemUpdateDTO->uuid, $movementItemUpdateDTO->userUuid);
 
         return self::readByUuid($movementItemUuidDTO);
+    }
+
+    public function delete(MovementItemDeleteDTO $movementItemDeleteDTO): mixed {
+        $sql = "DELETE FROM movementItem WHERE userUuid = UUID_TO_BIN(:userUuid) AND uuid = UUID_TO_BIN(:uuid)";
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $stmt->bindValue("userUuid", $movementItemDeleteDTO->userUuid);
+        $stmt->bindValue("uuid", $movementItemDeleteDTO->uuid);
+
+        $movementItemUuidDTO = new MovementItemUuidDTO($movementItemDeleteDTO->uuid, $movementItemDeleteDTO->userUuid);
+        $movementItemOptional = self::readByUuid($movementItemUuidDTO);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new ForeignKeyConstraintViolationException();
+        }
+
+        return $movementItemOptional;
     }
 }
