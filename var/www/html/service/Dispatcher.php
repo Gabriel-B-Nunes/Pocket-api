@@ -14,6 +14,7 @@ use App\api\v1\item\ReadUuidItemController;
 use App\api\v1\item\UpdateItemController;
 use App\api\v1\item\UuidItemController;
 use App\api\v1\movementItem\CreateMovementItemController;
+use App\api\v1\movementItem\ReadUuidMovementItemController;
 use App\api\v1\user\CreateUserController;
 use App\api\v1\user\LoginUserController;
 use App\api\v1\user\RefreshUserController;
@@ -45,7 +46,9 @@ class Dispatcher
             "/^\/api\/v1\/groups(?:(?:\?|\&)[\w\d\-]+\=[\w\d\-]+)*$/" => ReadGroupController::class,
             //items
             "/^\/api\/v1\/items\/uuid\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => ReadUuidItemController::class,
-            "/^\/api\/v1\/items(?:(?:\?|\&)[\w\d\-]+\=[\w\d\-]+)*$/" => ReadItemController::class
+            "/^\/api\/v1\/items(?:(?:\?|\&)[\w\d\-]+\=[\w\d\-]+)*$/" => ReadItemController::class,
+            //movementItems
+            "/^\/api\/v1\/movementItems\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => ReadUuidMovementItemController::class
         ],
         "PUT" => [
             //groups
