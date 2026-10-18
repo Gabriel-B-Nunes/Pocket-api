@@ -13,6 +13,7 @@ use App\api\v1\item\ReadItemController;
 use App\api\v1\item\ReadUuidItemController;
 use App\api\v1\item\UpdateItemController;
 use App\api\v1\movementItem\CreateMovementItemController;
+use App\api\v1\movementItem\DeleteMovementItemController;
 use App\api\v1\movementItem\ReadMovementItemCotroller;
 use App\api\v1\movementItem\ReadUuidMovementItemController;
 use App\api\v1\movementItem\UpdateMovementItemController;
@@ -64,7 +65,9 @@ class Dispatcher
             //groups
             "/^\/api\/v1\/groups\/uuid\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => DeleteGroupController::class,
             //items
-            "/^\/api\/v1\/items\/uuid\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => DeleteItemController::class
+            "/^\/api\/v1\/items\/uuid\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => DeleteItemController::class,
+            //movementItems
+            "/^\/api\/v1\/movementItems\/uuid\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => DeleteMovementItemController::class
         ]
     ];
 
