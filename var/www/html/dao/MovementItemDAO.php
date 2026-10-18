@@ -17,6 +17,7 @@ class MovementItemDAO {
     private PDO $pdo;
     const LIMIT = 50;
     const ILIKE_COLUMNS = [
+        "itemUuid" => " AND itemUuid = UUID_TO_BIN(:itemUuid)",
         "unitValue" => " AND unitValue = :unitValue",
         "quantity" => " AND quatity = :quantity",
         "unity" => " AND unity = :unity",
