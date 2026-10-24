@@ -11,7 +11,6 @@ use App\model\Request;
 use App\model\Response;
 use App\service\cache\Container;
 use App\service\data\InputHandler;
-use App\service\security\JWTService;
 use DateTimeImmutable;
 use Override;
 
@@ -27,7 +26,7 @@ class ReadMovementItemCotroller implements ControllerInterface {
     public function handleRequest(Request $request): Response
     {
         $data = [
-            "userUuid" => JWTService::getUserUuid($request->getHeader("Authorization")),
+            "userUuid" => $request->getUserUuid(),
             "queryString" => $request->getQueryString()
         ];
 

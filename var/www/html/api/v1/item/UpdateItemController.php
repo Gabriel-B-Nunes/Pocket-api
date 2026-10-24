@@ -12,7 +12,6 @@ use App\model\Request;
 use App\model\Response;
 use App\service\cache\Container;
 use App\service\data\InputHandler;
-use App\service\security\JWTService;
 use DateTimeImmutable;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
@@ -31,7 +30,7 @@ class UpdateItemController implements ControllerInterface
         $data = [
             "uuid" => $matchs[1] ?? "",
             "groupUuid" => $request->getBody()["groupUuid"] ?? "",
-            "userUuid" => JWTService::getUserUuid($request->getHeader("Authorization")) ?? "",
+            "userUuid" => $request->getUserUuid(),
             "name" => $request->getBody()["name"] ?? "",
             "status" => $request->getBody()["status"] ?? ""
         ];

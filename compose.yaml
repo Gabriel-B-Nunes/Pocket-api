@@ -1,0 +1,49 @@
+services:
+  database:
+    image: mysql:9.7.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=pocket
+      - MYSQL_USER=pocket
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - Pocket
+
+  api:
+    build:
+      context: .
+      dockerfile: ./php/dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - MYSQL_HOST=database
+      - MYSQL_USER=pocket
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - REDIS_HOST=redis
+      - HASH_PEPPER=${HASH_PEPPER}
+      - JWT_SECRET=${JWT_SECRET}
+    volumes:
+      - ./var/www/:/var/www
+    networks:
+      - Pocket
+    depends_on:
+      - database
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis_server
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis:/data
+    networks:
+      - Pocket
+
+networks:
+  Pocket:
+    driver: bridge

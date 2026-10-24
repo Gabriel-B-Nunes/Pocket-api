@@ -2,18 +2,17 @@
 
 namespace App\model;
 
-use App\service\security\JWTService;
-
 require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class Request {
-    
+
     public function __construct(
         private string $method,
         private string $url,
         private array $headers,
         private ?array $body = [],
-        private ?array $queryString = []
+        private ?array $queryString = [],
+        private ?string $userUuid = null
     )
     {}
 
@@ -56,9 +55,14 @@ class Request {
         return isset($this->headers[$header]) ? $this->headers[$header] : "";
     }
 
-    public function setUserUuid(): void {
-        $authHeader = self::getHeader("Authorization");
-        $userUuid = JWTService::getUserUuid($authHeader);
-        $this->body["userUuid"] = $userUuid;
+    public function setUserUuid(?string $userUuid = null): void {
+        if ($userUuid !== null) {
+            $this->userUuid = $userUuid;
+        }
+        $this->body["userUuid"] = $this->userUuid ?? "";
+    }
+
+    public function getUserUuid(): string {
+        return $this->userUuid ?? "";
     }
 }

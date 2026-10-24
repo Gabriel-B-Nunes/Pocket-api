@@ -76,7 +76,7 @@ class JWTService
         $tokenValidation = hash_equals($expectedToken, $jwtToken);
 
         if ($tokenValidation) {
-            $uuid = json_decode(base64_decode($payload), true)["sub"];
+            $uuid = self::getSubject($jwtToken);
             $redis = RedisService::getInstance();
             $sessionData = json_decode($redis->get("user:session:" . $uuid), true);
             if (isset($sessionData["accessToken"]) && $sessionData["accessToken"] === $jwtToken) {
@@ -100,7 +100,7 @@ class JWTService
         $tokenValidation = hash_equals($expectedToken, $jwtToken);
 
         if ($tokenValidation) {
-            $uuid = json_decode(base64_decode($payload), true)["sub"];
+            $uuid = self::getSubject($jwtToken);
             $redis = RedisService::getInstance();
             $sessionData = json_decode($redis->get("user:session:" . $uuid), true);
             if (isset($sessionData["refreshToken"]) && $sessionData["refreshToken"] === $jwtToken) {
@@ -113,18 +113,17 @@ class JWTService
         throw new UnauthorizedException("Invalid token.");
     }
 
-    public static function getUserUuid(string $bearerToken): string
+    public static function getSubject(string $jwtToken): string
     {
-        preg_match("/Bearer\s?(.+)/i", $bearerToken, $matches);
-        $jwtToken = $matches[1] ?? "";
-        $explodedJwtToken = explode(".", $bearerToken);
+        $explodedJwtToken = explode(".", $jwtToken);
         $payload = $explodedJwtToken[1] ?? "";
-        $userUuid = "";
 
-        if ($payload) {
-            $userUuid = json_decode(base64_decode($payload), true)["sub"];
+        if ($payload === "") {
+            return "";
         }
 
-        return $userUuid;
+        $decodedPayload = json_decode(base64_decode($payload, true), true);
+
+        return is_array($decodedPayload) ? ($decodedPayload["sub"] ?? "") : "";
     }
 }

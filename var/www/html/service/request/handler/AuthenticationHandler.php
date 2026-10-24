@@ -27,6 +27,7 @@ class AuthenticationHandler extends AbstractHandler
 
         if (!$userRoute) {
             JWTService::validate($jwtToken);
+            $request->setUserUuid(JWTService::getSubject($jwtToken));
             $this->nextHandler->handle($request);
             return;
         }

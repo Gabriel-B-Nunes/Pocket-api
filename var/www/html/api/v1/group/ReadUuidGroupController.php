@@ -12,7 +12,6 @@ use App\model\Request;
 use App\model\Response;
 use App\service\cache\Container;
 use App\service\data\InputHandler;
-use App\service\security\JWTService;
 use DateTimeImmutable;
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
@@ -30,7 +29,7 @@ class ReadUuidGroupController implements ControllerInterface
 
         $data = [
             "uuid" => $matchs[1] ?? "",
-            "userUuid" => JWTService::getUserUuid($request->getHeader("Authorization"))
+            "userUuid" => $request->getUserUuid()
         ];
     
         $groupUuidDTO = $this->inputHandler->handle(GroupUuidDTO::class, $data);

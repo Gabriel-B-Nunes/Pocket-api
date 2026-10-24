@@ -11,7 +11,6 @@ use App\model\Request;
 use App\model\Response;
 use App\service\cache\Container;
 use App\service\data\InputHandler;
-use App\service\security\JWTService;
 use DateTimeImmutable;
 use Override;
 
@@ -30,7 +29,7 @@ class ReadUuidMovementItemController implements ControllerInterface {
         
         $data = [
             "uuid" => $matchs[1] ?? "",
-            "userUuid" => JWTService::getUserUuid($request->getHeader("Authorization"))
+            "userUuid" => $request->getUserUuid()
         ];
 
         $movementItemUuidDTO = $this->inputHandler->handle(MovementItemUuidDTO::class, $data);
