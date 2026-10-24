@@ -28,6 +28,7 @@ services:
       - JWT_SECRET=${JWT_SECRET}
     volumes:
       - ./var/www/:/var/www
+      - ./tests:/var/www/tests
     networks:
       - Pocket
     depends_on:

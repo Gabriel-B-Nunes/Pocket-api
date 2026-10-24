@@ -1,6 +1,9 @@
 FROM php:8.5-apache
 
 RUN apt-get update \
+    && apt-get install -y --no-install-recommends wget
+
+RUN apt-get update \
     && apt-get install -y --no-install-recommends libgettextpo-dev libicu-dev
 
 RUN pecl install redis \
@@ -8,6 +11,12 @@ RUN pecl install redis \
 
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
+
+RUN pecl install pcov \
+    && docker-php-ext-enable pcov
+
+RUN wget -O /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-12.phar \
+    && chmod +x /usr/local/bin/phpunit
     
 RUN docker-php-ext-configure intl \
     && docker-php-ext-install mysqli pdo_mysql intl

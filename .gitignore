@@ -2,3 +2,6 @@
 /data/
 /var/www/html/tmp
 /var/www/html/test.php
+# IDE / local PHPUnit stubs
+/phpunit.phar
+/.ide-stubs/

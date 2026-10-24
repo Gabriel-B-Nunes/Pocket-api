@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>.</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="DOCUMENT_ROOT" value="/var/www/html"/>
+    </php>
+    <source>
+        <include>
+            <directory suffix=".php">/var/www/html</directory>
+        </include>
+    </source>
+</phpunit>

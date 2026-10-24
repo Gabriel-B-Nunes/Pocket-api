@@ -1,0 +1,4 @@
+{
+  "intelephense.files.include": ["**/*.php", ".ide-stubs/**/*.php"],
+  "intelephense.files.exclude": ["phpunit.phar"]
+}

@@ -1,0 +1,1 @@
+{"version":2,"defects":[],"times":{"Tests\\JWTServiceTest::testGetSubjectReturnsEmptyForInvalidToken":0.001,"Tests\\JWTServiceTest::testGetSubjectExtractsSubClaim":0}}
