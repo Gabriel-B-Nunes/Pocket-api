@@ -5,3 +5,5 @@
 # IDE / local PHPUnit stubs
 /phpunit.phar
 /.ide-stubs/
+/vendor/
+/var/www/vendor/

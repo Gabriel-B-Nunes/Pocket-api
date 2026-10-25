@@ -5,7 +5,6 @@ namespace App\model;
 use App\service\security\UUIDService;
 use App\dto\item\ItemCreateDTO;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class Item
 {

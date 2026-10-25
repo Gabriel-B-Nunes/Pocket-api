@@ -9,7 +9,6 @@ use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\EnumValidator;
 use App\service\data\validator\StringValidator;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class ItemUpdateDTO {
     public function __construct(

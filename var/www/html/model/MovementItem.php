@@ -5,7 +5,6 @@ namespace App\model;
 use App\dto\movementItem\MovementItemCreateDTO;
 use App\service\security\UUIDService;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class MovementItem {
     private function __construct(

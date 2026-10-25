@@ -6,7 +6,6 @@ use App\model\Request;
 use App\service\request\handler\AbstractHandler;
 use App\service\security\JWTService;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class AuthenticationHandler extends AbstractHandler
 {

@@ -11,7 +11,6 @@ use App\service\data\validator\EnumValidator;
 use App\service\data\validator\IntegerValidator;
 use App\service\data\validator\StringValidator;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class GroupCreateDTO
 {

@@ -2,7 +2,6 @@
 
 namespace App\model;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class Request {
 

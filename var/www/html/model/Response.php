@@ -5,7 +5,6 @@ namespace App\model;
 use App\exception\InternalServerErrorException;
 use JsonException;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class Response {
     public function __construct(

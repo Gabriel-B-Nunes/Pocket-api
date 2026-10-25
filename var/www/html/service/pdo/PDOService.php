@@ -6,7 +6,6 @@ use App\exception\InternalServerErrorException;
 use PDOException;
 use PDO;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class PDOService
 {

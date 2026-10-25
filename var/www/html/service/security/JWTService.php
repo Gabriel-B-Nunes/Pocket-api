@@ -6,7 +6,6 @@ use App\exception\UnauthorizedException;
 use App\service\cache\RedisService;
 use DateTime;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class JWTService
 {

@@ -2,7 +2,6 @@
 
 namespace App\api\v1\user;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 use App\api\ControllerInterface;
 use App\dao\UserDAO;

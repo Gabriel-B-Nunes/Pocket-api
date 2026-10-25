@@ -14,7 +14,7 @@
 - `intl`
 - `mysqli`
 - `pdo_mysql`
-- No Composer; autoloading via `var/www/html/autoload.php` (PSR-4-like, `App\` → `var/www/html/`).
+- Composer; autoloading PSR-4 via Composer (`App\` → `var/www/html/`), `var/www/html/autoload.php` carrega `vendor/autoload.php`.
 
 ## Environment Variables
 - `MYSQL_PASSWORD` — MySQL password for `pocket` user.
@@ -34,8 +34,8 @@
 
 ## Tooling
 - Git (branches: `master`, `develop`; active development on `develop`).
-- No test framework configured.
-- No package manager (Composer) in use.
+- PHPUnit 12 via Composer (dev).
+- Composer em uso (PHPMailer, PHPUnit).
 
 ## Constraints
 - Autoloader depends on `$_SERVER["DOCUMENT_ROOT"]`, so requests must go through Apache (not CLI directly) unless `DOCUMENT_ROOT` is set.

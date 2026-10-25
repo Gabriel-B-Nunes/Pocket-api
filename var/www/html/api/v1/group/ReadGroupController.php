@@ -14,7 +14,6 @@ use App\service\data\InputHandler;
 use DateTimeImmutable;
 use Override;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class ReadGroupController implements ControllerInterface {
     public function __construct(

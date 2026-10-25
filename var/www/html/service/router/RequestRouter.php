@@ -5,7 +5,6 @@ namespace App\service\router;
 use App\model\Request;
 use App\model\RequestFactory;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class RequestRouter
 {

@@ -7,7 +7,6 @@ use App\dto\user\UserLoginDTO;
 use App\service\security\HashService;
 use App\service\security\UUIDService;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class User {
     private ?int $id;

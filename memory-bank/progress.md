@@ -10,6 +10,7 @@
 - Movement item CRUD: create, read (list/by UUID), update, delete.
 - Input validation/sanitization pipeline via DTO attributes.
 - Localized error responses (EN_US default, PT_BR).
+- Gerenciamento de dependencias via Composer (PHPMailer, PHPUnit).
 - MySQL persistence with UUID binary conversion and constraint handling.
 - Redis-backed JWT sessions.
 

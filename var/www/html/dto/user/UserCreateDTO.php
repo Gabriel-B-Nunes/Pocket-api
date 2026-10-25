@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\dto\user;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 use App\model\Status;
 use App\service\data\sanitizer\StringSanitizer;

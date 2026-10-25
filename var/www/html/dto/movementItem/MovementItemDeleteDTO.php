@@ -7,7 +7,6 @@ namespace App\dto\movementItem;
 use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\StringValidator;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class MovementItemDeleteDTO {
     public function __construct(

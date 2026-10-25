@@ -5,7 +5,6 @@ namespace App\service\data\validator;
 use App\service\cache\Container;
 use Attribute;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 #[Attribute(Attribute::TARGET_PARAMETER)]
 class ArrayValidator implements ValidatorInterface

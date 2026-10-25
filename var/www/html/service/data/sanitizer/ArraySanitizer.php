@@ -4,7 +4,6 @@ namespace App\service\data\sanitizer;
 
 use Attribute;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 #[Attribute(Attribute::TARGET_PARAMETER)]
 class ArraySanitizer implements SanitizerInterface {

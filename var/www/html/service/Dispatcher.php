@@ -25,7 +25,6 @@ use App\exception\NotFoundException;
 use App\model\Request;
 use App\model\Response;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class Dispatcher
 {

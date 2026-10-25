@@ -13,7 +13,6 @@ use App\service\cache\Container;
 use App\service\data\InputHandler;
 use DateTimeImmutable;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class DeleteGroupController implements ControllerInterface {
     public function __construct(

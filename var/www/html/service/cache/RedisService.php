@@ -4,7 +4,6 @@ namespace App\service\cache;
 
 use Redis;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class RedisService
 {

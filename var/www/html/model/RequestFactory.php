@@ -4,7 +4,6 @@ namespace App\model;
 
 use App\exception\BadRequestException;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class RequestFactory {
     public static function createGetRequest(string $url, ?array $queryString): Request {

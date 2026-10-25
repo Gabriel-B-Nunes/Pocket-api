@@ -4,7 +4,6 @@ namespace App\service\translation;
 
 use App\service\translation\LangEnum;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class Translator {
     private array $messages;

@@ -1,10 +1,8 @@
 FROM php:8.5-apache
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends wget
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends libgettextpo-dev libicu-dev
+    && apt-get install -y --no-install-recommends git unzip libzip-dev libgettextpo-dev libicu-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN pecl install redis \
     && docker-php-ext-enable redis
@@ -15,14 +13,17 @@ RUN pecl install xdebug \
 RUN pecl install pcov \
     && docker-php-ext-enable pcov
 
-RUN wget -O /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-12.phar \
-    && chmod +x /usr/local/bin/phpunit
-    
 RUN docker-php-ext-configure intl \
     && docker-php-ext-install mysqli pdo_mysql intl
 
 RUN a2enmod rewrite \
-    && sed -ri -e 's!AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
-    && rm -rf /var/lib/apt/lists/*
+    && sed -ri -e 's!AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-interaction --optimize-autoloader
 
 COPY ./php/php.ini /usr/local/etc/php/

@@ -8,7 +8,6 @@ use App\service\request\handler\AbstractHandler;
 use App\service\translation\LangEnum;
 use App\service\translation\Translator;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class TranslationHandler extends AbstractHandler {
 

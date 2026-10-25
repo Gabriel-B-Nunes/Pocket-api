@@ -9,7 +9,6 @@ use App\service\pdo\PDOService;
 use PDO;
 use PDOException;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 class UserDAO
 {

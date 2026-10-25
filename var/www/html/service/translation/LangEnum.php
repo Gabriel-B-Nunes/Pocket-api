@@ -2,7 +2,6 @@
 
 namespace App\service\translation;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 enum LangEnum {
     case PT_BR;

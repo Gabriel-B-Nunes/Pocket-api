@@ -15,7 +15,6 @@ use App\service\data\InputHandler;
 use DateTimeImmutable;
 use Override;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class CreateMovementItemController implements ControllerInterface {
     public function __construct(

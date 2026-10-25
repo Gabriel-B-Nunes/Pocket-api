@@ -18,9 +18,6 @@ use App\service\request\handler\ResponseHandler;
 use App\service\request\handler\DispatchingHandler;
 use App\service\translation\Translator;
 use DateTimeImmutable;
-use Exception;
-
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class FrontController
 {

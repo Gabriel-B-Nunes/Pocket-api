@@ -5,7 +5,6 @@ namespace App\model;
 use App\dto\group\GroupCreateDTO;
 use App\service\security\UUIDService;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class Group {
     private function __construct(

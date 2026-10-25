@@ -6,7 +6,6 @@ use App\service\cache\Container;
 use DateTime;
 use Attribute;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/autoload.php';
 
 #[Attribute(Attribute::TARGET_PARAMETER)]
 class StringValidator implements ValidatorInterface {

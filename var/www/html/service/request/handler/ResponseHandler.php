@@ -6,7 +6,6 @@ use App\model\Cache;
 use App\model\Request;
 use App\service\request\handler\AbstractHandler;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 class ResponseHandler extends AbstractHandler {
     public function __construct(

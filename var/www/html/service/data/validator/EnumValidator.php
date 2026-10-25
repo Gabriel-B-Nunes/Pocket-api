@@ -8,7 +8,6 @@ use Attribute;
 use ReflectionEnum;
 use ReflectionException;
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/autoload.php";
 
 #[Attribute(Attribute::TARGET_PARAMETER)]
 class EnumValidator implements ValidatorInterface
