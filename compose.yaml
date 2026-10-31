@@ -26,6 +26,16 @@ services:
       - REDIS_HOST=redis
       - HASH_PEPPER=${HASH_PEPPER}
       - JWT_SECRET=${JWT_SECRET}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_APP_PASSWORD=${MAIL_APP_PASSWORD}
+      - MAIL_ENCRYPTION=${MAIL_ENCRYPTION}
+      - MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS}
+      - MAIL_FROM_NAME=${MAIL_FROM_NAME}
+      - MAIL_CHARSET=${MAIL_CHARSET}
+      - MAIL_DEBUG=${MAIL_DEBUG}
     volumes:
       - ./var/www/:/var/www
       - ./tests:/var/www/tests
