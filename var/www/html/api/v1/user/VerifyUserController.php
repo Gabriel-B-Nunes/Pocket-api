@@ -20,8 +20,7 @@ use JsonException;
 class VerifyUserController implements ControllerInterface
 {
     public function __construct(
-        private UserDAO $dao = new UserDAO(),
-        private InputHandler $inputHandler = new InputHandler()
+        private UserDAO $dao = new UserDAO()
     ) {}
 
     public function handleRequest(Request $request): Response
