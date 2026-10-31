@@ -15,10 +15,12 @@ class AuthenticationHandler extends AbstractHandler
 
     public function handle(Request $request)
     {
-        $userRoute = match ($request->getUrl()) {
-            "/api/v1/users", "/api/v1/users/login", "/api/v1/users/refresh" => true,
-            default => false
-        };
+        $url = $request->getUrl();
+
+        $userRoute = $url === "/api/v1/users"
+            || $url === "/api/v1/users/login"
+            || $url === "/api/v1/users/refresh"
+            || str_starts_with($url, "/api/v1/users/verify/");
 
         $authorizationHeader = $request->getHeader("Authorization");
         preg_match("/Bearer\s?(.+)/i", $authorizationHeader, $matches);

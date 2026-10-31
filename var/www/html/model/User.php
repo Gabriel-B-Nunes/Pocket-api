@@ -56,6 +56,19 @@ class User {
         );
     }
 
+    public static function cacheConstructor(array $data): self
+    {
+        return new self(
+            null,
+            $data['uuid'] ?? null,
+            $data['name'] ?? null,
+            $data['email'] ?? null,
+            $data['cellphoneNumber'] ?? null,
+            $data['password'] ?? null,
+            $data['status'] ?? null
+        );
+    }
+
     public function getId(): int
     {
         return $this->id;

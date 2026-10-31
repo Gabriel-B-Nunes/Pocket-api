@@ -18,6 +18,7 @@ use App\api\v1\movementItem\ReadMovementItemCotroller;
 use App\api\v1\movementItem\ReadUuidMovementItemController;
 use App\api\v1\movementItem\UpdateMovementItemController;
 use App\api\v1\user\CreateUserController;
+use App\api\v1\user\VerifyUserController;
 use App\api\v1\user\LoginUserController;
 use App\api\v1\user\RefreshUserController;
 use App\exception\MethodNotAllowedException;
@@ -42,6 +43,8 @@ class Dispatcher
             "/^\/api\/v1\/movementItems$/" => CreateMovementItemController::class
         ],
         "GET" => [
+            //users
+            "/^\\/api\\/v1\\/users\\/verify\\/[\\d\\w]{8}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{12}$/" => VerifyUserController::class,
             //groups
             "/^\/api\/v1\/groups\/uuid\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => ReadUuidGroupController::class,
             "/^\/api\/v1\/groups(?:(?:\?|\&)[\w\d\-]+\=[\w\d\-]+)*$/" => ReadGroupController::class,

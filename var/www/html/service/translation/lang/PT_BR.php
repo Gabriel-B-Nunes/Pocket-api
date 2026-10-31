@@ -30,5 +30,8 @@ return [
     "Refresh successful." => "Atualização concluída com sucesso.",
     "Record found." => "Registro encontrado.",
     "group" => "grupo",
-    "The request could not be completed due to a conflict with the current state of the resource." => "A solicitação não pôde ser concluída devido a um conflito com o estado atual do recurso."
+    "The request could not be completed due to a conflict with the current state of the resource." => "A solicitação não pôde ser concluída devido a um conflito com o estado atual do recurso.",
+    "Verify your email" => "Verifique seu e-mail",
+    "Click the link below to verify your email: %s" => "Clique no link abaixo para verificar seu e-mail: %s",
+    "Verification URL: %s" => "URL de verificação: %s"
 ];

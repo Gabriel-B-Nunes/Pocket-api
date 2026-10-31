@@ -26,6 +26,7 @@ services:
       - REDIS_HOST=redis
       - HASH_PEPPER=${HASH_PEPPER}
       - JWT_SECRET=${JWT_SECRET}
+      - APP_URL=${APP_URL}
       - MAIL_HOST=${MAIL_HOST}
       - MAIL_PORT=${MAIL_PORT}
       - MAIL_USERNAME=${MAIL_USERNAME}
