@@ -40,7 +40,7 @@ class MovementItemDAO {
     }
 
     public function create(MovementItem $movementItem): mixed {
-        $sql = "INSERT INTO movementItem (uuid, userUuid, itemUuid, unitValue, quantity, unity, currency) VALUES (UUID_TO_BIN(:uuid), UUID_TO_BIN(:userUuid), UUID_TO_BIN(:itemUuid), :unitValue, :quantity, :unity, :currency)";
+        $sql = "INSERT INTO movementItem (uuid, userUuid, movementUuid, itemUuid, unitValue, quantity, unity, currency) VALUES (UUID_TO_BIN(:uuid), UUID_TO_BIN(:userUuid), UUID_TO_BIN(:movementUuid), UUID_TO_BIN(:itemUuid), :unitValue, :quantity, :unity, :currency)";
 
         try {
             $stmt = $this->pdo->prepare($sql);
@@ -50,6 +50,7 @@ class MovementItemDAO {
 
         $stmt->bindValue("uuid", $movementItem->getUuid());
         $stmt->bindValue("userUuid", $movementItem->getUserUuid());
+        $stmt->bindValue("movementUuid", $movementItem->getMovementUuid());
         $stmt->bindValue("itemUuid", $movementItem->getItemUuid());
         $stmt->bindValue("unitValue", $movementItem->getUnitValue());
         $stmt->bindValue("quantity", $movementItem->getQuantity());
@@ -71,7 +72,7 @@ class MovementItemDAO {
     }
 
     public function readByUuid(MovementItemUuidDTO $movementItemUuidDTO): mixed {
-        $sql = "SELECT id, BIN_TO_UUID(uuid) as uuid, BIN_TO_UUID(userUuid) as userUuid, BIN_TO_UUID(itemUuid) as itemUuid, unitValue, quantity, unity, currency, DATE_FORMAT(createdAt, '%Y-%m-%dT%H:%i:%sZ') as createAt, DATE_FORMAT(updatedAt, '%Y-%m-%dT%H:%i:%sZ') as updatedAt FROM movementItem WHERE userUuid = UUID_TO_BIN(:userUuid) AND uuid = UUID_TO_BIN(:uuid)";
+        $sql = "SELECT id, BIN_TO_UUID(uuid) as uuid, BIN_TO_UUID(userUuid) as userUuid, BIN_TO_UUID(movementUuid) as movementUuid, BIN_TO_UUID(itemUuid) as itemUuid, unitValue, quantity, unity, currency, DATE_FORMAT(createdAt, '%Y-%m-%dT%H:%i:%sZ') as createAt, DATE_FORMAT(updatedAt, '%Y-%m-%dT%H:%i:%sZ') as updatedAt FROM movementItem WHERE userUuid = UUID_TO_BIN(:userUuid) AND uuid = UUID_TO_BIN(:uuid)";
 
         try {
             $stmt = $this->pdo->prepare($sql);

@@ -12,7 +12,7 @@ final class TransactionTest extends TestCase
 {
     public function testConstructorAndGetters(): void
     {
-        $t = new Transaction(1, 'uuid-1', 'user-1', '2024-01-01', 100);
+        $t = new Transaction(1, 'uuid-1', 'user-1', null, '2024-01-01', 100);
         $this->assertSame(1, $t->getId());
         $this->assertSame('uuid-1', $t->getUuid());
         $this->assertSame('user-1', $t->getUserUuid());
@@ -23,7 +23,7 @@ final class TransactionTest extends TestCase
 
     public function testPendingWhenZero(): void
     {
-        $t = new Transaction(null, null, null, null, 0);
+        $t = new Transaction(null, null, null, null, null, 0);
         $this->assertInstanceOf(Pending::class, $t->getState());
     }
 
@@ -44,14 +44,14 @@ final class TransactionTest extends TestCase
 
     public function testPartiallyPaidThrows(): void
     {
-        $t = new Transaction(null, null, null, null, 100);
+        $t = new Transaction(null, null, null, null, null, 100);
         $this->expectException(ValidationException::class);
         $t->payPartially();
     }
 
     public function testRemovePaymentWhenZeroAllowed(): void
     {
-        $t = new Transaction(null, null, null, null, 0);
+        $t = new Transaction(null, null, null, null, null, 0);
         $t->removePayment();
         $this->assertInstanceOf(Pending::class, $t->getState());
     }

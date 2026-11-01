@@ -11,6 +11,7 @@ class MovementItem {
         private ?int $id,
         private ?string $uuid,
         private ?string $userUuid,
+        private ?string $movementUuid,
         private ?string $itemUuid,
         private ?int $unitValue,
         private ?int $quantity,
@@ -24,6 +25,7 @@ class MovementItem {
             null,
             UUIDService::generate(),
             $movementItemCreateDTO->userUuid,
+            $movementItemCreateDTO->movementUuid,
             $movementItemCreateDTO->itemUuid,
             $movementItemCreateDTO->unitValue,
             $movementItemCreateDTO->quantity,
@@ -42,6 +44,14 @@ class MovementItem {
 
     public function getUserUuid(): string {
         return $this->userUuid;
+    }
+
+    public function getMovementUuid(): string {
+        return $this->movementUuid;
+    }
+
+    public function setMovementUuid(?string $movementUuid): void {
+        $this->movementUuid = $movementUuid;
     }
 
     public function getItemUuid(): string {

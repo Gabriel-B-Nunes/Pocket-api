@@ -14,7 +14,7 @@ final class InstallmentTest extends TestCase
 {
     public function testPendingWhenNoTransactions(): void
     {
-        $i = new Installment(null, null, null, null, 100, []);
+        $i = new Installment(null, null, null, null, null, 100, []);
         $this->assertSame(0, $i->getPaymentValue());
         $this->assertSame(100, $i->getTotalValue());
         $this->assertInstanceOf(Pending::class, $i->getState());
@@ -22,23 +22,23 @@ final class InstallmentTest extends TestCase
 
     public function testPartiallyPaid(): void
     {
-        $t = new Transaction(null, null, null, null, 40);
-        $i = new Installment(null, null, null, null, 100, [$t]);
+        $t = new Transaction(null, null, null, null, null, 40);
+        $i = new Installment(null, null, null, null, null, 100, [$t]);
         $this->assertSame(40, $i->getPaymentValue());
         $this->assertInstanceOf(PartiallyPaid::class, $i->getState());
     }
 
     public function testPaidInFull(): void
     {
-        $t = new Transaction(null, null, null, null, 100);
-        $i = new Installment(null, null, null, null, 100, [$t]);
+        $t = new Transaction(null, null, null, null, null, 100);
+        $i = new Installment(null, null, null, null, null, 100, [$t]);
         $this->assertInstanceOf(PaidInFull::class, $i->getState());
     }
 
     public function testPaidInFullThrowsWhenNotFull(): void
     {
-        $t = new Transaction(null, null, null, null, 40);
-        $i = new Installment(null, null, null, null, 100, [$t]);
+        $t = new Transaction(null, null, null, null, null, 40);
+        $i = new Installment(null, null, null, null, null, 100, [$t]);
         $this->expectException(ValidationException::class);
         $i->payInFull();
     }

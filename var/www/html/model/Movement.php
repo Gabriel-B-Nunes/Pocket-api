@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\model;
 
+use App\dto\movement\MovementCreateDTO;
+use App\dto\movementItem\MovementItemCreateDTO;
+use App\dto\installment\InstallmentCreateDTO;
 use App\exception\ValidationException;
+use App\service\security\UUIDService;
 
 class Movement implements Payable, Payment
 {
@@ -42,6 +46,62 @@ class Movement implements Payable, Payment
             $this->state = $state;
             $this->changeState($state);
         }
+    }
+
+    public static function createConstructor(MovementCreateDTO $movementCreateDTO): self
+    {
+        $uuid = UUIDService::generate();
+
+        $items = [];
+        foreach ($movementCreateDTO->movementItemList ?? [] as $item) {
+            if ($item instanceof MovementItemCreateDTO) {
+                $itemCreateDTO = $item;
+            } elseif (is_array($item)) {
+                $itemCreateDTO = new MovementItemCreateDTO(
+                    $movementCreateDTO->userUuid,
+                    $uuid,
+                    $item['itemUuid'] ?? '',
+                    (int) ($item['unitValue'] ?? 0),
+                    (int) ($item['quantity'] ?? 0),
+                    $item['unity'] ?? '',
+                    $item['currency'] ?? ''
+                );
+            } else {
+                continue;
+            }
+            $items[] = MovementItem::createConstructor($itemCreateDTO);
+        }
+
+        $installments = [];
+        foreach ($movementCreateDTO->installmentList ?? [] as $inst) {
+            if ($inst instanceof InstallmentCreateDTO) {
+                $installmentCreateDTO = $inst;
+            } elseif (is_array($inst)) {
+                $installmentCreateDTO = new InstallmentCreateDTO(
+                    $movementCreateDTO->userUuid,
+                    $uuid,
+                    $inst['dueDate'] ?? '',
+                    (int) ($inst['dueValue'] ?? 0),
+                    $inst['transactionList'] ?? null
+                );
+            } else {
+                continue;
+            }
+            $installments[] = Installment::createConstructor($installmentCreateDTO);
+        }
+
+        return new self(
+            null,
+            $uuid,
+            $movementCreateDTO->userUuid,
+            $movementCreateDTO->description,
+            $movementCreateDTO->transactionDate,
+            $items,
+            $installments,
+            null,
+            $movementCreateDTO->financialType,
+            $movementCreateDTO->recurrence
+        );
     }
 
     public function getId(): ?int { return $this->id; }

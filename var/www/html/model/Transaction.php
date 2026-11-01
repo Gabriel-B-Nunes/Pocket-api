@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\model;
 
+use App\dto\transaction\TransactionCreateDTO;
 use App\exception\ValidationException;
+use App\service\security\UUIDService;
 
 class Transaction implements Payable, Payment
 {
@@ -14,12 +16,25 @@ class Transaction implements Payable, Payment
         private ?int $id = null,
         private ?string $uuid = null,
         private ?string $userUuid = null,
+        private ?string $installmentUuid = null,
         private ?string $paymentDate = null,
         private ?int $paymentValue = null
     ) {
         $this->state = $this->paymentValue > 0
             ? new PaidInFull($this)
             : new Pending($this);
+    }
+
+    public static function createConstructor(TransactionCreateDTO $transactionCreateDTO): self
+    {
+        return new self(
+            null,
+            UUIDService::generate(),
+            $transactionCreateDTO->userUuid,
+            $transactionCreateDTO->installmentUuid,
+            $transactionCreateDTO->paymentDate,
+            $transactionCreateDTO->paymentValue
+        );
     }
 
     public function getId(): ?int { return $this->id; }
@@ -30,6 +45,9 @@ class Transaction implements Payable, Payment
 
     public function getUserUuid(): ?string { return $this->userUuid; }
     public function setUserUuid(?string $userUuid): void { $this->userUuid = $userUuid; }
+
+    public function getInstallmentUuid(): ?string { return $this->installmentUuid; }
+    public function setInstallmentUuid(?string $installmentUuid): void { $this->installmentUuid = $installmentUuid; }
 
     public function getPaymentDate(): ?string { return $this->paymentDate; }
     public function setPaymentDate(?string $paymentDate): void { $this->paymentDate = $paymentDate; }

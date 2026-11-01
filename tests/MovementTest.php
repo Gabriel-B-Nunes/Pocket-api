@@ -17,7 +17,7 @@ final class MovementTest extends TestCase
 {
     public function testMovementWithItemsTotal(): void
     {
-        $dto = new MovementItemCreateDTO('user-1', 'item-1', 10, 2, 'UN', 'BRL');
+        $dto = new MovementItemCreateDTO('user-1', '11111111-2222-3333-4444-555555555555', 'item-1', 10, 2, 'UN', 'BRL');
         $item = MovementItem::createConstructor($dto);
         $m = new Movement(null, null, null, 'desc', null, [$item], []);
         $this->assertSame(20, $m->getTotalValue());
@@ -27,8 +27,8 @@ final class MovementTest extends TestCase
 
     public function testMovementWithInstallmentsPartiallyPaid(): void
     {
-        $t = new Transaction(null, null, null, null, 40);
-        $inst = new Installment(null, null, null, null, 100, [$t]);
+        $t = new Transaction(null, null, null, null, null, 40);
+        $inst = new Installment(null, null, null, null, null, 100, [$t]);
         $m = new Movement(null, null, null, 'desc', null, [], [$inst]);
         $this->assertSame(100, $m->getTotalValue());
         $this->assertSame(40, $m->getPaymentValue());
@@ -37,16 +37,16 @@ final class MovementTest extends TestCase
 
     public function testMovementPaidInFull(): void
     {
-        $t = new Transaction(null, null, null, null, 100);
-        $inst = new Installment(null, null, null, null, 100, [$t]);
+        $t = new Transaction(null, null, null, null, null, 100);
+        $inst = new Installment(null, null, null, null, null, 100, [$t]);
         $m = new Movement(null, null, null, 'desc', null, [], [$inst]);
         $this->assertInstanceOf(PaidInFull::class, $m->getState());
     }
 
     public function testMovementPaidInFullThrows(): void
     {
-        $t = new Transaction(null, null, null, null, 40);
-        $inst = new Installment(null, null, null, null, 100, [$t]);
+        $t = new Transaction(null, null, null, null, null, 40);
+        $inst = new Installment(null, null, null, null, null, 100, [$t]);
         $m = new Movement(null, null, null, 'desc', null, [], [$inst]);
         $this->expectException(ValidationException::class);
         $m->payInFull();

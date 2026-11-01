@@ -11,14 +11,14 @@ final class PaidInFullTest extends TestCase
 {
     public function testGetPayable(): void
     {
-        $t = new Transaction(null, null, null, null, 100);
+        $t = new Transaction(null, null, null, null, null, 100);
         $p = new PaidInFull($t);
         $this->assertSame($t, $p->getPayable());
     }
 
     public function testPayInFullKeepsPaidInFull(): void
     {
-        $t = new Transaction(null, null, null, null, 100);
+        $t = new Transaction(null, null, null, null, null, 100);
         $p = new PaidInFull($t);
         $p->payInFull();
         $this->assertInstanceOf(PaidInFull::class, $t->getState());
@@ -26,7 +26,7 @@ final class PaidInFullTest extends TestCase
 
     public function testRemovePaymentThrowsWhenPaid(): void
     {
-        $t = new Transaction(null, null, null, null, 100);
+        $t = new Transaction(null, null, null, null, null, 100);
         $p = new PaidInFull($t);
         $this->expectException(ValidationException::class);
         $p->removePayment();

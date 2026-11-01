@@ -17,6 +17,12 @@ use App\api\v1\movementItem\DeleteMovementItemController;
 use App\api\v1\movementItem\ReadMovementItemCotroller;
 use App\api\v1\movementItem\ReadUuidMovementItemController;
 use App\api\v1\movementItem\UpdateMovementItemController;
+use App\api\v1\movement\CreateMovementController;
+use App\api\v1\movement\ReadUuidMovementController;
+use App\api\v1\installment\CreateInstallmentController;
+use App\api\v1\installment\ReadUuidInstallmentController;
+use App\api\v1\transaction\CreateTransactionController;
+use App\api\v1\transaction\ReadUuidTransactionController;
 use App\api\v1\user\CreateUserController;
 use App\api\v1\user\VerifyUserController;
 use App\api\v1\user\LoginUserController;
@@ -40,7 +46,13 @@ class Dispatcher
             //items
             "/^\/api\/v1\/items$/" => CreateItemController::class,
             //movementItems
-            "/^\/api\/v1\/movementItems$/" => CreateMovementItemController::class
+            "/^\/api\/v1\/movementItems$/" => CreateMovementItemController::class,
+            //movements
+            "/^\/api\/v1\/movements$/" => CreateMovementController::class,
+            //installments
+            "/^\/api\/v1\/installments$/" => CreateInstallmentController::class,
+            //transactions
+            "/^\/api\/v1\/transactions$/" => CreateTransactionController::class
         ],
         "GET" => [
             //users
@@ -53,7 +65,13 @@ class Dispatcher
             "/^\/api\/v1\/items(?:(?:\?|\&)[\w\d\-]+\=[\w\d\-]+)*$/" => ReadItemController::class,
             //movementItems
             "/^\/api\/v1\/movementItems\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => ReadUuidMovementItemController::class,
-            "/^\/api\/v1\/movementItems(?:(?:\?|\&)[\w\d\-]+\=[\w\d\-]+)*$/" => ReadMovementItemCotroller::class
+            "/^\/api\/v1\/movementItems(?:(?:\?|\&)[\w\d\-]+\=[\w\d\-]+)*$/" => ReadMovementItemCotroller::class,
+            //movements
+            "/^\/api\/v1\/movements\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => ReadUuidMovementController::class,
+            //installments
+            "/^\/api\/v1\/installments\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => ReadUuidInstallmentController::class,
+            //transactions
+            "/^\/api\/v1\/transactions\/[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}$/" => ReadUuidTransactionController::class
         ],
         "PUT" => [
             //groups

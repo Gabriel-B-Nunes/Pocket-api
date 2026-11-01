@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\model;
 
+use App\dto\installment\InstallmentCreateDTO;
+use App\dto\transaction\TransactionCreateDTO;
 use App\exception\ValidationException;
+use App\service\security\UUIDService;
 
 class Installment implements Payable, Payment
 {
@@ -16,6 +19,7 @@ class Installment implements Payable, Payment
         private ?int $id = null,
         private ?string $uuid = null,
         private ?string $userUuid = null,
+        private ?string $movementUuid = null,
         private ?string $dueDate = null,
         private ?int $dueValue = null,
         ?array $transactionList = null,
@@ -38,6 +42,37 @@ class Installment implements Payable, Payment
         }
     }
 
+    public static function createConstructor(InstallmentCreateDTO $installmentCreateDTO): self
+    {
+        $uuid = UUIDService::generate();
+        $transactions = [];
+        foreach ($installmentCreateDTO->transactionList ?? [] as $item) {
+            if ($item instanceof TransactionCreateDTO) {
+                $transactionCreateDTO = $item;
+            } elseif (is_array($item)) {
+                $transactionCreateDTO = new TransactionCreateDTO(
+                    $installmentCreateDTO->userUuid,
+                    $uuid,
+                    $item['paymentDate'] ?? '',
+                    (int) ($item['paymentValue'] ?? 0)
+                );
+            } else {
+                continue;
+            }
+            $transactions[] = Transaction::createConstructor($transactionCreateDTO);
+        }
+
+        return new self(
+            null,
+            $uuid,
+            $installmentCreateDTO->userUuid,
+            $installmentCreateDTO->movementUuid,
+            $installmentCreateDTO->dueDate,
+            $installmentCreateDTO->dueValue,
+            $transactions
+        );
+    }
+
     public function getId(): ?int { return $this->id; }
     public function setId(?int $id): void { $this->id = $id; }
 
@@ -46,6 +81,9 @@ class Installment implements Payable, Payment
 
     public function getUserUuid(): ?string { return $this->userUuid; }
     public function setUserUuid(?string $userUuid): void { $this->userUuid = $userUuid; }
+
+    public function getMovementUuid(): ?string { return $this->movementUuid; }
+    public function setMovementUuid(?string $movementUuid): void { $this->movementUuid = $movementUuid; }
 
     public function getDueDate(): ?string { return $this->dueDate; }
     public function setDueDate(?string $dueDate): void { $this->dueDate = $dueDate; }

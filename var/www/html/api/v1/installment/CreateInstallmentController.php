@@ -1,0 +1,49 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\api\v1\installment;
+
+use App\api\ControllerInterface;
+use App\dao\InstallmentDAO;
+use App\dto\installment\InstallmentCreateDTO;
+use App\exception\ValidationException;
+use App\model\Cache;
+use App\model\Installment;
+use App\model\Request;
+use App\model\Response;
+use App\service\cache\Container;
+use App\service\data\InputHandler;
+use DateTimeImmutable;
+use Override;
+
+
+class CreateInstallmentController implements ControllerInterface {
+    public function __construct(
+        private InputHandler $inputHandler = new InputHandler(),
+        private InstallmentDAO $dao = new InstallmentDAO()
+    )
+    {}
+
+    public function handleRequest(Request $request): Response
+    {
+        $request->setUserUuid();
+
+        $installmentCreateDTO = $this->inputHandler->handle(InstallmentCreateDTO::class, $request->getBody());
+
+        if ($installmentCreateDTO) {
+            $installment = Installment::createConstructor($installmentCreateDTO);
+            $installmentOptional = $this->dao->create($installment);
+            $translator = Container::get("translator");
+
+            $response = [
+                $translator->translate("timestamp") => new DateTimeImmutable()->format("Y-m-d\TH:i:sp"),
+                $translator->translate("installment") => $installmentOptional
+            ];
+
+            return new Response($response, Cache::PRIVATE_NO_CACHE);
+        } else {
+            throw new ValidationException(errors: $this->inputHandler->getErrorMessages());
+        }
+    }
+}

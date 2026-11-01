@@ -12,8 +12,8 @@ final class PartiallyPaidTest extends TestCase
 {
     private function installment(): Installment
     {
-        $t = new Transaction(null, null, null, null, 40);
-        return new Installment(null, null, null, null, 100, [$t]);
+        $t = new Transaction(null, null, null, null, null, 40);
+        return new Installment(null, null, null, null, null, 100, [$t]);
     }
 
     public function testGetPayable(): void

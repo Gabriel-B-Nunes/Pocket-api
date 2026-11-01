@@ -11,14 +11,14 @@ final class PendingTest extends TestCase
 {
     public function testGetPayable(): void
     {
-        $t = new Transaction(null, null, null, null, 0);
+        $t = new Transaction(null, null, null, null, null, 0);
         $p = new Pending($t);
         $this->assertSame($t, $p->getPayable());
     }
 
     public function testRemovePaymentKeepsPending(): void
     {
-        $t = new Transaction(null, null, null, null, 0);
+        $t = new Transaction(null, null, null, null, null, 0);
         $p = new Pending($t);
         $p->removePayment();
         $this->assertInstanceOf(Pending::class, $t->getState());
@@ -26,7 +26,7 @@ final class PendingTest extends TestCase
 
     public function testPayInFullThrowsWhenZero(): void
     {
-        $t = new Transaction(null, null, null, null, 0);
+        $t = new Transaction(null, null, null, null, null, 0);
         $p = new Pending($t);
         $this->expectException(ValidationException::class);
         $p->payInFull();

@@ -27,6 +27,13 @@ class MovementItemCreateDTO {
             minLength: 36,
             maxLength: 36
         )]
+        public readonly string $movementUuid,
+
+        #[StringSanitizer()]
+        #[StringValidator(
+            minLength: 36,
+            maxLength: 36
+        )]
         public readonly string $itemUuid,
 
         #[IntegerSanitizer()]
