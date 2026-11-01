@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\dao;
 
 use App\dto\movement\MovementUuidDTO;
+use App\exception\ForeignKeyConstraintViolationException;
 use App\exception\InternalServerErrorException;
 use App\exception\UniqueConstraintViolationException;
 use App\model\Movement;
@@ -24,14 +25,16 @@ class MovementDAO
 
     public function create(Movement $movement): mixed
     {
-        $sql = "INSERT INTO movement (uuid, userUuid, description, transactionDate, financialType, recurrence) VALUES (UUID_TO_BIN(:uuid), UUID_TO_BIN(:userUuid), :description, :transactionDate, :financialType, :recurrence)";
+        $this->pdo->beginTransaction();
+
+        try {
+            $sql = "INSERT INTO movement (uuid, userUuid, description, transactionDate, financialType, recurrence) VALUES (UUID_TO_BIN(:uuid), UUID_TO_BIN(:userUuid), :description, :transactionDate, :financialType, :recurrence)";
 
         try {
             $stmt = $this->pdo->prepare($sql);
         } catch (PDOException $e) {
             throw new InternalServerErrorException();
         }
-
         $stmt->bindValue("uuid", $movement->getUuid());
         $stmt->bindValue("userUuid", $movement->getUserUuid());
         $stmt->bindValue("description", $movement->getDescription());
@@ -43,6 +46,12 @@ class MovementDAO
             $stmt->execute();
         } catch (PDOException $e) {
             if ($e->getCode() === "23000") {
+                if (isset($e->errorInfo[1]) && $e->errorInfo[1] === 1452) {
+                    throw new ForeignKeyConstraintViolationException(
+                        message: "The referenced resource does not exist.",
+                        error: "foreign_key_constraint"
+                    );
+                }
                 throw new UniqueConstraintViolationException();
             }
             throw new InternalServerErrorException();
@@ -62,7 +71,14 @@ class MovementDAO
             }
         }
 
-        return self::readByUuid(new MovementUuidDTO($movement->getUuid(), $movement->getUserUuid()));
+        $result = self::readByUuid(new MovementUuidDTO($movement->getUuid(), $movement->getUserUuid()));
+        $this->pdo->commit();
+
+        return $result;
+    } catch (\Throwable $e) {
+        $this->pdo->rollBack();
+        throw $e;
+    }
     }
 
     public function readByUuid(MovementUuidDTO $movementUuidDTO): mixed

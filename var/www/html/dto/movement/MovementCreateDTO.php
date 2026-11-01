@@ -4,12 +4,15 @@ declare(strict_types = 1);
 
 namespace App\dto\movement;
 
+use App\dto\installment\InstallmentCreateDTO;
+use App\dto\movementItem\MovementItemCreateDTO;
+use App\model\FinancialType;
+use App\model\Recurrence;
 use App\service\data\sanitizer\ArraySanitizer;
 use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\EnumValidator;
+use App\service\data\validator\NestedDTOValidator;
 use App\service\data\validator\StringValidator;
-use App\model\FinancialType;
-use App\model\Recurrence;
 
 
 class MovementCreateDTO {
@@ -40,9 +43,23 @@ class MovementCreateDTO {
         public readonly ?string $recurrence = null,
 
         #[ArraySanitizer()]
+        #[NestedDTOValidator(
+            MovementItemCreateDTO::class,
+            injected: [
+                'userUuid' => '00000000-0000-0000-0000-000000000000',
+                'movementUuid' => '00000000-0000-0000-0000-000000000000'
+            ]
+        )]
         public readonly ?array $movementItemList = null,
 
         #[ArraySanitizer()]
+        #[NestedDTOValidator(
+            InstallmentCreateDTO::class,
+            injected: [
+                'userUuid' => '00000000-0000-0000-0000-000000000000',
+                'movementUuid' => '00000000-0000-0000-0000-000000000000'
+            ]
+        )]
         public readonly ?array $installmentList = null
     )
     {}

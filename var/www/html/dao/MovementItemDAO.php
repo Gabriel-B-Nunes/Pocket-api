@@ -61,6 +61,12 @@ class MovementItemDAO {
             $stmt->execute();
         } catch (PDOException $e) {
             if ($e->getCode() === "23000") {
+                if (isset($e->errorInfo[1]) && $e->errorInfo[1] === 1452) {
+                    throw new ForeignKeyConstraintViolationException(
+                        message: "The referenced resource does not exist.",
+                        error: "foreign_key_constraint"
+                    );
+                }
                 throw new UniqueConstraintViolationException();
             }
 
