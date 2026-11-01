@@ -31,6 +31,9 @@ class StringValidator implements ValidatorInterface {
     {
         $validString = true;
         $translator = Container::get("translator");
+        if (!$translator) {
+            $translator = new \App\service\translation\Translator();
+        }
 
         if ($this->minLength && mb_strlen($value) < $this->minLength) {
             $this->errorMessages[] = sprintf($translator->translate("Field %s cannot be shorter than %d."), $name, $this->minLength);

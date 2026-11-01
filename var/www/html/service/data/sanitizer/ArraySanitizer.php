@@ -19,17 +19,23 @@ class ArraySanitizer implements SanitizerInterface {
             return [];
         }
 
-        $tmpArray = (array) $array;
+        $tmpArray = [];
 
-        foreach ($tmpArray as $key => $value) {
-            if ($value === null && $this->removeNull) {
-                unset($tmpArray[$key]);
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $tmpArray[$key] = $this->sanitize($value);
                 continue;
             }
 
-            if ($value !== null && mb_trim($value) === "" && $this->removeEmptyString) {
-                unset($tmpArray[$key]);
-            } 
+            if ($value === null && $this->removeNull) {
+                continue;
+            }
+
+            if ($value !== null && mb_trim((string) $value) === "" && $this->removeEmptyString) {
+                continue;
+            }
+
+            $tmpArray[$key] = $value;
         }
 
         return $tmpArray;

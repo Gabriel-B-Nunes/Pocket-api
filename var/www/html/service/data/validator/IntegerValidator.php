@@ -24,6 +24,9 @@ class IntegerValidator implements ValidatorInterface
     {
         $validInteger = true;
         $translator = Container::get("translator");
+        if (!$translator) {
+            $translator = new \App\service\translation\Translator();
+        }
 
         if ($this->min && $value < $this->min) {
             $this->errorMessages[] = sprintf($translator->translate("Field %s cannot be smaller than %d."), $name, $this->min);

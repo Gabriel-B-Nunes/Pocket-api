@@ -8,6 +8,7 @@ use App\dto\movement\MovementCreateDTO;
 use App\dto\movementItem\MovementItemCreateDTO;
 use App\dto\installment\InstallmentCreateDTO;
 use App\exception\ValidationException;
+use App\service\data\InputHandler;
 use App\service\security\UUIDService;
 
 class Movement implements Payable, Payment
@@ -57,15 +58,19 @@ class Movement implements Payable, Payment
             if ($item instanceof MovementItemCreateDTO) {
                 $itemCreateDTO = $item;
             } elseif (is_array($item)) {
-                $itemCreateDTO = new MovementItemCreateDTO(
-                    $movementCreateDTO->userUuid,
-                    $uuid,
-                    $item['itemUuid'] ?? '',
-                    (int) ($item['unitValue'] ?? 0),
-                    (int) ($item['quantity'] ?? 0),
-                    $item['unity'] ?? '',
-                    $item['currency'] ?? ''
-                );
+                $handler = new InputHandler();
+                $itemCreateDTO = $handler->handle(MovementItemCreateDTO::class, [
+                    'userUuid' => $movementCreateDTO->userUuid,
+                    'movementUuid' => $uuid,
+                    'itemUuid' => $item['itemUuid'] ?? '',
+                    'unitValue' => (int) ($item['unitValue'] ?? 0),
+                    'quantity' => (int) ($item['quantity'] ?? 0),
+                    'unity' => $item['unity'] ?? '',
+                    'currency' => $item['currency'] ?? '',
+                ]);
+                if ($itemCreateDTO === false) {
+                    throw new ValidationException(errors: $handler->getErrorMessages());
+                }
             } else {
                 continue;
             }
@@ -77,13 +82,17 @@ class Movement implements Payable, Payment
             if ($inst instanceof InstallmentCreateDTO) {
                 $installmentCreateDTO = $inst;
             } elseif (is_array($inst)) {
-                $installmentCreateDTO = new InstallmentCreateDTO(
-                    $movementCreateDTO->userUuid,
-                    $uuid,
-                    $inst['dueDate'] ?? '',
-                    (int) ($inst['dueValue'] ?? 0),
-                    $inst['transactionList'] ?? null
-                );
+                $handler = new InputHandler();
+                $installmentCreateDTO = $handler->handle(InstallmentCreateDTO::class, [
+                    'userUuid' => $movementCreateDTO->userUuid,
+                    'movementUuid' => $uuid,
+                    'dueDate' => $inst['dueDate'] ?? '',
+                    'dueValue' => (int) ($inst['dueValue'] ?? 0),
+                    'transactionList' => $inst['transactionList'] ?? null,
+                ]);
+                if ($installmentCreateDTO === false) {
+                    throw new ValidationException(errors: $handler->getErrorMessages());
+                }
             } else {
                 continue;
             }

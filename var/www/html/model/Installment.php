@@ -7,6 +7,7 @@ namespace App\model;
 use App\dto\installment\InstallmentCreateDTO;
 use App\dto\transaction\TransactionCreateDTO;
 use App\exception\ValidationException;
+use App\service\data\InputHandler;
 use App\service\security\UUIDService;
 
 class Installment implements Payable, Payment
@@ -50,12 +51,16 @@ class Installment implements Payable, Payment
             if ($item instanceof TransactionCreateDTO) {
                 $transactionCreateDTO = $item;
             } elseif (is_array($item)) {
-                $transactionCreateDTO = new TransactionCreateDTO(
-                    $installmentCreateDTO->userUuid,
-                    $uuid,
-                    $item['paymentDate'] ?? '',
-                    (int) ($item['paymentValue'] ?? 0)
-                );
+                $handler = new \App\service\data\InputHandler();
+                $transactionCreateDTO = $handler->handle(\App\dto\transaction\TransactionCreateDTO::class, [
+                    'userUuid' => $installmentCreateDTO->userUuid,
+                    'installmentUuid' => $uuid,
+                    'paymentDate' => $item['paymentDate'] ?? '',
+                    'paymentValue' => (int) ($item['paymentValue'] ?? 0),
+                ]);
+                if ($transactionCreateDTO === false) {
+                    throw new ValidationException(errors: $handler->getErrorMessages());
+                }
             } else {
                 continue;
             }
