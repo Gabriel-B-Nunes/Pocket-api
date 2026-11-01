@@ -15,12 +15,17 @@ class EnumValidator implements ValidatorInterface
     private array $errorMessages = [];
 
     public function __construct(
-        private string $enum
+        private string $enum,
+        private bool $nullable = false
     )
     {}
 
     public function validate(mixed $value, string $name): bool
     {
+        if ($this->nullable && ($value === null || $value === '')) {
+            return true;
+        }
+
         if (!enum_exists($this->enum)) {
             throw new InternalServerErrorException();
         }
@@ -28,6 +33,9 @@ class EnumValidator implements ValidatorInterface
         $validEnum = true;
         $enum = new ReflectionEnum($this->enum);
         $translator = Container::get("translator");
+        if (!$translator) {
+            $translator = new \App\service\translation\Translator();
+        }
 
         try {
             $enum->getCase($value ?? "");

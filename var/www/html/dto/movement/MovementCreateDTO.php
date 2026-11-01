@@ -36,8 +36,8 @@ class MovementCreateDTO {
         public readonly string $financialType,
 
         #[StringSanitizer()]
-        #[EnumValidator(Recurrence::class)]
-        public readonly string $recurrence,
+        #[EnumValidator(Recurrence::class, nullable: true)]
+        public readonly ?string $recurrence = null,
 
         #[ArraySanitizer()]
         public readonly ?array $movementItemList = null,
