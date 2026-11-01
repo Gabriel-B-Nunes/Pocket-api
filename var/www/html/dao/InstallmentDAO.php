@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\dao;
 
+use App\dto\installment\InstallmentReadDTO;
 use App\dto\installment\InstallmentUuidDTO;
 use App\exception\InternalServerErrorException;
 use App\exception\UniqueConstraintViolationException;
@@ -16,6 +17,22 @@ use PDOException;
 class InstallmentDAO
 {
     private PDO $pdo;
+    const LIMIT = 50;
+    const ILIKE_COLUMNS = [
+        "dueDate" => ["condition" => " AND dueDate = :dueDate", "paramType" => PDO::PARAM_STR],
+        "dueValue" => ["condition" => " AND dueValue = :dueValue", "paramType" => PDO::PARAM_INT]
+    ];
+    const DATE_COLUMNS = [
+        "dueDate" => ["condition" => " AND dueDate = :dueDate", "paramType" => PDO::PARAM_STR],
+        "dueDate_begin" => ["condition" => " AND dueDate >= :dueDate_begin", "paramType" => PDO::PARAM_STR],
+        "dueDate_end" => ["condition" => " AND dueDate <= :dueDate_end", "paramType" => PDO::PARAM_STR],
+        "createdAt" => ["condition" => " AND DATE(createdAt) = :createdAt", "paramType" => PDO::PARAM_STR],
+        "createdAt_begin" => ["condition" => " AND createdAt <= :createdAt_begin", "paramType" => PDO::PARAM_STR],
+        "createdAt_end" => ["condition" => " AND createdAt >= :createdAt_end", "paramType" => PDO::PARAM_STR],
+        "updatedAt" => ["condition" => " AND DATE(updatedAt) = :updatedAt", "paramType" => PDO::PARAM_STR],
+        "updatedAt_begin" => ["condition" => " AND updatedAt <= :updatedAt_begin", "paramType" => PDO::PARAM_STR],
+        "updatedAt_end" => ["condition" => " AND updatedAt >= :updatedAt_end", "paramType" => PDO::PARAM_STR]
+    ];
 
     public function __construct()
     {
@@ -89,5 +106,108 @@ class InstallmentDAO
         $installment['transactions'] = $txStmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $installment;
+    }
+
+    public function readByQueryString(InstallmentReadDTO $installmentReadDTO): mixed
+    {
+        $select = "SELECT id, BIN_TO_UUID(uuid) as uuid, BIN_TO_UUID(userUuid) as userUuid, BIN_TO_UUID(movementUuid) as movementUuid, dueDate, dueValue, DATE_FORMAT(createdAt, '%Y-%m-%dT%H:%i:%sZ') as createdAt, DATE_FORMAT(updatedAt, '%Y-%m-%dT%H:%i:%sZ') as updatedAt";
+        $from = " FROM installment WHERE userUuid = UUID_TO_BIN(:userUuid)";
+        $conditions = "";
+
+        foreach ($installmentReadDTO->queryString as $name => $value) {
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $conditions .= $column["condition"];
+            }
+        }
+
+        $sql = $select . $from . $conditions;
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $stmt->bindValue("userUuid", $installmentReadDTO->userUuid);
+
+        foreach ($installmentReadDTO->queryString as $name => $value) {
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $stmt->bindValue(":" . $name, $value, $column["paramType"]);
+            }
+        }
+
+        $page = (int) ($installmentReadDTO->queryString["page"] ?? 1);
+        $offset = ($page - 1) * self::LIMIT;
+
+        $countSql = str_replace($select, "SELECT COUNT(*)", $sql);
+        $countSql = rtrim($countSql, ";");
+
+        try {
+            $stmtCount = $this->pdo->prepare($countSql);
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $stmtCount->bindValue("userUuid", $installmentReadDTO->userUuid);
+
+        foreach ($installmentReadDTO->queryString as $name => $value) {
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $stmtCount->bindValue(":" . $name, $value, $column["paramType"]);
+            }
+        }
+
+        try {
+            $stmtCount->execute();
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $totalItems = (int) $stmtCount->fetchColumn();
+
+        $sql .= " LIMIT :limit OFFSET :offset";
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $stmt->bindValue("userUuid", $installmentReadDTO->userUuid);
+
+        foreach ($installmentReadDTO->queryString as $name => $value) {
+            $column = self::ILIKE_COLUMNS[$name] ?? self::DATE_COLUMNS[$name] ?? null;
+            if ($column !== null) {
+                $stmt->bindValue(":" . $name, $value, $column["paramType"]);
+            }
+        }
+
+        $stmt->bindValue("limit", self::LIMIT, PDO::PARAM_INT);
+        $stmt->bindValue("offset", $offset, PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new InternalServerErrorException();
+        }
+
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return [
+            "data" => $data,
+            "meta" => self::meta($page, $totalItems)
+        ];
+    }
+
+    private static function meta(int $page, int $totalItems): array
+    {
+        return [
+            "page" => $page,
+            "limit" => self::LIMIT,
+            "totalItems" => $totalItems,
+            "totalPages" => $totalItems ? ceil($totalItems / self::LIMIT) : 0
+        ];
     }
 }

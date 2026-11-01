@@ -54,6 +54,22 @@ class Dispatcher
             //transactions
             "/^\/api\/v1\/transactions$/" => CreateTransactionController::class
         ],
+        "PUT" => [
+            "/^/api/v1/movements/uuid/[\d\w]{8}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{12}$"=> UpdateMovementController::class,
+            "/^/api/v1/movements(?:(?:\\?|\\&)[\\w\\d\\-]+=[\\w\\d\\-]+)*$/"=> UpdateMovementController::class,
+            "/^/api/v1/installments/uuid/[\d\w]{8}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{12}$"=> UpdateInstallmentController::class,
+            "/^/api/v1/installments(?:(?:\\?|\\&)[\\w\\d\\-]+=[\\w\\d\\-]+)*$/"=> UpdateInstallmentController::class,
+            "/^/api/v1/transactions/uuid/[\d\\w]{8}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{12}$"=> UpdateTransactionController::class,
+            "/^/api/v1/transactions(?:(?:\\?|\\&)[\\w\\d\\-]+=[\\w\\d\\-]+)*$/"=> UpdateTransactionController::class
+        ],
+        "DELETE" => [
+            "/^/api/v1/movements/uuid/[\d\w]{8}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{12}$"=> DeleteMovementController::class,
+            "/^/api/v1/movements(?:(?:\\?|\\&)[\\w\\d\\-]+=[\\w\\d\\-]+)*$/"=> DeleteMovementController::class,
+            "/^/api/v1/installments/uuid/[\d\w]{8}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{12}$"=> DeleteInstallmentController::class,
+            "/^/api/v1/installments(?:(?:\\?|\\&)[\\w\\d\\-]+=[\\w\\d\\-]+)*$/"=> DeleteInstallmentController::class,
+            "/^/api/v1/transactions/uuid/[\d\w]{8}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{12}$"=> DeleteTransactionController::class,
+            "/^/api/v1/transactions(?:(?:\\?|\\&)[\\w\\d\\-]+=[\\w\\d\\-]+)*$/"=> DeleteTransactionController::class
+        ],
         "GET" => [
             //users
             "/^\\/api\\/v1\\/users\\/verify\\/[\\d\\w]{8}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{4}-[\\d\\w]{12}$/" => VerifyUserController::class,
