@@ -144,16 +144,6 @@ class Movement implements Payable, Payment
 
     public function getTotalValue(): int
     {
-        if (!empty($this->installmentList)) {
-            $sum = 0;
-            foreach ($this->installmentList as $installment) {
-                if ($installment instanceof Installment) {
-                    $sum += $installment->getTotalValue();
-                }
-            }
-            return $sum;
-        }
-
         $sum = 0;
         foreach ($this->movementItemList as $item) {
             if ($item instanceof MovementItem) {
