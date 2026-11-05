@@ -6,7 +6,9 @@ namespace App\dto\group;
 
 use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\StringValidator;
+use OpenApi\Attributes as OA;
 
+#[OA\Schema]
 class GroupDeleteDTO {
     public function __construct(
         #[StringSanitizer()]
@@ -14,6 +16,7 @@ class GroupDeleteDTO {
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $uuid,
 
         #[StringSanitizer()]
@@ -21,6 +24,7 @@ class GroupDeleteDTO {
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $userUuid
     )
     {}

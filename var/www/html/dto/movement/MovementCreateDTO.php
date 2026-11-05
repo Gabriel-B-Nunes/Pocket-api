@@ -13,16 +13,20 @@ use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\EnumValidator;
 use App\service\data\validator\NestedDTOValidator;
 use App\service\data\validator\StringValidator;
+use OpenApi\Attributes as OA;
 
 
+#[OA\Schema]
 class MovementCreateDTO {
     public function __construct(
         #[StringSanitizer()]
         #[StringValidator(minLength: 36, maxLength: 36)]
+        #[OA\Property]
         public readonly string $userUuid,
 
         #[StringSanitizer()]
         #[StringValidator(minLength: 1, maxLength: 255)]
+        #[OA\Property]
         public readonly string $description,
 
         #[StringSanitizer()]
@@ -32,14 +36,17 @@ class MovementCreateDTO {
             validDateTime: true,
             dateTimeFormat: "Y-m-d"
         )]
+        #[OA\Property]
         public readonly string $transactionDate,
 
         #[StringSanitizer()]
         #[EnumValidator(FinancialType::class)]
+        #[OA\Property(ref: FinancialType::class)]
         public readonly string $financialType,
 
         #[StringSanitizer()]
         #[EnumValidator(Recurrence::class, nullable: true)]
+        #[OA\Property(ref: Recurrence::class)]
         public readonly ?string $recurrence = null,
 
         #[ArraySanitizer()]
@@ -50,6 +57,7 @@ class MovementCreateDTO {
                 'movementUuid' => '00000000-0000-0000-0000-000000000000'
             ]
         )]
+        #[OA\Property]
         public readonly ?array $movementItemList = null,
 
         #[ArraySanitizer()]
@@ -60,6 +68,7 @@ class MovementCreateDTO {
                 'movementUuid' => '00000000-0000-0000-0000-000000000000'
             ]
         )]
+        #[OA\Property]
         public readonly ?array $installmentList = null
     )
     {}

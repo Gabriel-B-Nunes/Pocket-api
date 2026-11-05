@@ -19,6 +19,7 @@ use App\service\PHPMailer\PHPMailerService;
 use DateTimeImmutable;
 use JsonException;
 use PHPMailer\PHPMailer\Exception as MailerException;
+use OpenApi\Attributes as OA;
 
 class CreateUserController implements ControllerInterface
 {
@@ -27,6 +28,7 @@ class CreateUserController implements ControllerInterface
         private InputHandler $inputHandler = new InputHandler()
     ) {}
 
+#[OA\Post(path: '/api/v1/users', operationId: 'CreateUser', tags: ['Users'], requestBody: new OA\RequestBody(required: true, content: new OA\JsonContent(ref: \App\dto\user\UserCreateDTO::class)), security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK')])]
     public function handleRequest(Request $request): Response
     {
         $data = $request->getBody();

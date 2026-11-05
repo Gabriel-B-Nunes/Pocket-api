@@ -14,6 +14,7 @@ use App\service\cache\Container;
 use App\service\data\InputHandler;
 use DateTimeImmutable;
 use Override;
+use OpenApi\Attributes as OA;
 
 
 class CreateMovementItemController implements ControllerInterface {
@@ -23,6 +24,7 @@ class CreateMovementItemController implements ControllerInterface {
     )
     {}
 
+#[OA\Post(path: '/api/v1/movementItems', operationId: 'CreateMovementItem', tags: ['MovementItems'], requestBody: new OA\RequestBody(required: true, content: new OA\JsonContent(ref: \App\dto\movementItem\MovementItemCreateDTO::class)), security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK')])]
     public function handleRequest(Request $request): Response
     {
         $request->setUserUuid();

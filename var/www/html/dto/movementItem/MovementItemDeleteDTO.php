@@ -6,8 +6,10 @@ namespace App\dto\movementItem;
 
 use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\StringValidator;
+use OpenApi\Attributes as OA;
 
 
+#[OA\Schema]
 class MovementItemDeleteDTO {
     public function __construct(
         #[StringSanitizer()]
@@ -15,6 +17,7 @@ class MovementItemDeleteDTO {
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $uuid,
         
         #[StringSanitizer()]
@@ -22,6 +25,7 @@ class MovementItemDeleteDTO {
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $userUuid
     )
     {}

@@ -8,8 +8,10 @@ use App\service\data\sanitizer\ArraySanitizer;
 use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\ArrayValidator;
 use App\service\data\validator\StringValidator;
+use OpenApi\Attributes as OA;
 
 
+#[OA\Schema]
 class MovementReadDTO
 {
     public function __construct(
@@ -18,6 +20,7 @@ class MovementReadDTO
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $userUuid,
 
         #[ArraySanitizer()]
@@ -38,6 +41,7 @@ class MovementReadDTO
                 "page"
             ]
         )]
+        #[OA\Property]
         public readonly array $queryString
     )
     {

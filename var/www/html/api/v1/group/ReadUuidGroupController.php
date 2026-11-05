@@ -13,6 +13,7 @@ use App\model\Response;
 use App\service\cache\Container;
 use App\service\data\InputHandler;
 use DateTimeImmutable;
+use OpenApi\Attributes as OA;
 
 
 class ReadUuidGroupController implements ControllerInterface
@@ -22,6 +23,7 @@ class ReadUuidGroupController implements ControllerInterface
         private GroupDAO $dao = new GroupDAO()
     ) {}
 
+#[OA\Get(path: '/api/v1/groups/uuid/{uuid}', operationId: 'ReadUuidGroup', tags: ['Groups'], parameters: [new OA\Parameter(name: 'uuid', in: 'path', required: true, schema: new OA\Schema(type: 'string', format: 'uuid'))], security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK')])]
     public function handleRequest(Request $request): Response
     {
         preg_match("/([\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12})/", $request->getUrl(), $matchs);

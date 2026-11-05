@@ -11,8 +11,10 @@ use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\EnumValidator;
 use App\service\data\validator\IntegerValidator;
 use App\service\data\validator\StringValidator;
+use OpenApi\Attributes as OA;
 
 
+#[OA\Schema]
 class MovementItemUpdateDTO {
     public function __construct(
         #[StringSanitizer()]
@@ -20,6 +22,7 @@ class MovementItemUpdateDTO {
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $uuid,
 
         #[StringSanitizer()]
@@ -27,6 +30,7 @@ class MovementItemUpdateDTO {
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $userUuid,
 
         #[StringSanitizer()]
@@ -34,26 +38,31 @@ class MovementItemUpdateDTO {
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $itemUuid,
 
         #[IntegerSanitizer()]
         #[IntegerValidator(
             min: 1
         )]
+        #[OA\Property]
         public readonly int $unitValue,
 
         #[IntegerSanitizer()]
         #[IntegerValidator(
             min: 1
         )]
+        #[OA\Property]
         public readonly int $quantity,
 
         #[StringSanitizer()]
         #[EnumValidator(Unity::class)]
+        #[OA\Property(ref: Unity::class)]
         public readonly string $unity,
 
         #[StringSanitizer()]
         #[EnumValidator(Currency::class)]
+        #[OA\Property(ref: Currency::class)]
         public readonly string $currency
     )
     {}

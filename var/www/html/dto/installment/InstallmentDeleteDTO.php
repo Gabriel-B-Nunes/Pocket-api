@@ -6,8 +6,10 @@ namespace App\dto\installment;
 
 use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\StringValidator;
+use OpenApi\Attributes as OA;
 
 
+#[OA\Schema]
 class InstallmentDeleteDTO
 {
     public function __construct(
@@ -16,6 +18,7 @@ class InstallmentDeleteDTO
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $uuid,
 
         #[StringSanitizer()]
@@ -23,6 +26,7 @@ class InstallmentDeleteDTO
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $userUuid
     )
     {

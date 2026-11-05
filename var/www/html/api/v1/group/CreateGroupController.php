@@ -13,6 +13,7 @@ use App\model\Response;
 use App\service\cache\Container;
 use App\service\data\InputHandler;
 use DateTimeImmutable;
+use OpenApi\Attributes as OA;
 
 
 class CreateGroupController implements ControllerInterface
@@ -22,6 +23,7 @@ class CreateGroupController implements ControllerInterface
         private GroupDAO $dao = new GroupDAO
     ) {}
 
+#[OA\Post(path: '/api/v1/groups', operationId: 'CreateGroup', tags: ['Groups'], requestBody: new OA\RequestBody(required: true, content: new OA\JsonContent(ref: \App\dto\group\GroupCreateDTO::class)), security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK')])]
     public function handleRequest(Request $request): Response
     {
         $request->setUserUuid();

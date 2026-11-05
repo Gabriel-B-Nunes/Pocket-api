@@ -6,8 +6,10 @@ namespace App\dto\item;
 
 use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\StringValidator;
+use OpenApi\Attributes as OA;
 
 
+#[OA\Schema]
 class ItemDeleteDTO {
     public function __construct(
         #[StringSanitizer()]
@@ -15,6 +17,7 @@ class ItemDeleteDTO {
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $uuid,
 
         #[StringSanitizer()]
@@ -22,6 +25,7 @@ class ItemDeleteDTO {
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $userUuid
     )
     {}

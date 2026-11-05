@@ -15,6 +15,7 @@ use App\service\cache\Container;
 use App\service\data\InputHandler;
 use DateTimeImmutable;
 use Override;
+use OpenApi\Attributes as OA;
 
 
 class UpdateTransactionController implements ControllerInterface
@@ -26,6 +27,7 @@ class UpdateTransactionController implements ControllerInterface
     {
     }
 
+#[OA\Put(path: '/api/v1/transactions/uuid/{uuid}', operationId: 'UpdateTransaction', tags: ['Transactions'], parameters: [new OA\Parameter(name: 'uuid', in: 'path', required: true, schema: new OA\Schema(type: 'string', format: 'uuid'))], requestBody: new OA\RequestBody(required: true, content: new OA\JsonContent(ref: \App\dto\transaction\TransactionUpdateDTO::class)), security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK')])]
     public function handleRequest(Request $request): Response
     {
         $uuid = preg_match("/([\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12})/", $request->getUrl(), $matchs) ? $matchs[1] : null;

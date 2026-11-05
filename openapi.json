@@ -1,0 +1,1264 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Pocket API",
+        "description": "Backend REST API for the Pocket application. Authenticated CRUD for users, groups, items, movements, movement items, installments and transactions.",
+        "contact": {
+            "name": "Pocket API"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Local development"
+        }
+    ],
+    "paths": {
+        "/api/v1/groups": {
+            "post": {
+                "tags": [
+                    "Groups"
+                ],
+                "operationId": "CreateGroup",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GroupCreateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Groups"
+                ],
+                "operationId": "ReadGroup",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/groups/uuid/{uuid}": {
+            "delete": {
+                "tags": [
+                    "Groups"
+                ],
+                "operationId": "DeleteGroup",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Groups"
+                ],
+                "operationId": "ReadUuidGroup",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "//api/v1/groups/uuid/{uuid}/": {
+            "put": {
+                "tags": [
+                    "Groups"
+                ],
+                "operationId": "UpdateGroupCotroller",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/installments": {
+            "post": {
+                "tags": [
+                    "Installments"
+                ],
+                "operationId": "CreateInstallment",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/InstallmentCreateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Installments"
+                ],
+                "operationId": "ReadInstallment",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/installments/uuid/{uuid}": {
+            "delete": {
+                "tags": [
+                    "Installments"
+                ],
+                "operationId": "DeleteInstallment",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Installments"
+                ],
+                "operationId": "UpdateInstallment",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/InstallmentUpdateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/installments/{uuid}": {
+            "get": {
+                "tags": [
+                    "Installments"
+                ],
+                "operationId": "ReadUuidInstallment",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/items": {
+            "post": {
+                "tags": [
+                    "Items"
+                ],
+                "operationId": "CreateItem",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ItemCreateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Items"
+                ],
+                "operationId": "ReadItem",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/items/uuid/{uuid}": {
+            "delete": {
+                "tags": [
+                    "Items"
+                ],
+                "operationId": "DeleteItem",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Items"
+                ],
+                "operationId": "ReadUuidItem",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Items"
+                ],
+                "operationId": "UpdateItem",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ItemUpdateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/movements": {
+            "post": {
+                "tags": [
+                    "Movements"
+                ],
+                "operationId": "CreateMovement",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MovementCreateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Movements"
+                ],
+                "operationId": "ReadMovement",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/movements/uuid/{uuid}": {
+            "delete": {
+                "tags": [
+                    "Movements"
+                ],
+                "operationId": "DeleteMovement",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Movements"
+                ],
+                "operationId": "UpdateMovement",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MovementUpdateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/movements/{uuid}": {
+            "get": {
+                "tags": [
+                    "Movements"
+                ],
+                "operationId": "ReadUuidMovement",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/movementItems": {
+            "post": {
+                "tags": [
+                    "MovementItems"
+                ],
+                "operationId": "CreateMovementItem",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MovementItemCreateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/movementItems/uuid/{uuid}": {
+            "delete": {
+                "tags": [
+                    "MovementItems"
+                ],
+                "operationId": "DeleteMovementItem",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "MovementItems"
+                ],
+                "operationId": "UpdateMovementItem",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MovementItemUpdateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "//api/v1/movementItems?|&[wd-]+=[wd-]+*/": {
+            "get": {
+                "tags": [
+                    "MovementItems"
+                ],
+                "operationId": "ReadMovementItemCotroller",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/movementItems/{uuid}": {
+            "get": {
+                "tags": [
+                    "MovementItems"
+                ],
+                "operationId": "ReadUuidMovementItem",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/transactions": {
+            "post": {
+                "tags": [
+                    "Transactions"
+                ],
+                "operationId": "CreateTransaction",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TransactionCreateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/transactions/uuid/{uuid}": {
+            "delete": {
+                "tags": [
+                    "Transactions"
+                ],
+                "operationId": "DeleteTransaction",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Transactions"
+                ],
+                "operationId": "UpdateTransaction",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TransactionUpdateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/transactions/{uuid}": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "operationId": "ReadUuidTransaction",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "operationId": "CreateUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserCreateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/users/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "operationId": "LoginUser",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/users/refresh": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "operationId": "RefreshUser",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/users/verify/{uuid}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "operationId": "VerifyUser",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GroupCreateDTO": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Group name"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Status",
+                        "description": "Status"
+                    },
+                    "userUuid": {
+                        "type": "string",
+                        "description": "Owner user UUID"
+                    }
+                }
+            },
+            "InstallmentCreateDTO": {
+                "type": "object",
+                "properties": {
+                    "userUuid": {
+                        "type": "string"
+                    },
+                    "movementUuid": {
+                        "type": "string"
+                    },
+                    "dueDate": {
+                        "type": "string"
+                    },
+                    "dueValue": {
+                        "type": "integer"
+                    },
+                    "transactionList": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {}
+                    }
+                }
+            },
+            "InstallmentUpdateDTO": {
+                "type": "object",
+                "properties": {
+                    "dueDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "dueValue": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ]
+                    }
+                }
+            },
+            "ItemCreateDTO": {
+                "type": "object",
+                "properties": {
+                    "userUuid": {
+                        "type": "string"
+                    },
+                    "groupUuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Status"
+                    }
+                }
+            },
+            "ItemUpdateDTO": {
+                "type": "object",
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "groupUuid": {
+                        "type": "string"
+                    },
+                    "userUuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Status"
+                    }
+                }
+            },
+            "MovementCreateDTO": {
+                "type": "object",
+                "properties": {
+                    "userUuid": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "transactionDate": {
+                        "type": "string"
+                    },
+                    "financialType": {
+                        "$ref": "#/components/schemas/FinancialType"
+                    },
+                    "recurrence": {
+                        "$ref": "#/components/schemas/Recurrence"
+                    },
+                    "movementItemList": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {}
+                    },
+                    "installmentList": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {}
+                    }
+                }
+            },
+            "MovementUpdateDTO": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "transactionDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "financialType": {
+                        "$ref": "#/components/schemas/FinancialType",
+                        "description": "Financial type"
+                    },
+                    "recurrence": {
+                        "$ref": "#/components/schemas/Recurrence",
+                        "description": "Recurrence"
+                    }
+                }
+            },
+            "MovementItemCreateDTO": {
+                "type": "object",
+                "properties": {
+                    "userUuid": {
+                        "type": "string"
+                    },
+                    "movementUuid": {
+                        "type": "string"
+                    },
+                    "itemUuid": {
+                        "type": "string"
+                    },
+                    "unitValue": {
+                        "type": "integer"
+                    },
+                    "quantity": {
+                        "type": "integer"
+                    },
+                    "unity": {
+                        "$ref": "#/components/schemas/Unity"
+                    },
+                    "currency": {
+                        "$ref": "#/components/schemas/Currency"
+                    }
+                }
+            },
+            "MovementItemUpdateDTO": {
+                "type": "object",
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "userUuid": {
+                        "type": "string"
+                    },
+                    "itemUuid": {
+                        "type": "string"
+                    },
+                    "unitValue": {
+                        "type": "integer"
+                    },
+                    "quantity": {
+                        "type": "integer"
+                    },
+                    "unity": {
+                        "$ref": "#/components/schemas/Unity"
+                    },
+                    "currency": {
+                        "$ref": "#/components/schemas/Currency"
+                    }
+                }
+            },
+            "TransactionCreateDTO": {
+                "type": "object",
+                "properties": {
+                    "userUuid": {
+                        "type": "string"
+                    },
+                    "installmentUuid": {
+                        "type": "string"
+                    },
+                    "paymentDate": {
+                        "type": "string"
+                    },
+                    "paymentValue": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "TransactionUpdateDTO": {
+                "type": "object",
+                "properties": {
+                    "paymentDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "paymentValue": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ]
+                    }
+                }
+            },
+            "UserCreateDTO": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "cellphoneNumber": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Status"
+                    }
+                }
+            },
+            "Currency": {
+                "type": "string",
+                "enum": [
+                    "USD",
+                    "BRL"
+                ]
+            },
+            "FinancialType": {
+                "type": "string",
+                "enum": [
+                    "CREDIT",
+                    "DEBIT"
+                ]
+            },
+            "Recurrence": {
+                "type": "string",
+                "enum": [
+                    "DAILY",
+                    "WEEKLY",
+                    "MONTHLY",
+                    "ANNUALLY"
+                ]
+            },
+            "Status": {
+                "type": "string",
+                "enum": [
+                    "ACTIVE",
+                    "DISABLED"
+                ]
+            },
+            "Unity": {
+                "type": "string",
+                "enum": [
+                    "UN",
+                    "KG",
+                    "MG",
+                    "LT",
+                    "ML",
+                    "M",
+                    "CM"
+                ]
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "JWT access token issued by /api/v1/users/login",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Users",
+            "description": "Registration, login and token refresh"
+        },
+        {
+            "name": "Groups",
+            "description": "User-owned collections"
+        },
+        {
+            "name": "Items",
+            "description": "Products/materials linked to a group"
+        },
+        {
+            "name": "Movements",
+            "description": "Stock/inventory movements"
+        },
+        {
+            "name": "MovementItems",
+            "description": "Items within a movement"
+        },
+        {
+            "name": "Installments",
+            "description": "Payment installments of a movement"
+        },
+        {
+            "name": "Transactions",
+            "description": "Payments against an installment"
+        }
+    ]
+}

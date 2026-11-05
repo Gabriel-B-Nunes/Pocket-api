@@ -6,8 +6,10 @@ namespace App\dto\transaction;
 
 use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\StringValidator;
+use OpenApi\Attributes as OA;
 
 
+#[OA\Schema]
 class TransactionUpdateDTO
 {
     public function __construct(
@@ -19,6 +21,7 @@ class TransactionUpdateDTO
             dateTimeFormat: "Y-m-d",
             nullable: true
         )]
+        #[OA\Property]
         public readonly ?string $paymentDate,
 
         #[StringSanitizer()]
@@ -27,6 +30,7 @@ class TransactionUpdateDTO
             min: 1,
             nullable: true
         )]
+        #[OA\Property]
         public readonly ?int $paymentValue
     )
     {

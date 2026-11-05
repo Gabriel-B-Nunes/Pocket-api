@@ -8,8 +8,10 @@ use App\service\data\sanitizer\ArraySanitizer;
 use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\ArrayValidator;
 use App\service\data\validator\StringValidator;
+use OpenApi\Attributes as OA;
 
 
+#[OA\Schema]
 class InstallmentReadDTO
 {
     public function __construct(
@@ -18,6 +20,7 @@ class InstallmentReadDTO
             minLength: 36,
             maxLength: 36
         )]
+        #[OA\Property]
         public readonly string $userUuid,
 
         #[ArraySanitizer()]
@@ -36,6 +39,7 @@ class InstallmentReadDTO
                 "page"
             ]
         )]
+        #[OA\Property]
         public readonly array $queryString
     )
     {

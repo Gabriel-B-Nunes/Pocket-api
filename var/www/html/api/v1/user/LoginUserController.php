@@ -17,6 +17,7 @@ use App\service\data\InputHandler;
 use App\service\security\HashService;
 use App\service\security\JWTService;
 use DateTimeImmutable;
+use OpenApi\Attributes as OA;
 
 class LoginUserController implements ControllerInterface
 {
@@ -25,6 +26,7 @@ class LoginUserController implements ControllerInterface
         private InputHandler $inputHandler = new InputHandler()
     ) {}
 
+#[OA\Post(path: '/api/v1/users/login', operationId: 'LoginUser', tags: ['Users'], security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK')])]
     public function handleRequest(Request $request): Response
     {
         $body = $request->getBody();

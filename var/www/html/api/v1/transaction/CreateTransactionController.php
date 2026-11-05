@@ -16,6 +16,7 @@ use App\service\cache\Container;
 use App\service\data\InputHandler;
 use DateTimeImmutable;
 use Override;
+use OpenApi\Attributes as OA;
 
 
 class CreateTransactionController implements ControllerInterface {
@@ -25,6 +26,7 @@ class CreateTransactionController implements ControllerInterface {
     )
     {}
 
+#[OA\Post(path: '/api/v1/transactions', operationId: 'CreateTransaction', tags: ['Transactions'], requestBody: new OA\RequestBody(required: true, content: new OA\JsonContent(ref: \App\dto\transaction\TransactionCreateDTO::class)), security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK')])]
     public function handleRequest(Request $request): Response
     {
         $request->setUserUuid();

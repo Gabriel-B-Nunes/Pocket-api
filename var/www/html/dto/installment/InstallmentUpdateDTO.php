@@ -6,8 +6,10 @@ namespace App\dto\installment;
 
 use App\service\data\sanitizer\StringSanitizer;
 use App\service\data\validator\StringValidator;
+use OpenApi\Attributes as OA;
 
 
+#[OA\Schema]
 class InstallmentUpdateDTO
 {
     public function __construct(
@@ -19,6 +21,7 @@ class InstallmentUpdateDTO
             dateTimeFormat: "Y-m-d",
             nullable: true
         )]
+        #[OA\Property]
         public readonly ?string $dueDate,
 
         #[StringSanitizer()]
@@ -27,6 +30,7 @@ class InstallmentUpdateDTO
             min: 1,
             nullable: true
         )]
+        #[OA\Property]
         public readonly ?int $dueValue
     )
     {

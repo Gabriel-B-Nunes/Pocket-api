@@ -13,6 +13,7 @@ use App\model\Response;
 use App\service\cache\Container;
 use App\service\data\InputHandler;
 use DateTimeImmutable;
+use OpenApi\Attributes as OA;
 
 
 class CreateItemController implements ControllerInterface
@@ -22,6 +23,7 @@ class CreateItemController implements ControllerInterface
         private ItemDAO $dao = new ItemDAO()
     ) {}
 
+#[OA\Post(path: '/api/v1/items', operationId: 'CreateItem', tags: ['Items'], requestBody: new OA\RequestBody(required: true, content: new OA\JsonContent(ref: \App\dto\item\ItemCreateDTO::class)), security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK')])]
     public function handleRequest(Request $request): Response
     {
         $request->setUserUuid();
